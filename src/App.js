@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink
+} from "react-router-dom";
 import './App.css';
 
+import Auth from './components/Auth';
+import Login from './components/Login'
+
+const Public = () => <h1>Public</h1>;
+const Protected = () => <h1>Protected</h1>;
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <nav>
+                        <NavLink to="/public">Public Page</NavLink>
+                        <NavLink to="/protected">Protected Page</NavLink>
+                    </nav>
+
+                    <main>
+                        <Route path="/public" component={Public} />
+                        <Auth path="/protected" component={Protected} />
+
+                        <Route path="/login" component={Login} />
+                    </main>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
