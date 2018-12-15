@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 import './App.css';
 
+import Loading from './components/Loading';
 import Auth from './components/Auth';
 import Login from './components/Login';
 
@@ -55,6 +56,8 @@ class App extends Component {
                                         <Route render={ () => <NotFound /> } />
                                     </Switch>
                                 </main>
+
+                                <Loading />
                             </div>
                         )
                     }}

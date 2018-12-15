@@ -2,8 +2,11 @@ import { createStore } from 'redux';
 
 const AUTH_KEY = 'authenticated';
 
+const isAuthenticated = !!localStorage.getItem(AUTH_KEY);
+
 const initialState = {
-    isAuthenticated: false
+    loading: false,
+    isAuthenticated: isAuthenticated
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +23,20 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             isAuthenticated: false
+        }
+    }
+
+    if(action.type === 'SHOW_LOADING'){
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    if(action.type === 'HIDE_LOADING'){
+        return {
+            ...state,
+            loading: false
         }
     }
 

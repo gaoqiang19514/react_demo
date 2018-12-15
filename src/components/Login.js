@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+
 import api from '../api';
 
 class Login extends Component {
@@ -9,9 +10,12 @@ class Login extends Component {
         const username = 'tom';
         const pswd = '123456';
 
+        // 显示loading
+        this.props.showLoading();
+
         api.login(username, pswd)
             .then((response) => {
-                const { data } = response
+                const { data } = response;
                 this.props.login({
                     token: data.token
                 });
@@ -19,6 +23,10 @@ class Login extends Component {
             .catch((error) => {
                 console.log(error);
             })
+            .finally(() => {
+                // 隐藏loading
+                this.props.hideLoading();
+            });
     }
 
     render() {
@@ -44,7 +52,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: (payload) => dispatch({ type: 'LOGIN', token: payload.token })
+        login: (payload) => dispatch({ type: 'LOGIN', token: payload.token }),
+        showLoading: () => dispatch({ type: 'SHOW_LOADING' }),
+        hideLoading: () => dispatch({ type: 'HIDE_LOADING' })
     }
 }
 
