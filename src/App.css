@@ -1,23 +1,30 @@
-nav{
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-bottom: 1px solid #eaeaea;
 }
-nav a{
+
+nav a {
+  color: #888;
   text-decoration: none;
   padding: 0 10px;
   line-height: 50px;
+  -webkit-transition: all .3s;
   transition: all .3s;
 }
-nav a:hover{
+
+nav a:hover {
   text-decoration: underline;
 }
-nav a.active{
+
+nav a.active {
   font-size: 18px;
   font-weight: bold;
   text-decoration: underline;
   color: red;
 }
 
-main{
+main {
   padding: 10px;
 }

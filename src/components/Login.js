@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import api from '../api';
 
 class Login extends Component {
 
     login = () => {
-        this.props.login();
+        const username = 'tom';
+        const pswd = '123456';
+
+        api.login(username, pswd)
+            .then((response) => {
+                const { data } = response
+                this.props.login({
+                    token: data.token
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     render() {
@@ -31,7 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: () => dispatch({ type: 'LOGIN' })
+        login: (payload) => dispatch({ type: 'LOGIN', token: payload.token })
     }
 }
 

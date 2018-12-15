@@ -3,28 +3,37 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Switch
+  Switch,
+  withRouter
 } from "react-router-dom";
+import { connect } from 'react-redux';
+
 import './App.css';
 
 import Auth from './components/Auth';
 import Login from './components/Login';
 
-const duration = 300;
-
-const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0,
-};
-
-const transitionStyles = {
-  entering: { opacity: 0 },
-  entered:  { opacity: 1 },
-};
 
 const Public = () => <h1>Public</h1>;
-const Protected = () => <h1>Protected</h1>;
+
 const NotFound = () => <h1>Not Found</h1>;
+
+const Protected = ({ logout }) => (
+    <div>
+        <h1>Protected</h1>
+        <button onClick={ logout }>退出</button>
+    </div>
+);
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        logout: () => {
+            dispatch({ type: 'LOGOUT' })
+        }
+    }
+}
+
+const Protected2 = withRouter(connect(null, mapDispatchToProps)(Protected));
 
 class App extends Component {
     render() {
@@ -41,7 +50,7 @@ class App extends Component {
                                 <main>
                                     <Switch>
                                         <Route path="/public" component={Public} />
-                                        <Auth path="/protected" component={Protected} />
+                                        <Auth path="/protected" component={Protected2} />
                                         <Route path="/login" component={Login} />
                                         <Route render={ () => <NotFound /> } />
                                     </Switch>
