@@ -18,6 +18,12 @@ class Auth extends Component {
         }
     }
 
+    UNSAFE_componentWillUpdate(nextProps) {
+        if (!nextProps.authenticated || !session.isAuthenticated()) {
+            this.props.unauthenticate();
+        }
+    }
+
     render() {
         const { component: Part, isAuthenticated, ...rest } = this.props;
 

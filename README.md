@@ -21,3 +21,21 @@
     如果为false 则判断应用中token是否有效（存在和过期都要判断）
     token有效 更新登录标志为true
     token无效 更新登录表示为false以及token清理工作
+
+# 刷新token的流程
+
+    //  判断token是否满足刷新条件
+    function checkIfNeedRefreshToken() {
+        return true;
+    }
+
+    //  刷新token
+    function getRefreshToken() { 
+        return api.get('refreshToken')
+    }
+
+    //  将所有的请求都push到数组中
+    let refreshSubscribers = [];
+    function subscribeTokenRefresh(cb) {
+        refreshSubscribers.push(cb);
+    }
