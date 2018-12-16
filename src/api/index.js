@@ -13,6 +13,9 @@ const AuthApi = {
     };
 
     return api.post('login', {}, config);
+  },
+  refreshToken() {
+    return api.get('refresh_token')
   }
 };
 
