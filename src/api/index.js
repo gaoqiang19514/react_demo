@@ -1,9 +1,19 @@
 import axios from 'axios';
+import APIUtil from './apiUtil';
 
-const login = (username, pswd) => {
-    return axios.get('/login')
-}
+const api = new APIUtil();
 
-export default {
-    login
-}
+const AuthApi = {
+  login(username, password) {
+    const config = {
+      auth: {
+        username,
+        password
+      }
+    };
+
+    return api.post('login', {}, config);
+  }
+};
+
+export default AuthApi;

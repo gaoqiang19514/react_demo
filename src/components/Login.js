@@ -7,8 +7,8 @@ import api from '../api';
 class Login extends Component {
 
     login = () => {
-        const username = 'tom';
-        const pswd = '123456';
+        const username = 'test';
+        const pswd = 'react';
 
         // 显示loading
         this.props.showLoading();
@@ -16,9 +16,7 @@ class Login extends Component {
         api.login(username, pswd)
             .then((response) => {
                 const { data } = response;
-                this.props.login({
-                    token: data.token
-                });
+                this.props.login(data.token);
             })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: (payload) => dispatch({ type: 'LOGIN', token: payload.token }),
+        login: (token) => dispatch({ type: 'AUTH_SUCCESS', payload: {
+            token: token
+        } }),
         showLoading: () => dispatch({ type: 'SHOW_LOADING' }),
         hideLoading: () => dispatch({ type: 'HIDE_LOADING' })
     }

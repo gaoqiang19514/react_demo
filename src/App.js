@@ -29,7 +29,7 @@ const Protected = ({ logout }) => (
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         logout: () => {
-            dispatch({ type: 'LOGOUT' })
+            dispatch({ type: 'UNAUTH_USER' })
         }
     }
 }

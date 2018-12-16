@@ -1,31 +1,12 @@
 import { createStore } from 'redux';
 
-const AUTH_KEY = 'authenticated';
-
-const isAuthenticated = !!localStorage.getItem(AUTH_KEY);
-
 const initialState = {
     loading: false,
-    isAuthenticated: isAuthenticated
+    token: '',
+    isAuthenticated: false
 };
 
 const reducer = (state = initialState, action) => {
-    if(action.type === 'LOGIN'){
-        localStorage.setItem(AUTH_KEY, action.token);
-        return {
-            ...state,
-            isAuthenticated: true
-        }
-    }
-
-    if(action.type === 'LOGOUT'){
-        localStorage.removeItem(AUTH_KEY);
-        return {
-            ...state,
-            isAuthenticated: false
-        }
-    }
-
     if(action.type === 'SHOW_LOADING'){
         return {
             ...state,
@@ -39,6 +20,24 @@ const reducer = (state = initialState, action) => {
             loading: false
         }
     }
+
+    if(action.type === 'AUTH_SUCCESS'){
+        localStorage.setItem('token', action.payload.token);
+        return {
+            ...state,
+            token: action.payload.token,
+            isAuthenticated: true
+        }
+    }
+
+    if(action.type === 'UNAUTH_USER'){
+        localStorage.removeItem('token');
+        return {
+            ...state,
+            isAuthenticated: false
+        }
+    }
+
 
     return state;
 }
