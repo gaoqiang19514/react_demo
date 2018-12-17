@@ -33,9 +33,11 @@ app.post("/api/login", (req, res) => {
     const token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '30m' // setting the token expiry time to be 2h
+      expiresIn: '10s' // setting the token expiry time to be 2h
     });
-    res.json({token});
+    setTimeout(() => {
+      res.json({token});
+    }, 3000);
   } else {
     res
       .status(401)
@@ -53,9 +55,12 @@ app.get("/api/protected", ensureToken, (req, res) => {
         .status(403)
         .json({error: err});
     } else {
-      res.json({
-          goals: ["Learn Authentication", "Learn Context-API"]
-      });
+      setTimeout(() => {
+        res.json({
+            goals: ["Learn Authentication", "Learn Context-API"]
+        });
+      }, 2000);
+
     }
   });
 });

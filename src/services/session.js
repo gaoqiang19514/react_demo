@@ -32,7 +32,7 @@ export const isTokenValid = (token) => {
         }
         const date = new Date(0);
         date.setUTCSeconds(decoded.exp);
-
+        console.log(`exp:${date.valueOf()} now:${new Date().valueOf()} dif:${(date.valueOf() - new Date().valueOf()) / 1000}s`);
         return date.valueOf() > new Date().valueOf();
     }catch(error){
         return false;

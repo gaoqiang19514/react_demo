@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import * as session from '../services/session';
+import store from '../Store';
 import api from './index';
 
 let refreshSubscribers = [];
@@ -19,31 +20,36 @@ let isRefreshing = false;
 const configureAxios = () => {
     axios.interceptors.request.use(
         function(config) {
+
             const token = session.getToken();
             if(token){
-                config.headers.Authorization = token;
+                config.headers = {
+                    authorization: `Bearer ${token}`
+                };
             }
-            debugger;
-            if(!session.isAuthenticated() && config.url.indexOf('refresh_token') === -1){
-                if(!isRefreshing){
-                    isRefreshing = true;
-                    api.refreshToken()
-                        .then((res) => {
-                            isRefreshing = false;
-                            onRrefreshed(res.access_token);
-                        })
-                        .catch((err) => {
-                        });
+            console.log(session.isAuthenticated())
 
-                    // 缓存刷新token期间的请求
-                    return new Promise((resolve, reject) => {
-                        subScribeTokenRefresh((token) => {
-                            config.headers.Authorization = token;
-                            resolve(config);
-                        });
-                    });
-                }
-            }
+            // if(!session.isAuthenticated() && config.url.indexOf('refresh_token') === -1){
+            //     if(!isRefreshing){
+            //         isRefreshing = true;
+            //         api.refreshToken()
+            //             .then((res) => {
+            //                 isRefreshing = false;
+            //                 onRrefreshed(res.access_token);
+            //             })
+            //             .catch((err) => {
+            //             });
+
+            //         // 缓存刷新token期间的请求
+            //         return new Promise((resolve, reject) => {
+            //             subScribeTokenRefresh((token) => {
+            //                 config.headers.Authorization = token;
+            //                 resolve(config);
+            //             });
+            //         });
+            //     }
+            // }
+            
             return config;
         },
         function(error) {
@@ -59,6 +65,11 @@ const configureAxios = () => {
             return response;
         },
         function(error) {
+            if (parseInt(error.response.status, 10) === 401 || parseInt(error.response.status, 10) === 403) {
+                store.dispatch({
+                    type: 'UNAUTH_USER'
+                });
+            }
             // Do something with response error
             return Promise.reject(error);
         }

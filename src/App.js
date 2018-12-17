@@ -6,35 +6,18 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
-import { connect } from 'react-redux';
+
 
 import './App.css';
 
 import Loading from './components/Loading';
 import Auth from './components/Auth';
 import Login from './components/Login';
-
+import Protected from './components/Protected'
 
 const Public = () => <h1>Public</h1>;
 
 const NotFound = () => <h1>Not Found</h1>;
-
-const Protected = ({ logout }) => (
-    <div>
-        <h1>Protected</h1>
-        <button onClick={ logout }>退出</button>
-    </div>
-);
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        logout: () => {
-            dispatch({ type: 'UNAUTH_USER' })
-        }
-    }
-}
-
-const Protected2 = withRouter(connect(null, mapDispatchToProps)(Protected));
 
 class App extends Component {
     render() {
@@ -51,7 +34,7 @@ class App extends Component {
                                 <main>
                                     <Switch>
                                         <Route path="/public" component={Public} />
-                                        <Auth path="/protected" component={Protected2} />
+                                        <Auth path="/protected" component={Protected} />
                                         <Route path="/login" component={Login} />
                                         <Route render={ () => <NotFound /> } />
                                     </Switch>

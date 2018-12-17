@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "ExpressJS server for authenticating user and returning a valid token",
   "scripts": {
-    "start": "node server"
+    "start": "node index"
   },
   "main": "index.js",
   "author": "Amandeep Singh",
