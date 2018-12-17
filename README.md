@@ -38,3 +38,8 @@
     function subscribeTokenRefresh(cb) {
         refreshSubscribers.push(cb);
     }
+
+
+# token过期校验思路
+    1. 后台每次接收到请求时校验过期
+    2. 前台每次请求时拦截校验是否过期
