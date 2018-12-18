@@ -21,8 +21,9 @@ const configureAxios = () => {
     axios.interceptors.request.use(
         function(config) {
 
-            const token = session.getToken();
-            if(token){
+            // 如果token存在并且未过期 设置token
+            if(session.isAuthenticated()){
+                const token = session.getToken();
                 config.headers = {
                     authorization: `Bearer ${token}`
                 };

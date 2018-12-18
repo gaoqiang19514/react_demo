@@ -15,7 +15,6 @@ class Protected extends Component {
                 });
             })
             .catch((err) => {
-
             });
     }
 
