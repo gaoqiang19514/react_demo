@@ -44,3 +44,13 @@
 # token过期校验思路
     1. 后台每次接收到请求时校验过期
     2. 前台每次请求时拦截校验是否过期
+
+# access token + refresh token 实现的登录认证
+    利用续期的灵活性，把策略制定好，可以在用户静止较久以后的第一次更新Token时要求登录，这样就不会在操作中中断用户
+
+    1 登录时得到access_token和refresh_token
+    2 每次业务请求的时候带上access_token
+    3 当业务请求得到access_token过期的响应时 发起refresh_token请求
+    4 refresh_token请求校验通过 返回access_token
+    5 再次发起之前的业务请求
+    
