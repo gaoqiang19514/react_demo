@@ -66,6 +66,15 @@ const configureAxios = () => {
             return response;
         },
         function(error) {
+            // token过期
+            if(false){
+                api.getRefreshToken()
+                    .then(function(res){
+                        updateAccessToken(res.accessToken);
+                        // 重发业务请求
+                    });
+            }
+
             if (parseInt(error.response.status, 10) === 401 || parseInt(error.response.status, 10) === 403) {
                 store.dispatch({
                     type: 'UNAUTH_USER'
