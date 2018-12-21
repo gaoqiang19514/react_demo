@@ -66,11 +66,13 @@
       })
       .catch(() => dispatch(authError(SIGNIN_FAILURE, "Email or password isn't right")));
 ``
+
 //  登录成功
 localStorage.setItem('user', JSON.stringify(response.data));
 dispatch({ type: AUTH_USER });
 browserHistory.push('/reduxauth/users');
 
+更新redux的登录标志
 case AUTH_USER:
     return { ...state, authenticated: true, error: {} };
 
@@ -85,3 +87,33 @@ case SIGNIN_FAILURE:
       return { ...state, authenticated: true, error: {} };
     case UNAUTH_USER:
       return { ...state, authenticated: false, error: {} };
+
+
+    登出操作 更新redux中的登录标志
+      /**
+        * Sign out
+        */
+       export function signoutUser() {
+         localStorage.clear();
+
+         return {
+           type: UNAUTH_USER,
+         }
+       }
+
+
+# NotAuthentication 和 Authentication的区别在哪里？
+        改组件的作用是将已登录的用户重定向到指定路由 也就是不用已登录用户访问 比如等页面 已登录的用户不应该让其再次进来
+        NotAuthentication
+        如果是登录用户 去users
+        if (this.props.authenticated) {
+            browserHistory.push('/reduxauth/users');
+        }
+
+        Authentication
+        如果未登录 去注册
+        if (!this.props.authenticated) {
+            browserHistory.push('/reduxauth/signup');
+        }
+
+# token过期的情况没有处理
