@@ -53,4 +53,35 @@
     3 当业务请求得到access_token过期的响应时 发起refresh_token请求
     4 refresh_token请求校验通过 返回access_token
     5 再次发起之前的业务请求
-    
+
+# 登录请求
+``
+    axios.post(`${API_URL}/signin`, { email, password })
+      .then(response => {
+        localStorage.setItem('user', JSON.stringify(response.data));
+
+        dispatch({ type: AUTH_USER });
+
+        browserHistory.push('/reduxauth/users');
+      })
+      .catch(() => dispatch(authError(SIGNIN_FAILURE, "Email or password isn't right")));
+``
+//  登录成功
+localStorage.setItem('user', JSON.stringify(response.data));
+dispatch({ type: AUTH_USER });
+browserHistory.push('/reduxauth/users');
+
+case AUTH_USER:
+    return { ...state, authenticated: true, error: {} };
+
+//  登录失败
+dispatch(authError(SIGNIN_FAILURE, "Email or password isn't right"))
+case SIGNIN_FAILURE:
+    return { ...state, error: { signin: action.payload } };
+
+
+# 下面两个action是用来做什么的
+    case AUTH_USER:
+      return { ...state, authenticated: true, error: {} };
+    case UNAUTH_USER:
+      return { ...state, authenticated: false, error: {} };
