@@ -1,34 +1,16 @@
 import axios from 'axios';
 
-import * as session from '../services/session';
 import store from '../Store';
-import api from './index';
 
-let refreshSubscribers = [];
-const subScribeTokenRefresh = (cb) => {
-    refreshSubscribers.push(cb);
-}
-
-const onRrefreshed = (token) => {
-    refreshSubscribers.map(cb => cb(token));
-    refreshSubscribers = [];
-}
-
-let isRefreshing = false;
-
-// Add a request interceptor
 const configureAxios = () => {
+
+    // Add a request interceptor
     axios.interceptors.request.use(
         function(config) {
-
-            // 如果token存在并且未过期 设置token
-            if(session.isAuthenticated()){
-                const token = session.getToken();
-                config.headers = {
-                    authorization: `Bearer ${token}`
-                };
+            const token = localStorage.getItem('token');
+            if(token){
+                config.headers['authorization'] = `Bearer ${token}`;
             }
-            
             return config;
         },
         function(error) {
@@ -44,11 +26,21 @@ const configureAxios = () => {
             return response;
         },
         function(error) {
-            if (parseInt(error.response.status, 10) === 401 || parseInt(error.response.status, 10) === 403) {
-                store.dispatch({
-                    type: 'UNAUTH_USER'
-                });
+            if(error.response){
+                switch(parseInt(error.response.status, 10)){
+                    case 400:
+                        break;
+                    case 401:
+                        store.dispatch({ type: 'UNAUTH_USER' });
+                        break;
+                    case 403:
+                        store.dispatch({ type: 'UNAUTH_USER' });
+                        break;
+                    default:
+                        break;
+                }
             }
+
             // Do something with response error
             return Promise.reject(error);
         }
