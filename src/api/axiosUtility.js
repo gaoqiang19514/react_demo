@@ -28,28 +28,6 @@ const configureAxios = () => {
                     authorization: `Bearer ${token}`
                 };
             }
-            console.log(session.isAuthenticated())
-
-            // if(!session.isAuthenticated() && config.url.indexOf('refresh_token') === -1){
-            //     if(!isRefreshing){
-            //         isRefreshing = true;
-            //         api.refreshToken()
-            //             .then((res) => {
-            //                 isRefreshing = false;
-            //                 onRrefreshed(res.access_token);
-            //             })
-            //             .catch((err) => {
-            //             });
-
-            //         // 缓存刷新token期间的请求
-            //         return new Promise((resolve, reject) => {
-            //             subScribeTokenRefresh((token) => {
-            //                 config.headers.Authorization = token;
-            //                 resolve(config);
-            //             });
-            //         });
-            //     }
-            // }
             
             return config;
         },
@@ -66,15 +44,6 @@ const configureAxios = () => {
             return response;
         },
         function(error) {
-            // token过期
-            if(false){
-                api.getRefreshToken()
-                    .then(function(res){
-                        updateAccessToken(res.accessToken);
-                        // 重发业务请求
-                    });
-            }
-
             if (parseInt(error.response.status, 10) === 401 || parseInt(error.response.status, 10) === 403) {
                 store.dispatch({
                     type: 'UNAUTH_USER'
