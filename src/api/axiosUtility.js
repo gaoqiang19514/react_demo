@@ -1,29 +1,16 @@
 import axios from 'axios';
 
-import * as session from '../services/session';
-import store from '../Store';
-import api from './index';
+import store from '../store';
 
-let refreshSubscribers = [];
-const subScribeTokenRefresh = (cb) => {
-    refreshSubscribers.push(cb);
-}
-
-const onRrefreshed = (token) => {
-    refreshSubscribers.map(cb => cb(token));
-    refreshSubscribers = [];
-}
-
-let isRefreshing = false;
-
-// Add a request interceptor
 const configureAxios = () => {
+
+    // Add a request interceptor
     axios.interceptors.request.use(
         function(config) {
 
             // 如果token存在并且未过期 设置token
-            if(session.isAuthenticated()){
-                const token = session.getToken();
+            const token = localStorage.getItem('token');
+            if(token){
                 config.headers = {
                     authorization: `Bearer ${token}`
                 };

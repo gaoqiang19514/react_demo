@@ -3,7 +3,18 @@ import { createStore } from 'redux';
 const initialState = {
     loading: false,
     token: '',
+    refresh_token: '',
     isAuthenticated: false
+};
+
+const saveToken = props => {
+    localStorage.setItem('token', props.token);
+    localStorage.setItem('refresh_token', props.refresh_token);
+};
+
+const removeToken = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh_token');
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,19 +33,21 @@ const reducer = (state = initialState, action) => {
     }
 
     if(action.type === 'AUTH_SUCCESS'){
-        localStorage.setItem('token', action.payload.token);
+        saveToken(action.payload);
         return {
             ...state,
             token: action.payload.token,
+            refresh_token: action.payload.refresh_token,
             isAuthenticated: true
         }
     }
 
     if(action.type === 'UNAUTH_USER'){
-        localStorage.removeItem('token');
+        removeToken();
         return {
             ...state,
             token: '',
+            refresh_token: '',
             isAuthenticated: false
         }
     }

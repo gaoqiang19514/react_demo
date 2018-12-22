@@ -16,6 +16,9 @@ const AuthApi = {
   },
   refreshToken() {
     return api.get('refresh_token')
+  },
+    getUser() {
+    return api.get('protected');
   }
 };
 

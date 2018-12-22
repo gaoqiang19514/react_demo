@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import api from '../api/protected';
+import api from '../api';
 
 class Protected extends Component {
     state = { list: [] }
