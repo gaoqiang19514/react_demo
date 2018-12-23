@@ -14,7 +14,7 @@ class Login extends Component {
         api.login(username, pswd)
             .then((response) => {
                 const { data } = response;
-                this.props.login(data.token);
+                this.props.login(data);
             })
             .catch((error) => {
             });
@@ -43,8 +43,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: (token) => dispatch({ type: 'AUTH_SUCCESS', payload: {
-            token: token
+        login: (payload) => dispatch({ type: 'AUTH_USER', payload: {
+            access_token: payload.access_token,
+            refresh_token: payload.refresh_token
         } }),
         showLoading: () => dispatch({ type: 'SHOW_LOADING' }),
         hideLoading: () => dispatch({ type: 'HIDE_LOADING' })

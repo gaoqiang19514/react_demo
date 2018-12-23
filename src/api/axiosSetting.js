@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import store from '../Store';
+import store from '../store';
 
 export default () => {
 
@@ -8,9 +8,9 @@ export default () => {
     axios.interceptors.request.use(
         function(config) {
             // loading = weui.loading('...');
-            const token = localStorage.getItem('token');
-            if(token){
-                config.headers['authorization'] = `Bearer ${token}`;
+            const access_token = localStorage.getItem('access_token');
+            if(access_token){
+                config.headers['authorization'] = `Bearer ${access_token}`;
             }
             return config;
         },

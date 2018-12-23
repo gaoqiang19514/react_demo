@@ -30,13 +30,18 @@ app.post("/api/login", (req, res) => {
     // client can store this token to the local storage and every time client asks
     // for protected api resources, it send token attached in authorization header
     // with 'bearer' authentication scheme.
-    const token = jwt.sign({
+    const access_token = jwt.sign({
+      user
+    }, "my_secret_key", {
+      expiresIn: '1m' // setting the token expiry time to be 2h
+    });
+    const refresh_token = jwt.sign({
       user
     }, "my_secret_key", {
       expiresIn: '1m' // setting the token expiry time to be 2h
     });
     setTimeout(() => {
-      res.json({token});
+      res.json({access_token: access_token, refresh_token: refresh_token});
     }, 3000);
   } else {
     res

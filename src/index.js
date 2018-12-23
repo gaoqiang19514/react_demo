@@ -8,10 +8,22 @@ import axiosSetting from './api/axiosSetting';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store from './Store';
+import store from './store';
 
 // 配置axios
 axiosSetting();
+
+const access_token  = localStorage.getItem('access_token');
+const refresh_token = localStorage.getItem('refresh_token');
+
+if (access_token && refresh_token) {
+    store.dispatch({ 
+        type: 'AUTH_USER', payload: {
+            access_token: access_token,
+            refresh_token: refresh_token
+        } 
+    });
+}
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
