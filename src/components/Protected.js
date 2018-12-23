@@ -8,7 +8,6 @@ class Protected extends Component {
     state = { list: [] }
 
     componentDidMount() {
-
         this.cancelable = util.makeCancelable(api.getUser())
         
         this.cancelable.promise.then((res) => {
