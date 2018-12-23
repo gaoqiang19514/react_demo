@@ -1,6 +1,17 @@
-import { get, post } from './apiUtil';
+import axios from 'axios';
+import config from '../config';
 
-const AuthApi = {
+axios.defaults.baseURL = config.baseURL;
+
+export const get = (path, config = {}) => {
+    return axios.get(path, config);
+}
+
+export const post = (path, data, config = {}) => {
+    return axios.post(path, data, config);
+}
+
+export default {
     login(username, password) {
         const config = {
             auth: {
@@ -17,5 +28,3 @@ const AuthApi = {
         return get('protected');
     }
 };
-
-export default AuthApi;
