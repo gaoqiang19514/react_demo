@@ -10,6 +10,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './Store';
 
+// 配置axios
 axiosSetting();
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

@@ -7,15 +7,15 @@ class Protected extends Component {
     state = { list: [] }
 
     componentDidMount() {
-        api.getUser()
-            .then((res) => {
-                const { data } = res;
-                this.setState({
-                    list: data.goals
-                });
-            })
-            .catch((err) => {
-            });
+        // api.getUser()
+        //     .then((res) => {
+        //         const { data } = res;
+        //         this.setState({
+        //             list: data.goals
+        //         });
+        //     })
+        //     .catch((err) => {
+        //     });
     }
 
     render() {

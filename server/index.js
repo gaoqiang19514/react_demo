@@ -33,7 +33,7 @@ app.post("/api/login", (req, res) => {
     const token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '10s' // setting the token expiry time to be 2h
+      expiresIn: '1m' // setting the token expiry time to be 2h
     });
     setTimeout(() => {
       res.json({token});

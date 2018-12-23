@@ -2,15 +2,11 @@
 - [x] 为什么PrivateRoute组件只执行了一次？ 使用了connect的路由需要用withRouter包装一遍
 - [ ] 加入路由过渡淡入淡出
 - [ ] 以上对路由的淡出淡出可能会与rem冲突 需解决
-- [ ] 添加history组件
-- [ ] 为什么重复点击protected路由会导致退出？
+- [x] 添加history组件
+- [x] 为什么重复点击protected路由会导致退出？
+- [ ] 离开组件时如果有异步请求或者定时器没清理掉会报错
+- [x] 登录请示直接500的问题 (原来是登录请求被带上了token)
 
-# 初始化用户登录状态处理流程
-    初始化读取localStorage中是否存在token
-    有token 判断为已登录
-    无token 判断为未登录
-
-    这种方式只能判断token是否存在 无法判断token是否过期
 
 # 处理token过期的情况
     方式一
@@ -45,14 +41,6 @@
     1. 后台每次接收到请求时校验过期
     2. 前台每次请求时拦截校验是否过期
 
-# access token + refresh token 实现的登录认证
-    利用续期的灵活性，把策略制定好，可以在用户静止较久以后的第一次更新Token时要求登录，这样就不会在操作中中断用户
-
-    1 登录时得到access_token和refresh_token
-    2 每次业务请求的时候带上access_token
-    3 当业务请求得到access_token过期的响应时 发起refresh_token请求
-    4 refresh_token请求校验通过 返回access_token
-    5 再次发起之前的业务请求
 
 # 登录请求
 ``
@@ -115,5 +103,3 @@ case SIGNIN_FAILURE:
         if (!this.props.authenticated) {
             browserHistory.push('/reduxauth/signup');
         }
-
-# token过期的情况没有处理

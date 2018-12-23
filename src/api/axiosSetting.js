@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import store from '../Store';
 
-const loading = null;
-
 export default () => {
 
     // Add a request interceptor

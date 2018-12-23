@@ -25,7 +25,7 @@ class Loading extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { loading: state.loading };
+    return { loading: state.loading.loading };
 }
 
 export default withRouter(connect(mapStateToProps, null)(Loading));

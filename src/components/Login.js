@@ -11,19 +11,12 @@ class Login extends Component {
         const pswd = 'react';
 
         // 显示loading
-        this.props.showLoading();
-
         api.login(username, pswd)
             .then((response) => {
                 const { data } = response;
                 this.props.login(data.token);
             })
             .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                // 隐藏loading
-                this.props.hideLoading();
             });
     }
 
@@ -45,7 +38,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isAuthenticated: state.isAuthenticated }
+    return { isAuthenticated: state.auth.isAuthenticated }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
