@@ -3,7 +3,6 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 class Auth extends Component {
-
     render() {
         const { component: Part, isAuthenticated, ...rest } = this.props;
 

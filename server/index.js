@@ -9,20 +9,26 @@ const app = express();
 app.use(cors());
 
 app.get("/api", (req, res) => {
-  res.json({text: "my public api"});
+    res.json({
+        text: "my public api"
+    });
 });
 
 app.use(function (req, res, next) {
-  if (!req.headers.authorization) {
-    return res
-      .status(403)
-      .json({error: "No credentials sent!"});
-  }
-  next();
+    if (!req.headers.authorization) {
+        setTimeout(() => {
+            return res
+                .status(403)
+                .json({
+                    error: "No credentials sent!"
+                });
+        }, 2000);
+    }
+    next();
 });
 
 app.post("/api/login", (req, res) => {
-  const user = auth(req);
+    const user = auth(req);
 
   // hardcoded user {name: 'test', pass: 'react'}
   if (user.name === "test" && user.pass === "react") {
@@ -48,41 +54,53 @@ app.post("/api/login", (req, res) => {
       .status(401)
       .json({error: "Invalid Credentials"});
   }
+});
 
+app.get("/api/refreshToken", (req, res) => {
+    // 校验refreshToken
+    if(true){
+        // 返回新的access token
+    }else{
+        res.status(401)
+            .json({
+                error: "Invalid Credentials"
+            });
+    }
 });
 
 // protected api
 app.get("/api/protected", ensureToken, (req, res) => {
-  // server verifies the token (verifies the client )
-  jwt.verify(req.token, "my_secret_key", (err, data) => {
-    if (err) {
-      res
-        .status(403)
-        .json({error: err});
-    } else {
-      setTimeout(() => {
-        res.json({
-            goals: ["Learn Authentication", "Learn Context-API"]
-        });
-      }, 2000);
-
-    }
-  });
+    // server verifies the token (verifies the client )
+    jwt.verify(req.token, "my_secret_key", (err, data) => {
+        if (err) {
+            res
+                .status(401)
+                .json({
+                    error: err
+                });
+        } else {
+            res.json({
+                goals: ["Learn Authentication", "Learn Context-API"]
+            });
+        }
+    });
 });
 
 // Middleware: it reads the token from the authorization header and set to
 // req.token.
 function ensureToken(req, res, next) {
-  const bearerHeader = req.headers["authorization"];
+    const bearerHeader = req.headers["authorization"];
 
-  if (bearerHeader) {
-    req.token = bearerHeader.split(" ")[1];
-    next();
-  } else {
-    return res
-      .status(403)
-      .json({error: "No credentials sent!"});
-  }
+    if (bearerHeader) {
+        req.token = bearerHeader.split(" ")[1];
+        next();
+    } else {
+        return res
+            .status(403)
+            .json({
+                error: "No credentials sent!"
+            });
+    }
 }
 
 app.listen(8000, () => console.log("App listening on 8000...."));
