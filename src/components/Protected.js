@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import api from '../api';
+import util from '../util';
 
 class Protected extends Component {
     state = { list: [] }
 
     componentDidMount() {
-        api.getUser()
-            .then((res) => {
-                const { data } = res;
-                this.setState({
-                    list: data.goals
-                });
-            })
-            .catch((err) => {
-            });
+
+        this.cancelable = util.makeCancelable(api.getUser())
+        
+        this.cancelable.promise.then((res) => {
+            const { data } = res;
+            this.setState({ list: data.goals });
+        });
+    }
+    
+    componentWillUnmount() {
+        this.cancelable.cancel();
     }
 
     render() {
