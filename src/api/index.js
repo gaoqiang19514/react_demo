@@ -3,8 +3,11 @@ import config from '../config';
 
 axios.defaults.baseURL = config.baseURL;
 
-export const get = (path, config = {}) => {
-    return axios.get(path, config);
+export const get = (path, data, config = {}) => {
+    return axios.get(path, {
+        ...config,
+        params: data
+    });
 }
 
 export const post = (path, data, config = {}) => {
