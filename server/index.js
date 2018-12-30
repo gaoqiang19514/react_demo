@@ -79,9 +79,11 @@ app.get("/api/protected", ensureToken, (req, res) => {
                     error: err
                 });
         } else {
-            res.json({
-                goals: ["Learn Authentication", "Learn Context-API"]
-            });
+            setTimeout(() => {
+                res.json({
+                    goals: ["Learn Authentication", "Learn Context-API"]
+                });
+            }, 3000);
         }
     });
 });
