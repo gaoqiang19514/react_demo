@@ -34,6 +34,12 @@ export default (state = initialState, action) => {
                 refresh_token: '',
                 isAuthenticated: false
             }
+        case 'REFRESH_TOKEN':
+            saveToken(action.payload);
+            return {
+                ...state,
+                access_token: action.payload.access_token
+            }
         default:
             return state;
     }

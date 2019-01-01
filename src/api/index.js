@@ -22,8 +22,10 @@ export default {
         };
         return this.post('login', {}, config);
     },
-    refreshToken() {
-        return this.get('refresh_token');
+    refreshToken(refresh_token) {
+        return this.get('refresh_token', {
+            refresh_token: refresh_token
+        });
     },
     getUser() {
         return this.get('protected');

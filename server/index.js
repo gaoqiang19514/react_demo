@@ -39,12 +39,12 @@ app.post("/api/login", (req, res) => {
     const access_token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '1m' // setting the token expiry time to be 2h
+      expiresIn: '10s' // setting the token expiry time to be 2h
     });
     const refresh_token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '1m' // setting the token expiry time to be 2h
+      expiresIn: '10s' // setting the token expiry time to be 2h
     });
     setTimeout(() => {
       res.json({access_token: access_token, refresh_token: refresh_token});
@@ -56,9 +56,18 @@ app.post("/api/login", (req, res) => {
   }
 });
 
-app.get("/api/refreshToken", (req, res) => {
+app.get("/api/refresh_token", (req, res) => {
+    console.log('refresh_token');
     // 校验refreshToken
     if(true){
+        const access_token = jwt.sign({
+            name: 'text', pass: 'react'
+        }, "my_secret_key", { expiresIn: '1m' });
+        const refresh_token = jwt.sign({
+            name: 'text', pass: 'react'
+        }, "my_secret_key", { expiresIn: '1m' });
+
+        res.json({access_token: access_token, refresh_token: refresh_token});
         // 返回新的access token
     }else{
         res.status(401)
