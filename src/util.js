@@ -11,7 +11,16 @@ const makeCancelable = (promise) => {
     }
 }
 
+const refreshTokenIsValid = (refreshToken) => {
+    return true;
+}
+
+const accessTokenIsValid = (accessToken) => {
+    return true;
+}
 
 export default {
-    makeCancelable
+    makeCancelable,
+    accessTokenIsValid,
+    refreshTokenIsValid
 };
