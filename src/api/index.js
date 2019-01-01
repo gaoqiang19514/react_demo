@@ -3,18 +3,16 @@ import config from '../config';
 
 axios.defaults.baseURL = config.baseURL;
 
-export const get = (path, data, config = {}) => {
-    return axios.get(path, {
-        ...config,
-        params: data
-    });
-}
-
-export const post = (path, data, config = {}) => {
-    return axios.post(path, data, config);
-}
-
 export default {
+    get(path, data, config = {}) {
+        return axios.get(path, {
+            ...config,
+            params: data
+        });
+    },
+    post(path, data, config = {}) {
+        return axios.post(path, data, config);
+    },
     login(username, password) {
         const config = {
             auth: {
@@ -22,12 +20,12 @@ export default {
                 password
             }
         };
-        return post('login', {}, config);
+        return this.post('login', {}, config);
     },
     refreshToken() {
-        return get('refresh_token')
+        return this.get('refresh_token');
     },
     getUser() {
-        return get('protected');
+        return this.get('protected');
     }
 };
