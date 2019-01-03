@@ -3,16 +3,30 @@ import axios from 'axios';
 import store from '../store';
 import api from './index';
 
+let isRefreshing = false;
+let requestPool = [];
+const refreshSuccess = function(access_token){
+    console.log('refreshSuccess', access_token);
+    requestPool.map(cb => cb(access_token))
+};
+
 export default () => {
 
     // Add a request interceptor
     axios.interceptors.request.use(
         function(config) {
+            if(isRefreshing && config.url.indexOf('refresh_token') === -1){
+                return new Promise(function(resolve, reject){
+                    requestPool.push(access_token => {
+                        config.headers.Authorization = 'bearer ' + access_token;
+                        resolve(config);
+                    });
+                });
+            }
             const access_token = localStorage.getItem('access_token');
             if(access_token){
                 config.headers['authorization'] = `Bearer ${access_token}`;
             }
-
             return config;
         },
         function(error) {
@@ -24,13 +38,12 @@ export default () => {
     // Add a response interceptor
     axios.interceptors.response.use(
         function(response) {
-            // loading.hide();
             // Do something with response data
             return response;
         },
         function(error) {
+            debugger;
             // responses error before they are handled by then onRejected or catch
-            // loading.hide();
             if(error.response){
                 switch(parseInt(error.response.status, 10)){
                     case 400:
@@ -41,22 +54,30 @@ export default () => {
                             // 过期 直接跳过
                             // 未过期 发起refresh_token请求来获取新的access_token
                         // 2 得到新的access_token后更新过期的access_token
-
                         const refresh_token = localStorage.getItem('refresh_token');
                         if(refresh_token){
+                            isRefreshing = true;
                             api.refreshToken(refresh_token)
                                 .then(function(res){
+                                    isRefreshing = false;
                                     const { data } = res;
                                     // 更新access_token
                                     store.dispatch({ type: 'UNAUTH_USER', payload: {
                                         access_token: data.access_token
                                     }});
+                                    refreshSuccess(data.access_token);
                                 })
                                 .catch(function(){
                                     store.dispatch({ type: 'UNAUTH_USER' });
                                 });
-                        }
 
+                            return new Promise(function(resolve, reject){
+                                requestPool.push(access_token => {
+                                    error.config.headers.Authorization = 'bearer ' + access_token;
+                                    resolve(error.config);
+                                });    
+                            });
+                        }
                         break;
                     case 403:
                         store.dispatch({ type: 'UNAUTH_USER' });
