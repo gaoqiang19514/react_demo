@@ -6,7 +6,6 @@ import api from './index';
 let isRefreshing = false;
 let requestPool = [];
 const refreshSuccess = function(access_token){
-    console.log(requestPool)
     requestPool.map(cb => cb(access_token))
     requestPool = []
 };

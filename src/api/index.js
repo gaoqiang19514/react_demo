@@ -7,6 +7,9 @@ export default {
     get(path, data, config = {}) {
         return axios.get(path, {
             ...config,
+            // validateStatus: function (status) {
+            //     return status < 500; // 状态码在大于或等于500时才会 reject
+            // },
             params: data
         });
     },
@@ -29,5 +32,9 @@ export default {
     },
     getUser() {
         return this.get('protected');
+    },
+    // 获取指定状态的订单列表
+    getOrderList(status) {
+        return this.get('getOrderList', { status: status })
     }
 };
