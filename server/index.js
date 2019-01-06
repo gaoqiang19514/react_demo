@@ -57,7 +57,6 @@ app.post("/api/login", (req, res) => {
 });
 
 app.get("/api/refresh_token", (req, res) => {
-    console.log('refresh_token');
     // 校验refreshToken
     if(true){
         const access_token = jwt.sign({

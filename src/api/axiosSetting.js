@@ -6,7 +6,6 @@ import api from './index';
 let isRefreshing = false;
 let requestPool = [];
 const refreshSuccess = function(access_token){
-    console.log('refreshSuccess', access_token);
     requestPool.map(cb => cb(access_token))
 };
 
@@ -18,7 +17,7 @@ export default () => {
             if(isRefreshing && config.url.indexOf('refresh_token') === -1){
                 return new Promise(function(resolve, reject){
                     requestPool.push(access_token => {
-                        config.headers.Authorization = 'bearer ' + access_token;
+                        config.headers.authorization = 'bearer ' + access_token;
                         resolve(config);
                     });
                 });
@@ -42,7 +41,6 @@ export default () => {
             return response;
         },
         function(error) {
-            debugger;
             // responses error before they are handled by then onRejected or catch
             if(error.response){
                 switch(parseInt(error.response.status, 10)){
@@ -62,7 +60,7 @@ export default () => {
                                     isRefreshing = false;
                                     const { data } = res;
                                     // 更新access_token
-                                    store.dispatch({ type: 'UNAUTH_USER', payload: {
+                                    store.dispatch({ type: 'REFRESH_TOKEN', payload: {
                                         access_token: data.access_token
                                     }});
                                     refreshSuccess(data.access_token);
@@ -73,7 +71,7 @@ export default () => {
 
                             return new Promise(function(resolve, reject){
                                 requestPool.push(access_token => {
-                                    error.config.headers.Authorization = 'bearer ' + access_token;
+                                    error.config.headers.authorization = 'bearer ' + access_token;
                                     resolve(error.config);
                                 });    
                             });
