@@ -8,6 +8,24 @@ const app = express();
 
 app.use(cors());
 
+// Middleware: it reads the token from the authorization header and set to
+// req.token.
+const ensureToken = (req, res, next) => {
+    const bearerHeader = req.headers["authorization"];
+
+    if (bearerHeader) {
+        req.token = bearerHeader.split(" ")[1];
+        next();
+    } else {
+        return res
+            .status(403)
+            .json({
+                error: "No credentials sent!"
+            });
+    }
+}
+
+
 app.get("/api", (req, res) => {
     res.json({
         text: "my public api"
@@ -57,26 +75,27 @@ app.post("/api/login", (req, res) => {
 });
 
 app.get("/api/refresh_token", (req, res) => {
-    // 校验refreshToken
-    if(true){
-        const access_token = jwt.sign({
-            name: 'text', pass: 'react'
-        }, "my_secret_key", { expiresIn: '1m' });
-        const refresh_token = jwt.sign({
-            name: 'text', pass: 'react'
-        }, "my_secret_key", { expiresIn: '1m' });
+    setTimeout(() => {
+        // 校验refreshToken
+        if(true){
+            const access_token = jwt.sign({
+                name: 'text', pass: 'react'
+            }, "my_secret_key", { expiresIn: '10s' });
+            const refresh_token = jwt.sign({
+                name: 'text', pass: 'react'
+            }, "my_secret_key", { expiresIn: '10s' });
 
-        res.json({access_token: access_token, refresh_token: refresh_token});
-        // 返回新的access token
-    }else{
-        res.status(401)
-            .json({
-                error: "Invalid Credentials"
-            });
-    }
+            res.json({access_token: access_token, refresh_token: refresh_token});
+            // 返回新的access token
+        }else{
+            res.status(401)
+                .json({
+                    error: "Invalid Credentials"
+                });
+        }
+    }, 5000)
 });
 
-// protected api
 app.get("/api/protected", ensureToken, (req, res) => {
     // server verifies the token (verifies the client )
     jwt.verify(req.token, "my_secret_key", (err, data) => {
@@ -96,21 +115,6 @@ app.get("/api/protected", ensureToken, (req, res) => {
     });
 });
 
-// Middleware: it reads the token from the authorization header and set to
-// req.token.
-function ensureToken(req, res, next) {
-    const bearerHeader = req.headers["authorization"];
 
-    if (bearerHeader) {
-        req.token = bearerHeader.split(" ")[1];
-        next();
-    } else {
-        return res
-            .status(403)
-            .json({
-                error: "No credentials sent!"
-            });
-    }
-}
 
 app.listen(8000, () => console.log("App listening on 8000...."));

@@ -11,7 +11,6 @@ class Protected extends Component {
         this.cancelable = util.makeCancelable(api.getUser())
         
         this.cancelable.promise.then((res) => {
-            debugger
             const { data } = res;
             this.setState({ list: data.goals });
         });

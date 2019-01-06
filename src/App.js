@@ -7,7 +7,6 @@ import {
   withRouter
 } from "react-router-dom";
 
-
 import './App.css';
 
 import Loading from './components/Loading';

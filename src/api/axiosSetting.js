@@ -6,7 +6,9 @@ import api from './index';
 let isRefreshing = false;
 let requestPool = [];
 const refreshSuccess = function(access_token){
+    console.log(requestPool)
     requestPool.map(cb => cb(access_token))
+    requestPool = []
 };
 
 export default () => {
@@ -59,6 +61,7 @@ export default () => {
                                 .then(function(res){
                                     isRefreshing = false;
                                     const { data } = res;
+
                                     // 更新access_token
                                     store.dispatch({ type: 'REFRESH_TOKEN', payload: {
                                         access_token: data.access_token
@@ -72,7 +75,7 @@ export default () => {
                             return new Promise(function(resolve, reject){
                                 requestPool.push(access_token => {
                                     error.config.headers.authorization = 'bearer ' + access_token;
-                                    resolve(error.config);
+                                    resolve(axios(error.config));
                                 });    
                             });
                         }
