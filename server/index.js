@@ -30,7 +30,8 @@ const createOrderList = (status) => {
     for(let i = 0; i < len; i++){
         result.push({
             id: Random.id(),
-            name: Random.csentence(2, 4),
+            img: Random.image('180x180'),
+            name: Random.cparagraph(1, 2),
             age: Random.integer(18, 80),
             date: Random.date()
         })
@@ -64,12 +65,12 @@ app.post("/api/login", (req, res) => {
     const access_token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '10s' // setting the token expiry time to be 2h
+      expiresIn: '10m' // setting the token expiry time to be 2h
     });
     const refresh_token = jwt.sign({
       user
     }, "my_secret_key", {
-      expiresIn: '10s' // setting the token expiry time to be 2h
+      expiresIn: '10m' // setting the token expiry time to be 2h
     });
     setTimeout(() => {
       res.json({access_token: access_token, refresh_token: refresh_token});
@@ -85,10 +86,10 @@ app.get("/api/refresh_token", (req, res) => {
         if(true){
             const access_token = jwt.sign({
                 name: 'text', pass: 'react'
-            }, "my_secret_key", { expiresIn: '10s' });
+            }, "my_secret_key", { expiresIn: '10m' });
             const refresh_token = jwt.sign({
                 name: 'text', pass: 'react'
-            }, "my_secret_key", { expiresIn: '10s' });
+            }, "my_secret_key", { expiresIn: '10m' });
 
             res.json({access_token: access_token, refresh_token: refresh_token});
             // 返回新的access token

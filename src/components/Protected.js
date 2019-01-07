@@ -48,8 +48,6 @@ class Protected extends Component {
         const { list, status, orderList } = this.state;
         const { logout } = this.props;
 
-        console.log(orderList)
-
         const List = list.map((item, index) => {
             return <li key={index}>{item}</li>
         })

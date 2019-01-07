@@ -9,12 +9,22 @@ import {
 
 import './App.css';
 
+import Menu from './components/Menu'
+
 import Loading from './components/Loading';
 import Auth from './components/Auth';
 import Login from './components/Login';
 import Protected from './components/Protected'
+import Order from './components/Order'
 
-const Public = () => <h1>Public</h1>;
+const Public = () => {
+    return (
+        <div>
+            <Menu />
+            <h1>Public</h1>
+        </div>
+    )
+}
 
 const NotFound = () => <h1>Not Found</h1>;
 
@@ -26,14 +36,12 @@ class App extends Component {
                     render={ ({ location }) => {
                         return  (
                             <div>
-                                <nav>
-                                    <NavLink to="/public">Public Page</NavLink>
-                                    <NavLink to="/protected">Protected Page</NavLink>
-                                </nav>
+
                                 <main>
                                     <Switch>
-                                        <Route path="/public" component={Public} />
+                                        <Route path="/" exact component={Public} />
                                         <Auth path="/protected" component={Protected} />
+                                        <Auth path="/order" component={ Order } />
                                         <Route path="/login" component={Login} />
                                         <Route render={ () => <NotFound /> } />
                                     </Switch>
