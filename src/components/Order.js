@@ -116,6 +116,7 @@ class Order extends Component {
   loadNextPage = () => {
     api.getOrderList()
       .then((res) => {
+        debugger
         const { data } = res
         if(data && data.length){
           this.setState({
@@ -127,8 +128,10 @@ class Order extends Component {
             showLoading: false
           })
         }
+
       })
       .catch((err) => {
+        debugger
       })    
   }
 
