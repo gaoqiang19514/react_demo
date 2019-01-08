@@ -8,6 +8,9 @@ const Mock = require("mockjs")
 const app = express();
 const Random = Mock.Random
 
+let maxLength = 3
+let count = 0
+
 app.use(cors());
 
 // Middleware: it reads the token from the authorization header and set to
@@ -100,6 +103,8 @@ app.get("/api/refresh_token", (req, res) => {
 });
 
 app.get("/api/protected", ensureToken, (req, res) => {
+    count = 0
+
     // server verifies the token (verifies the client )
     jwt.verify(req.token, "my_secret_key", (err, data) => {
         if (err) {
@@ -119,8 +124,12 @@ app.get('/api/getOrderList', ensureToken, (req, res) => {
             if(err){
                 res.status(401).json({ error: err})
             }else{
-                console.log(req.query)
-                res.json(createOrderList(req.query.status))
+                if(count <= maxLength){
+                    count++
+                    res.json(createOrderList(req.query.status))
+                }else{
+                    res.json([])
+                }
             }
         }, 2000)
     })

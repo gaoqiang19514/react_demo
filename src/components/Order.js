@@ -120,12 +120,11 @@ class Order extends Component {
         if(data && data.length){
           this.setState({
             isLoad: false,
-            showLoading: false,
             list: [...this.state.list, ...data]
           })
         }else{
           this.setState({
-            showLoading: true
+            showLoading: false
           })
         }
       })
@@ -151,7 +150,7 @@ class Order extends Component {
         <div ref={node => this.itemsElem = node}>
           { items }
         </div>
-        { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : null}
+        { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }
       </div>
     )
   }
