@@ -58,6 +58,11 @@ const main = {
   justifyContent: 'space-between'
 }
 
+const loadingStyle = {
+  textAlign: 'center',
+  padding: '15px 0'
+}
+
 const Item = (props) => (
   <div style={ itemStyle }>
     <img style={ imgStyle } src={ props.img } alt=""/>
@@ -73,6 +78,8 @@ const Item = (props) => (
 
 class Order extends Component {
   state = {
+    showLoading: true,
+    isLoad: false,
     list: []
   }
 
@@ -88,11 +95,49 @@ class Order extends Component {
       })
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollListener)
+  }
+
+  scrollListener = () => {
+    if(this.state.isLoad){ return }
+
+    const scrollEl = window
+    const doc = document.documentElement || document.body.parentNode || document.body
+    const scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : doc.scrollTop
+    const winHeight = window.innerHeight
+    const docHeight = this.itemsElem.offsetHeight
+    if((scrollTop + winHeight) >= docHeight){
+      this.setState({ isLoad: true })
+      this.loadNextPage()
+    }
+  }
+
+  loadNextPage = () => {
+    api.getOrderList()
+      .then((res) => {
+        const { data } = res
+        if(data && data.length){
+          this.setState({
+            isLoad: false,
+            showLoading: false,
+            list: [...this.state.list, ...data]
+          })
+        }else{
+          this.setState({
+            showLoading: true
+          })
+        }
+      })
+      .catch((err) => {
+      })    
+  }
+
   render() {
     const { list } = this.state
     
-    const todoItems = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
- 
+    const items = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
+
     return (
       <div>
         <div>
@@ -103,8 +148,10 @@ class Order extends Component {
             <a style={ navItemStyle }>失败</a>
           </div>
         </div>
-
-        { todoItems }
+        <div ref={node => this.itemsElem = node}>
+          { items }
+        </div>
+        { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : null}
       </div>
     )
   }

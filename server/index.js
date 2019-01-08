@@ -115,12 +115,14 @@ app.get("/api/protected", ensureToken, (req, res) => {
 
 app.get('/api/getOrderList', ensureToken, (req, res) => {
     jwt.verify(req.token, "my_secret_key", (err, data) => {
-        if(err){
-            res.status(401).json({ error: err})
-        }else{
-            console.log(req.query)
-            res.json(createOrderList(req.query.status))
-        }
+        setTimeout(() => {
+            if(err){
+                res.status(401).json({ error: err})
+            }else{
+                console.log(req.query)
+                res.json(createOrderList(req.query.status))
+            }
+        }, 2000)
     })
 })
 
