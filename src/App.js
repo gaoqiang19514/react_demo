@@ -6,6 +6,7 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
+import VConsole from 'vconsole'
 
 import './App.css';
 
@@ -16,6 +17,9 @@ import Auth from './components/Auth';
 import Login from './components/Login';
 import Protected from './components/Protected'
 import Order from './components/Order'
+
+// init vConsole
+var vConsole = new VConsole()
 
 const Public = () => {
     return (

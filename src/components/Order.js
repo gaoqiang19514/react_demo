@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import api from '../api'
 import util from '../util'
-import { hidden } from 'ansi-colors';
+import { hidden } from 'ansi-colors'
+import styled from 'styled-components'
 
 const fixedStyle = {
   position: 'fixed',
@@ -19,11 +20,16 @@ const navStyle = {
   background: '#f7f7f8'
 }
 
-const navItemStyle = {
-  lineHeight: '50px',
-  flex: 1,
-  textAlign: 'center'
-}
+const StyleNavItem = styled.a`
+  flex: 1;
+  line-Height: 50px;
+  text-align: center;
+  transition: all .3s ease;
+  &.active{
+    font-weight: bold;
+    color: red;
+  }
+`
 
 const itemStyle = {
   display: 'flex',
@@ -76,6 +82,9 @@ const Item = (props) => (
   </div>
 )
 
+let status = '1'
+let currentPage = 1
+
 class Order extends Component {
   state = {
     showLoading: true,
@@ -84,15 +93,7 @@ class Order extends Component {
   }
 
   componentWillMount() {
-    api.getOrderList()
-      .then((res) => {
-        const { data } = res
-        this.setState({
-          list: data
-        })
-      })
-      .catch((err) => {
-      })
+    this.loadNextPage(status, currentPage)
   }
 
   componentDidMount() {
@@ -109,14 +110,13 @@ class Order extends Component {
     const docHeight = this.itemsElem.offsetHeight
     if((scrollTop + winHeight) >= docHeight){
       this.setState({ isLoad: true })
-      this.loadNextPage()
+      this.loadNextPage(status, ++currentPage)
     }
   }
 
-  loadNextPage = () => {
-    api.getOrderList()
+  loadNextPage = (status, page) => {
+    api.getOrderList(status, page)
       .then((res) => {
-        debugger
         const { data } = res
         if(data && data.length){
           this.setState({
@@ -128,11 +128,19 @@ class Order extends Component {
             showLoading: false
           })
         }
-
       })
       .catch((err) => {
-        debugger
+        console.log('err', err)
       })    
+  }
+
+  clickHandle = (e) => {
+    this.setState({
+      list: []
+    })
+    currentPage = 1
+    status = e.target.getAttribute('data-status')
+    this.loadNextPage(status, currentPage)
   }
 
   render() {
@@ -140,14 +148,16 @@ class Order extends Component {
     
     const items = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
 
+    console.log(status)
+
     return (
       <div>
         <div>
           <div style={ siblingStyle }></div>
           <div style={ { ...navStyle, ...fixedStyle } }>
-            <a style={ navItemStyle }>处理中</a>
-            <a style={ navItemStyle }>成功</a>
-            <a style={ navItemStyle }>失败</a>
+            <StyleNavItem className={ status === '1' ? 'active' : '' } onClick={this.clickHandle} data-status="1">处理中</StyleNavItem>
+            <StyleNavItem className={ status === '2' ? 'active' : '' } onClick={this.clickHandle} data-status="2">成功</StyleNavItem>
+            <StyleNavItem className={ status === '3' ? 'active' : '' } onClick={this.clickHandle} data-status="3">失败</StyleNavItem>
           </div>
         </div>
         <div ref={node => this.itemsElem = node}>

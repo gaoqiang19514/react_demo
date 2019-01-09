@@ -8,7 +8,7 @@ const Mock = require("mockjs")
 const app = express();
 const Random = Mock.Random
 
-let maxLength = 3
+let maxLength = 1000000
 let count = 0
 
 app.use(cors());
