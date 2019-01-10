@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import api from '../api'
 import util from '../util'
 import { hidden } from 'ansi-colors'
 import styled from 'styled-components'
+import { dispatch } from 'rxjs/internal/observable/range';
+
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
 
 const fixedStyle = {
   position: 'fixed',
@@ -84,6 +89,7 @@ const Item = (props) => (
 
 let status = '1'
 let currentPage = 1
+let nextRequestId = 0
 
 class Order extends Component {
   state = {
@@ -115,22 +121,35 @@ class Order extends Component {
   }
 
   loadNextPage = (status, page) => {
+    const reqId = ++nextRequestId
+
+    const ifNextRequestValid = (cb) => {
+      if(nextRequestId === reqId){
+        console.log('finished')
+        cb && cb()
+      }
+    }
+
     api.getOrderList(status, page)
       .then((res) => {
-        const { data } = res
-        if(data && data.length){
-          this.setState({
-            isLoad: false,
-            list: [...this.state.list, ...data]
-          })
-        }else{
-          this.setState({
-            showLoading: false
-          })
-        }
+        ifNextRequestValid(() => {
+          const { data } = res
+          if(data && data.length){
+            this.setState({
+              isLoad: false,
+              list: [...this.state.list, ...data]
+            })
+          }else{
+            this.setState({
+              showLoading: false
+            })
+          }
+        })
       })
       .catch((err) => {
-        console.log('err', err)
+        ifNextRequestValid(() => {
+          console.log('err', err)
+        })
       })    
   }
 
@@ -147,8 +166,6 @@ class Order extends Component {
     const { list } = this.state
     
     const items = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
-
-    console.log(status)
 
     return (
       <div>

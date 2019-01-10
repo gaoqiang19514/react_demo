@@ -19,7 +19,7 @@ import Protected from './components/Protected'
 import Order from './components/Order'
 
 // init vConsole
-var vConsole = new VConsole()
+// var vConsole = new VConsole()
 
 const Public = () => {
     return (
