@@ -56,6 +56,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/api/hotProducts', (req, res) => {
+    res.json({
+        id: 1,
+        name: '仙女棒',
+        price: 23.50,
+        sku: 999
+    })
+})
+
 app.post("/api/login", (req, res) => {
     const user = auth(req);
 

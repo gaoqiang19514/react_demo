@@ -17,18 +17,10 @@ import Auth from './components/Auth';
 import Login from './components/Login';
 import Protected from './components/Protected'
 import Order from './components/Order'
+import Public from './components/Public'
 
 // init vConsole
 // var vConsole = new VConsole()
-
-const Public = () => {
-    return (
-        <div>
-            <Menu />
-            <h1>Public</h1>
-        </div>
-    )
-}
 
 const NotFound = () => <h1>Not Found</h1>;
 

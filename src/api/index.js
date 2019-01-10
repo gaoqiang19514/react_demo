@@ -4,7 +4,7 @@ import config from '../config';
 axios.defaults.baseURL = config.baseURL;
 
 export default {
-    get(path, data, config = {}) {
+    get(path, data = {}, config = {}) {
         return axios.get(path, {
             ...config,
             // validateStatus: function (status) {
@@ -13,7 +13,7 @@ export default {
             params: data
         });
     },
-    post(path, data, config = {}) {
+    post(path, data = {}, config = {}) {
         return axios.post(path, data, config);
     },
     login(username, password) {
@@ -36,5 +36,8 @@ export default {
     // 获取指定状态的订单列表
     getOrderList(status) {
         return this.get('getOrderList', { status: status })
+    },
+    hotProducts() {
+        return this.get('hotProducts')
     }
 };
