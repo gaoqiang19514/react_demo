@@ -1,10 +1,16 @@
 import React from 'react'
 import { NavLink } from "react-router-dom"
+import styled from 'styled-components'
+
+const S_Link = styled(NavLink)`
+  font-size: 16px;
+`
+
 
 export default () => (
   <nav>
-    <NavLink to="/">Public Page</NavLink>
-    <NavLink to="/protected">Protected Page</NavLink>
-    <NavLink to="/order">order Page</NavLink>
+    <S_Link to="/">Public</S_Link>
+    <S_Link to="/protected">Protected</S_Link>
+    <S_Link to="/order">order</S_Link>
   </nav>
 )

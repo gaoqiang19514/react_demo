@@ -6,24 +6,11 @@ import { hidden } from 'ansi-colors'
 import styled from 'styled-components'
 import { dispatch } from 'rxjs/internal/observable/range';
 
+import { Protal } from './Layout'
+
+
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
-
-const fixedStyle = {
-  position: 'fixed',
-  left: 0,
-  right: 0,
-  top: 0
-}
-
-const siblingStyle = {
-  height: '50px'
-}
-
-const navStyle = {
-  display: 'flex',
-  background: '#f7f7f8'
-}
 
 const StyleNavItem = styled.a`
   flex: 1;
@@ -106,6 +93,10 @@ class Order extends Component {
     window.addEventListener('scroll', this.scrollListener)
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollListener)
+  }
+
   scrollListener = () => {
     if(this.state.isLoad){ return }
 
@@ -169,18 +160,19 @@ class Order extends Component {
 
     return (
       <div>
-        <div>
-          <div style={ siblingStyle }></div>
-          <div style={ { ...navStyle, ...fixedStyle } }>
+        <Protal>
+          <header>
             <StyleNavItem className={ status === '1' ? 'active' : '' } onClick={this.clickHandle} data-status="1">处理中</StyleNavItem>
             <StyleNavItem className={ status === '2' ? 'active' : '' } onClick={this.clickHandle} data-status="2">成功</StyleNavItem>
             <StyleNavItem className={ status === '3' ? 'active' : '' } onClick={this.clickHandle} data-status="3">失败</StyleNavItem>
-          </div>
-        </div>
-        <div ref={node => this.itemsElem = node}>
-          { items }
-        </div>
-        { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }
+          </header>
+          <main>
+            <div ref={node => this.itemsElem = node}>
+              { items }
+            </div>
+            { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }
+          </main>
+        </Protal>
       </div>
     )
   }

@@ -32,16 +32,13 @@ class App extends Component {
                     render={ ({ location }) => {
                         return  (
                             <div>
-
-                                <main>
-                                    <Switch>
-                                        <Route path="/" exact component={Public} />
-                                        <Auth path="/protected" component={Protected} />
-                                        <Auth path="/order" component={ Order } />
-                                        <Route path="/login" component={Login} />
-                                        <Route render={ () => <NotFound /> } />
-                                    </Switch>
-                                </main>
+                                <Switch>
+                                    <Route path="/" exact component={Public} />
+                                    <Auth path="/protected" component={Protected} />
+                                    <Auth path="/order" component={ Order } />
+                                    <Route path="/login" component={Login} />
+                                    <Route render={ () => <NotFound /> } />
+                                </Switch>
 
                                 <Loading />
                             </div>
