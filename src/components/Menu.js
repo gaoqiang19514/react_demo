@@ -11,6 +11,7 @@ export default () => (
   <nav>
     <S_Link to="/">Public</S_Link>
     <S_Link to="/protected">Protected</S_Link>
+    <S_Link to="/transition">transition</S_Link>
     <S_Link to="/order">order</S_Link>
   </nav>
 )

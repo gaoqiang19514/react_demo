@@ -10,14 +10,13 @@ import VConsole from 'vconsole'
 
 import './App.css';
 
-import Menu from './components/Menu'
-
 import Loading from './components/Loading';
 import Auth from './components/Auth';
 import Login from './components/Login';
 import Protected from './components/Protected'
 import Order from './components/Order'
 import Public from './components/Public'
+import Transition from './components/Transition'
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -28,23 +27,17 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Route
-                    render={ ({ location }) => {
-                        return  (
-                            <div>
-                                <Switch>
-                                    <Route path="/" exact component={ Public } />
-                                    <Auth path="/protected" component={ Protected } />
-                                    <Auth path="/order" component={ Order } />
-                                    <Route path="/login" component={Login} />
-                                    <Route render={ () => <NotFound /> } />
-                                </Switch>
-
-                                <Loading />
-                            </div>
-                        )
-                    }}
-                />
+                <div>
+                    <Switch>
+                        <Route path="/" exact component={ Public } />
+                        <Auth path="/protected" component={ Protected } />
+                        <Auth path="/order" component={ Order } />
+                        <Route path="/login" component={Login} />
+                        <Route path="/transition" component={Transition} />
+                        <Route render={ () => <NotFound /> } />
+                    </Switch>
+                    <Loading />
+                </div>
             </Router>
         );
     }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import styled from 'styled-components'
 
 import api from '../api';
-
+const S_main = styled.main`
+  padding: 10px;
+`
 class Login extends Component {
 
     login = () => {
@@ -30,8 +33,12 @@ class Login extends Component {
 
         return (
             <div>
-                <h1>Login Page</h1>
-                <button onClick={ this.login }>login</button>
+                <S_main>
+                    Login
+                </S_main>
+                <div className="btn-wrap">
+                    <button onClick={ this.login }>login</button>
+                </div>
             </div>
         )
     }

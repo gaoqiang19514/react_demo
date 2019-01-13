@@ -25,7 +25,7 @@ class Public extends Component {
       <div>
         <Menu />
         <S_main>
-          Product
+          Public
         </S_main>
       </div>
     )
