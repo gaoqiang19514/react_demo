@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
-  Switch,
-  withRouter
+  Switch
 } from "react-router-dom";
 import VConsole from 'vconsole'
 

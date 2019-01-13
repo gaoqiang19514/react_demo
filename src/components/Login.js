@@ -13,14 +13,17 @@ class Login extends Component {
         const username = 'test';
         const pswd = 'react';
 
-        // 显示loading
+        this.props.showLoading()
         api.login(username, pswd)
             .then((response) => {
                 const { data } = response;
                 this.props.login(data);
             })
             .catch((error) => {
-            });
+            })
+            .finally(() => {
+                this.props.hideLoading()
+            })
     }
 
     render() {

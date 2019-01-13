@@ -6,7 +6,6 @@ const S_Link = styled(NavLink)`
   font-size: 16px;
 `
 
-
 export default () => (
   <nav>
     <S_Link to="/">Public</S_Link>

@@ -17,15 +17,15 @@ const S_Loading = styled.div`
 
 class Loading extends Component {
     render() {
-        const { loading } = this.props;
+        const { show } = this.props;
         return (
-            loading ? <S_Loading>Loading...</S_Loading> : null
+            show ? <S_Loading>Loading...</S_Loading> : null
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    return { loading: state.loading.loading };
+    return { show: state.loading.show };
 }
 
 export default withRouter(connect(mapStateToProps, null)(Loading));

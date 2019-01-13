@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/api/hotProducts', (req, res) => {
-    res.json({
+    return res.json({
         id: 1,
         name: '仙女棒',
         price: 23.50,
