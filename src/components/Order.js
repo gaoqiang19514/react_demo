@@ -8,9 +8,27 @@ import { dispatch } from 'rxjs/internal/observable/range';
 
 import { Protal } from './Layout'
 
-
-const CancelToken = axios.CancelToken;
-const source = CancelToken.source();
+const L_Container = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  display: flex;
+`
+const L_Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`
+const L_Top = styled.div`
+  line-height: 50px;
+  background: #ccc;
+`
+const L_Main = styled.div`
+  flex-shrink: 1;
+  flex-grow: 1;
+  overflow-y: auto;
+`
 
 const StyleNavItem = styled.a`
   flex: 1;
@@ -21,6 +39,10 @@ const StyleNavItem = styled.a`
     font-weight: bold;
     color: red;
   }
+`
+
+const L_header = styled.header`
+  display: flex;
 `
 
 const itemStyle = {
@@ -90,21 +112,20 @@ class Order extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scrollListener)
+    this.scrollContainer.addEventListener('scroll', this.scrollListener)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scrollListener)
+    this.scrollContainer.removeEventListener('scroll', this.scrollListener)
   }
 
   scrollListener = () => {
     if(this.state.isLoad){ return }
 
-    const scrollEl = window
-    const doc = document.documentElement || document.body.parentNode || document.body
-    const scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : doc.scrollTop
-    const winHeight = window.innerHeight
+    const scrollTop = this.scrollContainer.scrollTop
+    const winHeight = this.scrollContainer.offsetHeight
     const docHeight = this.itemsElem.offsetHeight
+
     if((scrollTop + winHeight) >= docHeight){
       this.setState({ isLoad: true })
       this.loadNextPage(status, ++currentPage)
@@ -116,7 +137,6 @@ class Order extends Component {
 
     const ifNextRequestValid = (cb) => {
       if(nextRequestId === reqId){
-        console.log('finished')
         cb && cb()
       }
     }
@@ -159,21 +179,25 @@ class Order extends Component {
     const items = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
 
     return (
-      <div>
-        <Protal>
-          <header>
-            <StyleNavItem className={ status === '1' ? 'active' : '' } onClick={this.clickHandle} data-status="1">处理中</StyleNavItem>
-            <StyleNavItem className={ status === '2' ? 'active' : '' } onClick={this.clickHandle} data-status="2">成功</StyleNavItem>
-            <StyleNavItem className={ status === '3' ? 'active' : '' } onClick={this.clickHandle} data-status="3">失败</StyleNavItem>
-          </header>
-          <main>
-            <div ref={node => this.itemsElem = node}>
-              { items }
-            </div>
-            { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }
-          </main>
-        </Protal>
-      </div>
+      <L_Container>
+        <L_Wrap>
+          <L_Top>
+            <L_header>
+              <StyleNavItem className={ status === '1' ? 'active' : '' } onClick={this.clickHandle} data-status="1">处理中</StyleNavItem>
+              <StyleNavItem className={ status === '2' ? 'active' : '' } onClick={this.clickHandle} data-status="2">成功</StyleNavItem>
+              <StyleNavItem className={ status === '3' ? 'active' : '' } onClick={this.clickHandle} data-status="3">失败</StyleNavItem>
+            </L_header>
+          </L_Top>
+          <L_Main ref={ node => this.scrollContainer = node }>
+            <main ref={node => this.itemsElem = node}>
+              <div>
+                { items }
+              </div>
+              { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }            
+            </main>
+          </L_Main>
+        </L_Wrap>
+      </L_Container>
     )
   }
 }

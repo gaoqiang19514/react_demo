@@ -34,8 +34,8 @@ export default {
         return this.get('protected');
     },
     // 获取指定状态的订单列表
-    getOrderList(status) {
-        return this.get('getOrderList', { status: status })
+    getOrderList(status, page) {
+        return this.get('getOrderList', { status: status, page: page })
     },
     hotProducts() {
         return this.get('hotProducts')

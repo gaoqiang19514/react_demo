@@ -24,5 +24,6 @@ nav a.active {
   color: red;
 }
 
-main{
+.btn-wrap{
+  padding: 10px;
 }

@@ -33,8 +33,8 @@ class App extends Component {
                         return  (
                             <div>
                                 <Switch>
-                                    <Route path="/" exact component={Public} />
-                                    <Auth path="/protected" component={Protected} />
+                                    <Route path="/" exact component={ Public } />
+                                    <Auth path="/protected" component={ Protected } />
                                     <Auth path="/order" component={ Order } />
                                     <Route path="/login" component={Login} />
                                     <Route render={ () => <NotFound /> } />
