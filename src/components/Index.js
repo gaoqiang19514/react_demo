@@ -5,8 +5,7 @@ import api from '../api';
 
 import kafei from '../asset/images/icon/kafei.png'
 
-const S_main = styled.main`
-`
+
 
 const S_nav = styled.nav`
   display: flex;
@@ -42,6 +41,31 @@ const S_link = styled.a`
         box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   }
 `
+const S_box = styled.div`
+  display: flex;
+  margin: 0 5px;
+`
+const S_aside = styled.div`
+  height: 170px;
+  width: 50%;
+  background: #fde6ea;
+      border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+`
+const S_main = styled.main`
+      width: 50%;
+          margin-left: 10px;
+`
+const S_main_cell = styled.div`
+  height: 80px;
+    background: #f9f2e9;
+        border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  & + div{
+    margin-top: 10px;
+    background: #ecd0a3;
+  }
+`
 
 class Public extends Component {
   
@@ -60,9 +84,6 @@ class Public extends Component {
     return (
       <div>
         <Menu />
-        <S_main>
-
-
           <section>
             <S_section_head>
               <h2>常用服务</h2>
@@ -132,7 +153,15 @@ class Public extends Component {
               <h2>商城专区</h2>
             </S_section_head>
             <S_section_main>
-              
+
+              <S_box>
+                <S_aside></S_aside>
+                <S_main>
+                  <S_main_cell></S_main_cell>
+                  <S_main_cell></S_main_cell> 
+                </S_main>
+              </S_box>
+
             </S_section_main>
           </section>
 
@@ -145,7 +174,6 @@ class Public extends Component {
             </S_section_main>
           </section>       
 
-        </S_main>
       </div>
     )
   }
