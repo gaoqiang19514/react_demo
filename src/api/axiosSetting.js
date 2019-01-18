@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import store from '../store';
+import store from '../Store';
 import api from './index';
 
 let isRefreshing = false;
