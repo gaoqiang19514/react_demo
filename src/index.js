@@ -10,6 +10,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './Store';
 
+import 'amfe-flexible'
+
 // 配置axios
 axiosSetting();
 

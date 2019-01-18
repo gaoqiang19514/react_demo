@@ -13,7 +13,7 @@ import Auth from './components/Auth';
 import Login from './components/Login';
 import Protected from './components/Protected'
 import Order from './components/Order'
-import Public from './components/Public'
+import Index from './components/Index'
 import Transition from './components/Transition'
 
 // init vConsole
@@ -27,7 +27,7 @@ class App extends Component {
             <Router>
                 <div>
                     <Switch>
-                        <Route path="/" exact component={ Public } />
+                        <Route path="/" exact component={ Index } />
                         <Auth path="/protected" component={ Protected } />
                         <Auth path="/order" component={ Order } />
                         <Route path="/login" component={Login} />
