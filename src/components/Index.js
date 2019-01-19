@@ -4,7 +4,8 @@ import Menu from './Menu'
 import api from '../api';
 
 import kafei from '../asset/images/icon/kafei.png'
-
+import biaoqian from '../asset/images/icon/biaoqian.png'
+import goldCard from '../asset/images/goldCard.png' 
 
 
 const S_nav = styled.nav`
@@ -67,6 +68,15 @@ const S_main_cell = styled.div`
   }
 `
 
+const S_flex = styled.div`
+  display: flex;
+`
+const S_flex_space = styled(S_flex)`
+  justify-content: space-between;
+`
+
+
+
 class Public extends Component {
   
   state = {
@@ -83,7 +93,7 @@ class Public extends Component {
   render() {
     return (
       <div>
-        <Menu />
+        <main>
           <section>
             <S_section_head>
               <h2>常用服务</h2>
@@ -166,13 +176,14 @@ class Public extends Component {
           </section>
 
           <section>
-            <S_section_head>
-              <h2>热卖产品</h2>
-            </S_section_head>
-            <S_section_main>
+          <S_section_head>
+            <h2>热卖产品</h2>
+          </S_section_head>
+          <S_section_main>
 
-            </S_section_main>
-          </section>       
+          </S_section_main>
+        </section>       
+        </main>
 
       </div>
     )
