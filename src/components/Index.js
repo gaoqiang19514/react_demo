@@ -29,7 +29,7 @@ const S_link = styled.a`
   text-decoration: none;
   img{
     display: block;
-    margin: auto;
+    margin: 0 auto 5px;
     width: 25px;
     height: 25px;
   }
@@ -97,7 +97,7 @@ class Public extends Component {
             </S_section_head>
             <S_section_main>
               <S_nav>
-                <S_link href="">
+                <S_link href="/recharge">
                   <div className="wrap">
                     <img src={kafei} alt=""/>
                     <div>充话费</div>

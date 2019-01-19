@@ -5,8 +5,8 @@ const StyledMain = styled.main`
 `
 const StyledList = styled.ul`
     list-style: none;
-    padding: 10px 0;
-    margin: 0 10px;
+    padding: 5px 0;
+    margin: 0 5px;
     display: flex;
     flex-wrap: wrap;
     p{
@@ -56,7 +56,7 @@ const Link = styled(A)`
 const StyledNav = styled.nav`
     display: flex;
     background: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 `
 const Input = styled.input`
     border: 0;
@@ -70,7 +70,7 @@ const StyledInput = styled(Input)`
 `
 const InputWrap = styled.div`
     padding: 15px;
-    margin: 0 15px;
+    margin: 0 10px;
     background: #fff;
     border-radius: 3px;
 `

@@ -16,6 +16,7 @@ import Order from './components/Order'
 import Index from './components/Index'
 import Transition from './components/Transition'
 import Recharge from './components/Recharge'
+import Redeem from './components/Redeem'
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -34,6 +35,7 @@ class App extends Component {
                         <Route path="/login" component={Login} />
                         <Route path="/transition" component={Transition} />
                         <Route path="/recharge" component={Recharge} />
+                        <Route path="/redeem" component={Redeem} />
                         <Route render={ () => <NotFound /> } />
                     </Switch>
                     <Loading />
