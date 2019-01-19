@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const StyledMain = styled.main`
-    background: #fff;
 `
 const StyledList = styled.ul`
     list-style: none;
-    padding: 5px 0;
-    margin: 0 5px;
+    padding: 10px 0;
+    margin: 0 10px;
     display: flex;
     flex-wrap: wrap;
     p{
@@ -16,15 +15,21 @@ const StyledList = styled.ul`
     li{
         width: 33.33%;
         text-align: center;
+        &.active .wrap{
+            color: red;
+            transition: all .3s;
+        }
     }
     .wrap{
         margin: 5px;
         padding: 10px 0;
-        border: 1px solid #eaeaea;
         border-radius: 3px;
+        background: #fff;
     }
     .title{
-        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
     p{
         font-size: 12px;
@@ -41,6 +46,12 @@ const Link = styled(A)`
     line-height: 50px;
     height: 50px;
     flex: 1;
+    transition: all .3s;
+    &.active{
+        color: red;
+        font-size: 16px;
+        font-weight: bold;
+    }
 `
 const StyledNav = styled.nav`
     display: flex;
@@ -54,17 +65,19 @@ const Input = styled.input`
     width: 100%;
 `
 const StyledInput = styled(Input)`
-
+    font-size: 22px;
+    font-weight: bold;
 `
 const InputWrap = styled.div`
     padding: 15px;
+    margin: 0 15px;
     background: #fff;
+    border-radius: 3px;
 `
 
 const api = {
     fetchProducts: (type) => {
         return new Promise((resolve, reject) => {
-            console.log(`拉取${type}`)
             const data = [
                 { id: 'ccd8105e-4bc5-40ac-ae44-cef48d3cd57a', integral: 1060, amount: 10 },
                 { id: 'ccd8105e-4bc5-40ac-ae44-cef48d33d57a', integral: 2010, amount: 20 },
@@ -75,15 +88,16 @@ const api = {
                 { id: 'ccd8105e-4bc5-40ac-ae44-cef48d38d57a', integral: 31800, amount: 70 },
                 { id: 'ccd8105e-4bc5-40ac-ae44-cef48d39d57a', integral: 53000, amount: 80 }
             ]
-            setTimeout(() => {
-                resolve(data);
-            }, 2000)
+            resolve(data);
         })
     }
 }
 
 class Recharge extends Component {
     state = {
+        phone: '15014095291',
+        currentProductIndex: 0,
+        currentIndex: 1,
         products: []
     }
 
@@ -96,11 +110,24 @@ class Recharge extends Component {
             })
     }
 
-    handleClick = (id) => {
-        console.log(id)
+    handleClick = (id, index) => {
+        // 校验手机号输入
+        if(!this.state.phone){
+            alert('请输入手机号')
+            return;
+        }
+
+        // 下一步要高亮当前点选块
+        // 思路1 用一个index来表示
+        this.setState({currentProductIndex: index})
+    }
+
+    handleChange = (e) => {
+        this.setState({ phone: e.target.value })
     }
 
     navHandleClick = (type) => {
+        this.setState({ currentIndex: type })
         // 根据type拉取产品列表
         api.fetchProducts(type)
             .then((res) => {
@@ -111,23 +138,25 @@ class Recharge extends Component {
     }
 
     render() {
+        const { currentIndex, currentProductIndex } = this.state
+
         return (
             <div>
                 <StyledNav>
-                    <Link onClick={() => this.navHandleClick(1)}>中国移动</Link>
-                    <Link onClick={() => this.navHandleClick(2)}>中国联通</Link>
-                    <Link onClick={() => this.navHandleClick(3)}>中国电信</Link>
+                    <Link className={currentIndex === 1 ? 'active' : ''} onClick={() => this.navHandleClick(1)}>中国移动</Link>
+                    <Link className={currentIndex === 2 ? 'active' : ''} onClick={() => this.navHandleClick(2)}>中国联通</Link>
+                    <Link className={currentIndex === 3 ? 'active' : ''} onClick={() => this.navHandleClick(3)}>中国电信</Link>
                 </StyledNav>
                 <StyledMain>
                     <InputWrap>
-                        <StyledInput type="text" placeholder="请输入手机号"/>                    
+                        <StyledInput type="text" value={this.state.phone} onChange={this.handleChange} placeholder="请输入手机号"/>                    
                     </InputWrap>
                     <StyledList>
-                        {this.state.products.map(product => (
-                            <li key={product.id} id={product.id} onClick={() => this.handleClick(product.id)}>
+                        {this.state.products.map((product, index) => (
+                            <li className={index === currentProductIndex ? 'active' : ''} key={product.id} id={product.id} onClick={() => this.handleClick(product.id, index)}>
                                 <div className="wrap">
                                     <p className="title">{product.amount}元</p>
-                                    <p>售价{product.integral}积分</p>
+                                    <p>{product.integral}积分</p>
                                 </div>
                             </li>
                         ))}

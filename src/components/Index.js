@@ -7,7 +7,6 @@ import kafei from '../asset/images/icon/kafei.png'
 import biaoqian from '../asset/images/icon/biaoqian.png'
 import goldCard from '../asset/images/goldCard.png' 
 
-
 const S_nav = styled.nav`
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +38,7 @@ const S_link = styled.a`
     padding: 5px 0;
     border-radius: 3px; 
     background: #fff;
-        box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   }
 `
 const S_box = styled.div`
@@ -50,18 +49,18 @@ const S_aside = styled.div`
   height: 170px;
   width: 50%;
   background: #fde6ea;
-      border-radius: 3px;
+  border-radius: 3px;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
 `
 const S_main = styled.main`
-      width: 50%;
-          margin-left: 10px;
+  width: 50%;
+  margin-left: 10px;
 `
 const S_main_cell = styled.div`
   height: 80px;
-    background: #f9f2e9;
-        border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  background: #f9f2e9;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   & + div{
     margin-top: 10px;
     background: #ecd0a3;
