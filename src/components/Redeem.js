@@ -64,7 +64,7 @@ const Input = styled.input`
 const Text = styled.div`
   color: #888;
   line-height: 1.7;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 const Button = styled.button`
