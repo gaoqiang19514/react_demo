@@ -75,19 +75,17 @@ const S_flex_space = styled(S_flex)`
   justify-content: space-between;
 `
 
-
-
 class Public extends Component {
   
   state = {
   }
 
   componentWillMount() {
-    api.hotProducts()
-      .then((res) => {
-        const { data } = res
-        console.log(data)
-      })
+    // api.hotProducts()
+    //   .then((res) => {
+    //     const { data } = res
+    //     console.log(data)
+    //   })
   }
 
   render() {
