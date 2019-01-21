@@ -6,7 +6,6 @@ import qia from '../asset/images/icon/qia.png'
 const StyledBg = styled.div`
   background: #fff;
 `
-
 const StyledBar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -19,7 +18,6 @@ const StyledBar = styled.div`
     display: block;
   }
 `
-
 const StyledCard = styled.div`
   display: flex;
   padding: 15px;
@@ -46,7 +44,6 @@ const StyledCard = styled.div`
     }
   }
 `
-
 const StyledWrap = styled.div`
   padding: 15px;
 `
@@ -60,13 +57,11 @@ const Input = styled.input`
   font-size: inherit;
   color: inherit;
 `
-
 const Text = styled.div`
   color: #888;
   line-height: 1.7;
   font-size: 12px;
 `
-
 const Button = styled.button`
   outline: none;
   display: block;
@@ -80,20 +75,50 @@ const PrimaryButton = styled(Button)`
   font-size: 16px;
   line-height: 50px;
   border-radius: 3px;
-  box-shadow: 0 0.03rem 0.05rem rgba(207, 162, 95, .58);
-  background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
+  &.active{
+    box-shadow: 0 0.03rem 0.05rem rgba(207, 162, 95, .58);
+    background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
+  }
 `
 
 class Redeem extends Component {
 
+  state = {
+    max: 892,
+    inputVal: '',
+    submitFlag: false
+  }
+
+  // 1 收集输入的数值
+  // 2 校验
+  // 3 发起赎回请求
+  handleClick = () => {
+    console.log('handleClick')
+  }
+
+  handleChange = (e) => {
+    this.setState({ inputVal: e.target.value })
+    if(e.target.value >= 100 && e.target.value <= this.state.max){
+      this.setState({submitFlag: true})
+    }else{
+      this.setState({submitFlag: false})
+    }
+  }
+
+  // 1 收集输入数值
+  // 2 校验
+  // 3 发起手续费计算请求
+  handleBlur = () => {
+    console.log('handleBlur')
+  }
+
   render() {
+    const { submitFlag } = this.state
     return (
       <StyledBg>
         <StyledBar>
           <span>转入银行卡</span>
-          <span>
-            <img className="icon" src={qia} alt=""/>
-          </span>
+          <img className="icon" src={qia} alt=""/>
         </StyledBar>
 
         <StyledCard>
@@ -107,7 +132,7 @@ class Redeem extends Component {
         </StyledCard>
 
         <StyledWrap>
-          <Input type="text" placeholder="最多可赎回892积分"/>
+          <Input type="text" onBlur={this.handleBlur} onChange={this.handleChange} value={this.state.inputVal} placeholder="最多可赎回892积分"/>
         </StyledWrap>
 
         <StyledWrap>
@@ -116,7 +141,7 @@ class Redeem extends Component {
         </StyledWrap>
 
         <StyledWrap>
-          <PrimaryButton>确认赎回</PrimaryButton>
+          <PrimaryButton className={ submitFlag ? 'active' : '' } onClick={this.handleClick}>确认赎回</PrimaryButton>
         </StyledWrap>
 
       </StyledBg>
