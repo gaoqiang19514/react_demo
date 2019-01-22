@@ -20,6 +20,10 @@ export default {
             Color: '/color',
             Login: '/login'
         }
+    },
+    // 业务配置
+    card: {
+        
     }
 };
 
