@@ -18,6 +18,8 @@ import Transition from './components/Transition'
 import Recharge from './components/Recharge'
 import Redeem from './components/Redeem'
 import Card from './components/Card'
+import AddBankCard from './components/AddBankCard'
+import Cate from './components/Cate'
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -38,6 +40,10 @@ class App extends Component {
                         <Route path="/recharge" component={Recharge} />
                         <Route path="/redeem" component={Redeem} />
                         <Route path="/card" component={Card} />
+                        <Route path="/add_bank_card" component={AddBankCard} />
+
+                        <Route path="/cate" component={Cate} />
+                        
                         <Route render={ () => <NotFound /> } />
                     </Switch>
                     <Loading />

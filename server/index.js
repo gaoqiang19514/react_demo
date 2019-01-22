@@ -3,6 +3,7 @@
 const jwt = require("jsonwebtoken");
 const auth = require("basic-auth");
 const express = require("express");
+const proxy = require('http-proxy-middleware');
 const cors = require("cors");
 const Mock = require("mockjs")
 const app = express();
@@ -43,6 +44,7 @@ const createOrderList = (status) => {
     return result
 }
 
+
 app.get("/api", (req, res) => {
     res.json({ text: "my public api" });
 });
@@ -55,6 +57,9 @@ app.use(function (req, res, next) {
     }
     next();
 });
+
+app.use('/portal', proxy({ target: 'http://portal.ewoyin.com', changeOrigin: true }))
+
 
 app.get('/api/hotProducts', (req, res) => {
     return res.json({
