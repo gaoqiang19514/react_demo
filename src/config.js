@@ -23,7 +23,8 @@ export default {
     },
     // 业务配置
     card: {
-        
+        MAX_COUNT: 10,
+        MIN_COUNT: 1
     }
 };
 
