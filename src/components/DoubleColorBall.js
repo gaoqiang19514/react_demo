@@ -63,13 +63,14 @@ class DoubleColorBall extends Component {
   redHandleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
 
-    // 限制判断
-    if(this.state.redBallPool.length >= config.double_color_ball.red.MAX){
-      return
-    }
+
     if(this.state.redBallPool.indexOf(num) > -1){
       this.setState({ redBallPool: this.state.redBallPool.filter((item) => item !== num) })
     }else{
+      // 限制判断
+      if((this.state.redBallPool.length + 1) > config.double_color_ball.red.MAX){
+        return
+      }      
       this.setState({ redBallPool: [...this.state.redBallPool, num] })
     }
   }
@@ -77,13 +78,14 @@ class DoubleColorBall extends Component {
   blueHandleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
 
-    // 限制判断
-    if(this.state.blueBallPool.length >= config.double_color_ball.blue.MAX){
-      return
-    }
+
     if(this.state.blueBallPool.indexOf(num) > -1){
       this.setState({ blueBallPool: this.state.blueBallPool.filter((item) => item !== num) })
     }else{
+      // 限制判断
+      if((this.state.blueBallPool.length + 1) > config.double_color_ball.blue.MAX){
+        return
+      }      
       this.setState({ blueBallPool: [...this.state.blueBallPool, num] })
     }
   }
