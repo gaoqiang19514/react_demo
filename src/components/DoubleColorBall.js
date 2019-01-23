@@ -63,7 +63,6 @@ class DoubleColorBall extends Component {
   redHandleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
 
-
     if(this.state.redBallPool.indexOf(num) > -1){
       this.setState({ redBallPool: this.state.redBallPool.filter((item) => item !== num) })
     }else{
@@ -77,7 +76,6 @@ class DoubleColorBall extends Component {
 
   blueHandleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
-
 
     if(this.state.blueBallPool.indexOf(num) > -1){
       this.setState({ blueBallPool: this.state.blueBallPool.filter((item) => item !== num) })
