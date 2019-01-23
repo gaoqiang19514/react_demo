@@ -62,7 +62,12 @@ class DoubleColorBall extends Component {
   handleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
     const pool = e.currentTarget.getAttribute('data-pool')
-    this.setState({ [pool]: [...this.state[pool], num] })
+
+    if(this.state[pool].indexOf(num) > -1){
+      this.setState({ [pool]: this.state[pool].filter((item) => item !== num) })
+    }else{
+      this.setState({ [pool]: [...this.state[pool], num] })
+    }
   }
 
   render() {
@@ -100,5 +105,5 @@ export default DoubleColorBall
 
 // 如何高亮选中的球呢？ 用数组的indexOf判检测当前号码是否存在于数组中方法
 // 如果取消当前选中的球呢？ 从数组中删除当前点选的号码 参考方法splice slice
-// 怎么判断当前点选是移除还是添加？ 查找数组中是否存在当前点选的号码 存在 ? 移除 ：添加
+// 怎么判断当前点选是移除还是添加？ 使用filter方法遍历数组 存在 ? 移除 ：添加
 // 号码选择数量限制放在哪里？
