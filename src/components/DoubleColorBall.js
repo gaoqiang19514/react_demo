@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import Util from '../util'
+import config from '../config'
 
 const StyledUl = styled.ul`
     list-style: none;
@@ -59,14 +60,31 @@ class DoubleColorBall extends Component {
     }
   }
 
-  handleClick = (e) => {
+  redHandleClick = (e) => {
     const num  = e.currentTarget.getAttribute('data-num')
-    const pool = e.currentTarget.getAttribute('data-pool')
 
-    if(this.state[pool].indexOf(num) > -1){
-      this.setState({ [pool]: this.state[pool].filter((item) => item !== num) })
+    // 限制判断
+    if(this.state.redBallPool.length >= config.double_color_ball.red.MAX){
+      return
+    }
+    if(this.state.redBallPool.indexOf(num) > -1){
+      this.setState({ redBallPool: this.state.redBallPool.filter((item) => item !== num) })
     }else{
-      this.setState({ [pool]: [...this.state[pool], num] })
+      this.setState({ redBallPool: [...this.state.redBallPool, num] })
+    }
+  }
+
+  blueHandleClick = (e) => {
+    const num  = e.currentTarget.getAttribute('data-num')
+
+    // 限制判断
+    if(this.state.blueBallPool.length >= config.double_color_ball.blue.MAX){
+      return
+    }
+    if(this.state.blueBallPool.indexOf(num) > -1){
+      this.setState({ blueBallPool: this.state.blueBallPool.filter((item) => item !== num) })
+    }else{
+      this.setState({ blueBallPool: [...this.state.blueBallPool, num] })
     }
   }
 
@@ -79,7 +97,7 @@ class DoubleColorBall extends Component {
             key={item}
             data-num={item}
             data-pool="redBallPool"
-            onClick={this.handleClick}
+            onClick={this.redHandleClick}
             className={(this.state.redBallPool.indexOf(item) > -1) ? 'active' : ''}>
               <div className="bg">{item}</div>
           </li>)}
@@ -89,7 +107,7 @@ class DoubleColorBall extends Component {
             key={item}
             data-num={item}
             data-pool="blueBallPool"
-            onClick={this.handleClick}
+            onClick={this.blueHandleClick}
             className={(this.state.blueBallPool.indexOf(item) > -1) ? 'active' : ''}>
               <div className="bg">{item}</div>
           </li>)}
