@@ -20,6 +20,8 @@ import Redeem from './components/Redeem'
 import Card from './components/Card'
 import AddBankCard from './components/AddBankCard'
 import Cate from './components/Cate'
+import DoubleColorBall from './components/DoubleColorBall'
+
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -42,6 +44,7 @@ class App extends Component {
                         <Route path="/card" component={Card} />
                         <Route path="/add_bank_card" component={AddBankCard} />
                         <Route path="/cate" component={Cate} />
+                        <Route path="/double_color_ball" component={DoubleColorBall} />
                         <Route render={ () => <NotFound /> } />
                     </Switch>
                     <Loading />

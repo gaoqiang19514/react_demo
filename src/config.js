@@ -25,6 +25,17 @@ export default {
     card: {
         MAX_COUNT: 10,
         MIN_COUNT: 1
+    },
+    // 双色球
+    double_color_ball: {
+        red: {
+            MAX: 20,
+            MIN: 6
+        },
+        blue: {
+            MAX: 6,
+            MIN: 1
+        }
     }
 };
 

@@ -1,3 +1,4 @@
+
 const makeCancelable = (promise) => {
     let active = true;
     return {
@@ -19,8 +20,19 @@ const accessTokenIsValid = (accessToken) => {
     return true;
 }
 
+const creteNumSeriesString = (start, end) => {
+    const result = []
+    
+    for(let i = start; i <= end; i++){
+        result.push(String(i))
+    }
+
+    return result
+}
+
 export default {
     makeCancelable,
     accessTokenIsValid,
-    refreshTokenIsValid
+    refreshTokenIsValid,
+    creteNumSeriesString
 };
