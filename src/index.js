@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-// import './mock';
+import './mock';
 import axiosSetting from './api/axiosSetting';
 
 import './index.css';

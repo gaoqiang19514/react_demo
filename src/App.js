@@ -41,9 +41,7 @@ class App extends Component {
                         <Route path="/redeem" component={Redeem} />
                         <Route path="/card" component={Card} />
                         <Route path="/add_bank_card" component={AddBankCard} />
-
                         <Route path="/cate" component={Cate} />
-                        
                         <Route render={ () => <NotFound /> } />
                     </Switch>
                     <Loading />

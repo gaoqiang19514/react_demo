@@ -39,5 +39,14 @@ export default {
     },
     hotProducts() {
         return this.get('hotProducts')
+    },
+    // 获取指定商城的分类列表
+    getProductCateList(type) {
+        // 1 京东  2 严选  3 自营
+        return this.get('getProductCateList', { type: type })
+    },
+    // 根据分类获取产品列表
+    getProductByCate(type, cate) {
+        return this.get('getProductByCate', { type: type, cate: cate })
     }
 };
