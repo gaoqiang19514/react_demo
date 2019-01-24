@@ -82,6 +82,7 @@ const LayoutLayer = styled.div`
 const LayoutScroller = styled.div`
   overflow-y: auto;
   height: 100%;
+  padding-bottom: 80px;
 `
 const StyledBall = styled.div`
   margin: 15px;
@@ -313,9 +314,12 @@ class DoubleColorBall extends Component {
                 </StyledBall>
               })}
             </div>
-            <StyledButtonBox>
-              <PrimaryButton onClick={this.createRandomBallsToPoolHandleClick}>机选</PrimaryButton>
-            </StyledButtonBox>
+
+            <LayoutFixedBottom>
+              <StyledButtonBox>
+                <PrimaryButton onClick={this.createRandomBallsToPoolHandleClick}>机选</PrimaryButton>
+              </StyledButtonBox>
+            </LayoutFixedBottom>
           </LayoutScroller>
         </LayoutLayer>
       </div>
