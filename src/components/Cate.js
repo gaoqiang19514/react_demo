@@ -43,7 +43,7 @@ const Product = ({name, imagePath, price, state}) => {
   const flexShrink = {
     flex: 1
   }
-  const title = {
+  const nameStyle = {
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10
@@ -70,7 +70,7 @@ const Product = ({name, imagePath, price, state}) => {
     <div style={flex}>
       <img style={{width: 90, height: 90}} src={imagePath} alt={name}/>
       <div style={flexShrink}>
-        <div style={title}>{name}</div>
+        <div style={nameStyle}>{name}</div>
         <div style={priceStyle}>￥{price}</div>
         <div style={flexAlignCenter}>
           <span style={stateStyle}>{state ? '有货' : '无货'}</span>
