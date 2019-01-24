@@ -31,6 +31,56 @@ const LayoutMain = styled.div`
   background: #fff;
 `
 
+const Product = ({name, imagePath, price, state}) => {
+  const flex = {
+    display: 'flex'
+  }
+  const flexAlignCenter = {
+    ...flex,
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }
+  const flexShrink = {
+    flex: 1
+  }
+  const title = {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 10
+  }
+  const priceStyle = {
+    fontSize: 14,
+    color: '#F53415',
+    fontWeight: 'bold'
+  }
+  const stateStyle = {
+    fontSize: 12,
+    padding: '2px 8px',
+    borderRadius: 3,
+    color: '#7e7e7e7e',
+    background: '#F2F2F2'
+  }
+  const redStateStyle = {
+    ...stateStyle,
+    color: '#fff',
+    background: '#F63618'
+  }
+
+  return <li style={{padding: 10}}>
+    <div style={flex}>
+      <img style={{width: 90, height: 90}} src={imagePath} alt={name}/>
+      <div style={flexShrink}>
+        <div style={title}>{name}</div>
+        <div style={priceStyle}>￥{price}</div>
+        <div style={flexAlignCenter}>
+          <span style={stateStyle}>{state ? '有货' : '无货'}</span>
+          {state ? <span style={redStateStyle}>兑换</span> : ''}
+        </div>
+      </div>
+    </div>
+  </li>
+}
+
 class Cate extends Component {
 
   state = {
@@ -54,8 +104,6 @@ class Cate extends Component {
             this.setState({products: data})
           })
       })
-
-
   }
 
   render() {
@@ -69,7 +117,7 @@ class Cate extends Component {
         </LayoutAside>
         <LayoutMain>
           <StyledUl>
-            {products.map((item) => <li key={item.skuid}>{item.name}</li>)}
+            {products.map((item) => <Product key={item.skuid} price={item.price} state={item.state} imagePath={item.imagePath} name={item.name}/>)}
           </StyledUl>
         </LayoutMain>
       </LayoutBox>

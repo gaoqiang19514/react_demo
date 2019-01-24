@@ -3,7 +3,7 @@ const Mock = require('mockjs');
 const Random = Mock.Random;
 
 Mock.setup({
-    timeout: 2000
+    // timeout: 2000
 });
 
 // 返回商品分类

@@ -1,6 +1,7 @@
 body {
     max-width: 640px;
     margin: auto;    
+    line-height: 1.7;
     background: #f7f7f8;
     font-family: "Lucida Console", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
