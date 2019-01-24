@@ -36,14 +36,14 @@ const randomRangeNum = (min, max) => {
 
 const closest = function (el, selector) {
     var matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
-    const oldEl = el
+    const old = el
     while (el) {
         if (matchesSelector.call(el, selector)) {
             break;
         }
         el = el.parentElement;
     }
-    return el !== oldEl;
+    return el !== old;
 }
 
 export default {
