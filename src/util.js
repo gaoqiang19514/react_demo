@@ -34,10 +34,23 @@ const randomRangeNum = (min, max) => {
     return min + Math.round(range * rand);
 }
 
+const closest = function (el, selector) {
+    var matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+    const oldEl = el
+    while (el) {
+        if (matchesSelector.call(el, selector)) {
+            break;
+        }
+        el = el.parentElement;
+    }
+    return el !== oldEl;
+}
+
 export default {
     makeCancelable,
     accessTokenIsValid,
     refreshTokenIsValid,
     creteNumSeriesString,
-    randomRangeNum
+    randomRangeNum,
+    closest
 };
