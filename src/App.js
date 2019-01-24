@@ -23,6 +23,8 @@ import Cate from './components/Cate'
 import DoubleColorBall from './components/DoubleColorBall'
 import Product from './components/Product'
 
+import Test from './components/Test'
+
 // init vConsole
 // var vConsole = new VConsole()
 
@@ -46,6 +48,9 @@ class App extends Component {
                         <Route path="/cate" component={Cate} />
                         <Route path="/product" component={Product} />
                         <Route path="/double_color_ball" component={DoubleColorBall} />
+
+                        <Route path="/test" component={Test} />
+
                         <Route render={ () => <NotFound /> } />
                     </Switch>
                     <Loading />
