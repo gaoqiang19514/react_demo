@@ -5,47 +5,42 @@ import styled from 'styled-components'
 
 import api from '../api';
 
-const StyledFrom = styled.form`
-    margin: 0 15px;
-`
-const StyledGroup = styled.div`
-    position: relative;
-    padding: 15px;
-    display: flex;
-    background: #fff;
-    &:after{
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        height: 1px;
-        background: #eaeaea;
-        transform: scaleY(.5);
-    }
-    &:last-child:after{
-        content: none;
-    }
-`
-const StyledGroupHead = styled.div`
-    flex: 1;
-`
-const StyledGroupFoot = styled.div`
-    margin-left: 10px;
-`
 const Input = styled.input`
-    border: 0;
-    padding: 0;
-    outline: none;
-    width: 100%;
+  width: 100%;
+  display: block;
+  border: 0;
+  padding: 0;
+  outline: none;
+  background: transparent;
 `
 const Button = styled.button`
-    border: 0;
-    padding: 0;
-    outline: none;
-    width: 100%;
-    color: #fff;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  padding: 0;
+  display: block;
+  border: 0;
+  background: transparent;
 `
+const Group = styled.div`
+  display: flex;
+  align-items: center;
+`
+const GroupHead = styled.div`
+`
+const GroupBody = styled.div`
+  flex: 1;
+`
+const GroupFoot = styled.div`
+`
+
+const FromLabel = styled.label`
+`
+const FromInput = styled.input`
+`
+const FromBtn = styled.button`
+`
+
 const A = styled.a`
     color: #333;
     font-size: 12px;
@@ -58,71 +53,74 @@ const PrimaryButton = styled(Button)`
     background-image: linear-gradient(90deg,#ffc637,#ff9537);
     box-shadow: 0 5px 10px 0 rgba(255,159,46,.4);
 `
-const ButtonWrap = styled.div`
-    margin: 15px 0;
-`
-const Title = styled.h1`
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 30px 0;
-`
 
 class Login extends Component {
-    state = {
-        username: 'test',
-        password: 'react'
-    }
+  // test react
+  state = {
+    username: '',
+    password: ''
+  }
 
     login = () => {
-        const { username, password } = this.state
+      const { username, password } = this.state
 
-        this.props.showLoading()
-        api.login(username, password)
-            .then((response) => {
-                const { data } = response;
-                this.props.login(data);
-            })
-            .catch((error) => {
-            })
-            .finally(() => {
-                this.props.hideLoading()
-            })
+      this.props.showLoading()
+      api.login(username, password)
+        .then((response) => {
+            const { data } = response;
+            this.props.login(data);
+        })
+        .catch((error) => {
+        })
+        .finally(() => {
+            this.props.hideLoading()
+        })
+    }
+
+    handleChange = (e) => {
+      this.setState({[e.target.name]: e.target.value})
     }
 
     render() {
         const { isAuthenticated } = this.props;
         const { from } = this.props.location.state || { from: { pathname: "/" } };
 
-        if(isAuthenticated){
-            return <Redirect to={ from } />;
-        }
+        if(isAuthenticated){ return <Redirect to={ from } />; }
 
         return (
-            <div>
-                <Title>登录</Title>
-                <StyledFrom>
-                    <div>
-                        <StyledGroup>
-                            <StyledGroupHead>
-                                <Input type="text" value={this.state.username} placeholder="请输入手机号" />
-                            </StyledGroupHead>
-                        </StyledGroup>    
-                        <StyledGroup>
-                            <StyledGroupHead>
-                                <Input type="password" value={this.state.password} placeholder="请输入密码" />
-                            </StyledGroupHead>
-                            <StyledGroupFoot>
-                                <A href="">忘记密码</A>
-                            </StyledGroupFoot>
-                        </StyledGroup>   
-                    </div>
-
-                    <ButtonWrap>
-                        <PrimaryButton type="button" onClick={ this.login }>登录</PrimaryButton>
-                    </ButtonWrap>                                     
-                </StyledFrom>
+          <div>
+            <h1 className="u_my_xxx u_mx_xxxx">登录</h1>
+            <div className="u_bg_white u_m_xxx">
+              <Group className="u_p_xxx">
+                <GroupBody>
+                  <Input 
+                    type="text" 
+                    name="username" 
+                    onChange={this.handleChange} 
+                    value={this.state.username} 
+                    placeholder="请输入手机号" 
+                  />
+                </GroupBody>
+              </Group>    
+              <Group className="u_p_xxx">
+                <GroupBody>
+                  <Input 
+                    type="password" 
+                    name="password" 
+                    onChange={this.handleChange} 
+                    value={this.state.password} 
+                    placeholder="请输入密码" 
+                  />
+                </GroupBody>
+                <GroupFoot>
+                  <A href="">忘记密码</A>
+                </GroupFoot>
+              </Group>   
             </div>
+            <div className="u_m_xxx">
+              <PrimaryButton className="u_fc_white" type="button" onClick={ this.login }>登录</PrimaryButton>
+            </div>
+          </div>
         )
     }
 }

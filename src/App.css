@@ -1,0 +1,243 @@
+/* margin */
+
+.u_m_x {
+  margin: 5px;
+}
+
+.u_mx_x,
+.u_ml_x {
+  margin-left: 5px;
+}
+
+.u_mx_x,
+.u_mr_x {
+  margin-right: 5px;
+}
+
+.u_my_x,
+.u_mt_x {
+  margin-top: 5px;
+}
+
+.u_my_x,
+.u_mb_x {
+  margin-bottom: 5px;
+}
+
+.u_m_xx {
+  margin: 10px;
+}
+
+.u_mx_xx,
+.u_ml_xx {
+  margin-left: 10px;
+}
+
+.u_mx_xx,
+.u_mr_xx {
+  margin-right: 10px;
+}
+
+.u_my_xx,
+.u_mt_xx {
+  margin-top: 10px;
+}
+
+.u_my_xx,
+.u_mb_xx {
+  margin-bottom: 10px;
+}
+
+.u_m_xxx {
+  margin: 15px;
+}
+
+.u_mx_xxx,
+.u_ml_xxx {
+  margin-left: 15px;
+}
+
+.u_mx_xxx,
+.u_mr_xxx {
+  margin-right: 15px;
+}
+
+.u_my_xxx,
+.u_mt_xxx {
+  margin-top: 15px;
+}
+
+.u_my_xxx,
+.u_mb_xxx {
+  margin-bottom: 15px;
+}
+
+.u_m_xxxx {
+  margin: 20px;
+}
+
+.u_mx_xxxx,
+.u_ml_xxxx {
+  margin-left: 20px;
+}
+
+.u_mx_xxxx,
+.u_mr_xxxx {
+  margin-right: 20px;
+}
+
+.u_my_xxxx,
+.u_mt_xxxx {
+  margin-top: 20px;
+}
+
+.u_my_xxxx,
+.u_mb_xxxx {
+  margin-bottom: 20px;
+}
+
+/* padding */
+
+.u_p_x {
+  padding: 5px;
+}
+
+.u_px_x,
+.u_pl_x {
+  padding-left: 5px;
+}
+
+.u_px_x,
+.u_pr_x {
+  padding-right: 5px;
+}
+
+.u_py_x,
+.u_pt_x {
+  padding-top: 5px;
+}
+
+.u_py_x,
+.u_pb_x {
+  padding-bottom: 5px;
+}
+
+.u_p_xx {
+  padding: 10px;
+}
+
+.u_px_xx,
+.u_pl_xx {
+  padding-left: 10px;
+}
+
+.u_px_xx,
+.u_pr_xx {
+  padding-right: 10px;
+}
+
+.u_py_xx,
+.u_pt_xx {
+  padding-top: 10px;
+}
+
+.u_py_xx,
+.u_pb_xx {
+  padding-bottom: 10px;
+}
+
+.u_p_xxx {
+  padding: 15px;
+}
+
+.u_px_xxx,
+.u_pl_xxx {
+  padding-left: 15px;
+}
+
+.u_px_xxx,
+.u_pr_xxx {
+  padding-right: 15px;
+}
+
+.u_py_xxx,
+.u_pt_xxx {
+  padding-top: 15px;
+}
+
+.u_py_xxx,
+.u_pb_xxx {
+  padding-bottom: 15px;
+}
+
+.u_p_xxxx {
+  padding: 20px;
+}
+
+.u_px_xxxx,
+.u_pl_xxxx {
+  padding-left: 20px;
+}
+
+.u_px_xxxx,
+.u_pr_xxxx {
+  padding-right: 20px;
+}
+
+.u_py_xxxx,
+.u_pt_xxxx {
+  padding-top: 20px;
+}
+
+.u_py_xxxx,
+.u_pb_xxxx {
+  padding-bottom: 20px;
+}
+
+/* bg */
+
+.u_bg_primary{
+  
+}
+
+.u_bg_secondary{
+  
+}
+
+.u_bg_white{
+  background: #fff;
+}
+
+/* fc */
+.u_fc_white{
+  color: #fff;
+}
+.u_fc_black{
+  color: #333;
+}
+.u_fc_gray{
+  color: #888;
+}
+.u_fc_red{
+  color: red;
+}
+
+/* fs */
+.u_fs_x{
+  font-size: 12px;
+}
+.u_fs_xx{
+  font-size: 14px;
+}
+.u_fs_xxx{
+  font-size: 14px;
+}
+.u_fs_xxxx{
+  font-size: 16px;
+}
+.u_fs_xxxxx{
+  font-size: 18px;
+}
+.u_fs_xxxxxx{
+  font-size: 20px;
+}
