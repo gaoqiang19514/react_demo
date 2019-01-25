@@ -23,8 +23,22 @@ const Button = styled.button`
   background: transparent;
 `
 const Group = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
+  &:after{
+    content: '';
+    position: absolute;
+    left: 15px;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #eaeaea;
+    transform: scaleY(.5);
+  }
+  &:last-child:after{
+    content: none;
+  }
 `
 const GroupHead = styled.div`
 `
@@ -32,50 +46,50 @@ const GroupBody = styled.div`
   flex: 1;
 `
 const GroupFoot = styled.div`
+  display: flex;
 `
-
 const FromLabel = styled.label`
 `
-const FromInput = styled.input`
+const FromInput = styled(Input)`
 `
-const FromBtn = styled.button`
+const FromButton = styled(Button)`
+  line-height: 50px;
+  height: 50px;
+  border-radius: 3px;
+  background-image: linear-gradient(90deg,#ffc637,#ff9537);
+  box-shadow: 0 5px 10px 0 rgba(255,159,46,.4);
 `
-
 const A = styled.a`
-    color: #333;
-    font-size: 12px;
-    text-decoration: none;
+  font-size: 12px;
+  color: inherit;
+  line-height: 1;
+  text-decoration: none;
 `
-const PrimaryButton = styled(Button)`
-    line-height: 50px;
-    height: 50px;
-    border-radius: 3px;
-    background-image: linear-gradient(90deg,#ffc637,#ff9537);
-    box-shadow: 0 5px 10px 0 rgba(255,159,46,.4);
+const FormLink = styled(A)`
+  margin-left: 10px;
 `
 
 class Login extends Component {
-  // test react
   state = {
-    username: '',
-    password: ''
+    username: 'test',
+    password: 'react'
   }
 
-    login = () => {
-      const { username, password } = this.state
+  login = () => {
+    const { username, password } = this.state
 
-      this.props.showLoading()
-      api.login(username, password)
-        .then((response) => {
-            const { data } = response;
-            this.props.login(data);
-        })
-        .catch((error) => {
-        })
-        .finally(() => {
-            this.props.hideLoading()
-        })
-    }
+    this.props.showLoading()
+    api.login(username, password)
+      .then((response) => {
+          const { data } = response;
+          this.props.login(data);
+      })
+      .catch((error) => {
+      })
+      .finally(() => {
+          this.props.hideLoading()
+      })
+  }
 
     handleChange = (e) => {
       this.setState({[e.target.name]: e.target.value})
@@ -93,9 +107,10 @@ class Login extends Component {
             <div className="u_bg_white u_m_xxx">
               <Group className="u_p_xxx">
                 <GroupBody>
-                  <Input 
+                  <FromInput 
                     type="text" 
-                    name="username" 
+                    name="username"
+                    className="form__input"
                     onChange={this.handleChange} 
                     value={this.state.username} 
                     placeholder="请输入手机号" 
@@ -107,18 +122,19 @@ class Login extends Component {
                   <Input 
                     type="password" 
                     name="password" 
+                    className="form__input"
                     onChange={this.handleChange} 
                     value={this.state.password} 
                     placeholder="请输入密码" 
                   />
                 </GroupBody>
                 <GroupFoot>
-                  <A href="">忘记密码</A>
+                  <FormLink>忘记密码</FormLink>
                 </GroupFoot>
               </Group>   
             </div>
             <div className="u_m_xxx">
-              <PrimaryButton className="u_fc_white" type="button" onClick={ this.login }>登录</PrimaryButton>
+              <FromButton className="u_fc_white" type="button" onClick={ this.login }>登录</FromButton>
             </div>
           </div>
         )

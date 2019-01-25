@@ -3,6 +3,7 @@ import { Link, Route } from "react-router-dom"
 import styled from 'styled-components'
 
 import Util from '../util'
+import { redirect } from '../services/redirect'
 
 const profileSrc = 'http://yanxuan.nosdn.127.net/63f5305881562d7dbf117d606381a8fe.png'
 
@@ -122,7 +123,7 @@ const Detail = function(){
 class Product extends Component {
   state = {
     count: 1,
-    showLayerFlag: false
+    showLayerFlag: true
   }
 
   handleChange = (e) => {
@@ -136,10 +137,13 @@ class Product extends Component {
 
   hideLayerHandleClick = (e) => {
     // 如果当前元素的祖先元素包含layer则直接返回
-    console.log(Util.closest(e.target, '.layer'))
     if(!Util.closest(e.target, '.layer')){
       this.showLayerHandleClick()
     }
+  }
+
+  submitHandleClick = () => {
+    redirect('/buy')
   }
 
   render() {
@@ -160,18 +164,18 @@ class Product extends Component {
         </StyledInfo>
 
         <Detail/>
-        <div>
+        <div className="u_m_xxx">
           <button onClick={this.showLayerHandleClick}>立即兑换</button>
         </div>
         <LayoutFixedFull onClick={this.hideLayerHandleClick} className={`layer ${this.state.showLayerFlag ? 'active' : ''}`}>
           <LayoutFixedBottom>
             <div>
-              <div>我的可用积分：590</div>
-              <FlexBox>
+              <div className="u_p_xxx">我的可用积分：590</div>
+              <FlexBox className="u_p_xxx">
                 <span>使用积分：</span>
                 <span>11900</span>
               </FlexBox>
-              <FlexBox>
+              <FlexBox className="u_p_xxx">
                 <span>数量</span>
                 <span>
                   {/* Operator */}
@@ -183,8 +187,8 @@ class Product extends Component {
                 </span>
               </FlexBox>
             </div>
-            <div>
-              <button>确认</button>
+            <div className="u_p_xxx">
+              <button onClick={this.submitHandleClick}>确认</button>
             </div>
           </LayoutFixedBottom>
         </LayoutFixedFull>

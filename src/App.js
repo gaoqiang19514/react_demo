@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch
 } from "react-router-dom";
@@ -22,8 +22,10 @@ import AddBankCard from './components/AddBankCard'
 import Cate from './components/Cate'
 import DoubleColorBall from './components/DoubleColorBall'
 import Product from './components/Product'
+import Buy from './components/Buy'
 
 import Test from './components/Test'
+import history from './history'
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -33,7 +35,7 @@ const NotFound = () => <h1>Not Found</h1>;
 class App extends Component {
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <div>
                     <Switch>
                         <Route path="/" exact component={ Index } />
@@ -48,6 +50,7 @@ class App extends Component {
                         <Route path="/cate" component={Cate} />
                         <Route path="/product" component={Product} />
                         <Route path="/double_color_ball" component={DoubleColorBall} />
+                        <Route path="/buy" component={Buy} />
 
                         <Route path="/test" component={Test} />
 
