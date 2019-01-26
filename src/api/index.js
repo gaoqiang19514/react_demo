@@ -48,5 +48,8 @@ export default {
     // 根据分类获取产品列表
     getProductByCate(type, cate) {
         return this.get('getProductByCate', { type: type, cate: cate })
+    },
+    getProductById(id) {
+        return this.get('getProductById', { id })
     }
 };

@@ -1,54 +1,133 @@
 body {
-    max-width: 640px;
-    margin: auto;    
-    line-height: 1.7;
-    background: #f7f7f8;
-    font-family: "Lucida Console", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.5;
+  background: #f7f7f8;
+  font-size: 14px;
+  font-family: "Lucida Console", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-text-size-adjust: 100% !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: 0
+}
+
+blockquote,
+body,
+button,
+dd,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+legend,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline
+}
+
+img {
+  border: 0 none;
+  vertical-align: top;
+}
+
+em,
+i {
+  font-style: normal
+}
+
+ol,
+ul {
+  list-style: none
+}
+
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select {
+  font-size: 100%;
+  font-family: inherit
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: #333
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
+
 
 
 /* fade */
 
 .fade-appear {
-    opacity: 0;
+  opacity: 0;
 }
 
 .fade-appear-active {
-    transition: all .5s;
-    opacity: 1;
+  transition: all .5s;
+  opacity: 1;
 }
 
 .fade-enter {
-    opacity: 0;
+  opacity: 0;
 }
 
 .fade-enter-active {
-    opacity: 1;
-    transition: all .5s;
+  opacity: 1;
+  transition: all .5s;
 }
 
 .fade-enter-done {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-exit {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-exit-active {
-    opacity: 0;
-    transition: all .3s;
+  opacity: 0;
+  transition: all .3s;
 }
 
 .fade-exit-done {
-    opacity: 0;
+  opacity: 0;
 }

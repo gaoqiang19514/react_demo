@@ -15,3 +15,14 @@ Mock.mock(/getProductCateList/, 'get', function(options){
 Mock.mock(/getProductByCate/, 'get', function(options){
     return [{"imagePath":"http://yanxuan.nosdn.127.net/3ce02ac47bf8a0e462beba970497d5f3.png","price":"99","name":"欧式简约玻璃茶壶","state":0,"sku":0,"yxPrice":"99","skuid":"1059089"},{"imagePath":"http://yanxuan.nosdn.127.net/cd22c4c92540cbf29b033336b82a7432.png","price":"89","name":"现代玻璃茶壶套装","state":0,"sku":0,"yxPrice":"89","skuid":"1006143"},{"imagePath":"http://yanxuan.nosdn.127.net/18bfada254b59618437bacdb69a725f9.png","price":"129","name":"现代玻璃茶壶套装","state":0,"sku":0,"yxPrice":"129","skuid":"1205021"},{"imagePath":"http://yanxuan.nosdn.127.net/16598ae9c24e8127b30ba3b50d22b1c7.png","price":"25","name":"高硼硅立式茶杯","state":0,"sku":0,"yxPrice":"25","skuid":"1006144"},{"imagePath":"http://yanxuan.nosdn.127.net/62f124e2d46296ad53fa85affa0b9d81.png","price":"99","name":"功夫茶具套装(1壶4杯)","state":0,"sku":0,"yxPrice":"99","skuid":"1023007"},{"imagePath":"http://yanxuan.nosdn.127.net/94cb9b4515c9cbb7b00e17ccf104c421.png","price":"49","name":"双层隔热绿茶杯","state":0,"sku":0,"yxPrice":"49","skuid":"1034007"},{"imagePath":"http://yanxuan.nosdn.127.net/063a39dec080ea082a1a9cb772b41b54.png","price":"89","name":"双层隔热绿茶杯","state":0,"sku":0,"yxPrice":"89","skuid":"1226003"},{"imagePath":"http://yanxuan.nosdn.127.net/ac23d63272b3ffcb0ee5fb6d3820d252.png","price":"69","name":"花茶个人杯","state":0,"sku":0,"yxPrice":"69","skuid":"1037029"},{"imagePath":"http://yanxuan.nosdn.127.net/0706727e022a6448d93bd7d811efe9dd.png","price":"199","name":"竹制蓄水茶盘","state":0,"sku":0,"yxPrice":"199","skuid":"1038005"},{"imagePath":"http://yanxuan.nosdn.127.net/38aa58e2fb85b1d233157476fc866161.png","price":"339","name":"羊脂玉白紫金线茶具套装","state":1,"sku":513,"yxPrice":"339","skuid":"1038048"}]
 });
+
+Mock.mock(/getProductById/, 'get', function(optiosn){
+    return {
+        merchant: 'RK外设官方旗舰店',
+        title: 'RK ABS 二色成型键帽 适用樱桃魔力鸭凯酷达尔优等机械键 37键彩色键帽--彩虹渐变',
+        price: '40',
+        count: 1,
+        sku: 20,
+        img: 'https://img10.360buyimg.com/mobilecms/s117x117_jfs/t24904/48/1762802430/218706/7a55b2a6/5bbb0feaNbb5e5595.jpg!q70.dpg.webp'
+    }
+})

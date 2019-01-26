@@ -50,7 +50,7 @@ class App extends Component {
                         <Route path="/cate" component={Cate} />
                         <Route path="/product" component={Product} />
                         <Route path="/double_color_ball" component={DoubleColorBall} />
-                        <Route path="/buy" component={Buy} />
+                        <Route path="/buy/:id" component={Buy} />
 
                         <Route path="/test" component={Test} />
 

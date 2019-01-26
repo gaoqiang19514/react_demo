@@ -143,7 +143,7 @@ class Product extends Component {
   }
 
   submitHandleClick = () => {
-    redirect('/buy')
+    redirect('/buy/15236')
   }
 
   render() {

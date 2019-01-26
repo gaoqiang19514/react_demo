@@ -230,14 +230,18 @@
   font-size: 14px;
 }
 .u_fs_xxx{
-  font-size: 14px;
-}
-.u_fs_xxxx{
   font-size: 16px;
 }
-.u_fs_xxxxx{
+.u_fs_xxxx{
   font-size: 18px;
 }
-.u_fs_xxxxxx{
+.u_fs_xxxxx{
   font-size: 20px;
+}
+.u_fs_xxxxxx{
+  font-size: 22px;
+}
+
+.u_f_bold{
+  font-weight: bold;
 }
