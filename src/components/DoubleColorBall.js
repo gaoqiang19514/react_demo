@@ -134,7 +134,7 @@ const StyledButtonBox = styled.div`
   margin: 15px;
 `
 
-const Layer = function({ballPool, createRandomBallsToPoolHandleClick}){
+const Layer = function({ballPool, editHandle, removeHandle, createRandomBallsToPoolHandleClick}){
   return (
     <LayoutLayer>
       <LayoutScroller>
@@ -150,8 +150,8 @@ const Layer = function({ballPool, createRandomBallsToPoolHandleClick}){
                 })}
               </LayoutMain>
               <LayoutAside>
-                <button>编辑</button>
-                <button>删除</button>
+                <button onClick={() => editHandle(index)}>编辑</button>
+                <button onClick={() => removeHandle(index)}>删除</button>
               </LayoutAside>
             </StyledBall>
           })}
@@ -174,7 +174,8 @@ class DoubleColorBall extends Component {
     super(props)
 
     this.state = {
-      layerShowFlag: false,
+      editing: false,
+      editIndex: -1,
       redBalls: Util.creteNumSeriesString(1, 32),
       blueBalls: Util.creteNumSeriesString(1, 16),
       redBallPool: [],
@@ -295,6 +296,63 @@ class DoubleColorBall extends Component {
     })
   }
 
+  removeHandle = (index) => {
+    this.setState({
+      ballPool: this.state.ballPool.filter((item, _index) => _index !== index)
+    })
+  }
+
+  editHandle = (index) => {
+    // 1 切换视图到号码选择界面
+    // 2 根据index从ballPoll中找出需要需要修改的号码
+    // 3 将号码渲染到redBallPool和blueBallPool中
+    // 4 编辑完成后切换视图到layer
+    // 5 将页面号码更新到ballPool中
+    // 6 清空redPool和bluePool
+    const ball = this.state.ballPool.slice(index, index + 1)[0]
+    this.setState({
+      editing: true,
+      editIndex: index,
+      redBallPool: ball.red,
+      blueBallPool: ball.blue
+    }, () => {
+      redirect('/double_color_ball')
+    })
+  }
+
+  editCancelHandleClick = () => {
+    this.setState({editing: false, editIndex: -1}, () => {
+      this.clearBalls()
+      redirect('/double_color_ball/layer')
+    })
+  }
+
+  editDoneHandleClick = () => {
+    if(!this.checkBallsIfMeetCondition()){ 
+      alert('所选号码不满足条件')
+      return
+    }
+
+    if(this.state.editIndex === -1){return}
+    const newBall = {
+      red: this.state.redBallPool, blue: this.state.blueBallPool
+    }
+
+    const newBallPool = this.state.ballPool.map((item, index) => {
+      if(index === this.state.editIndex){
+        return newBall
+      }else{
+        return item
+      }
+    })
+
+    // 更新ballPool
+    this.setState({ballPool: newBallPool, editing: false}, () => {
+      this.clearBalls()
+      redirect('/double_color_ball/layer')
+    })
+  }
+
   render() {
     const { ballPool, redBalls, blueBalls } = this.state
     return (
@@ -326,12 +384,26 @@ class DoubleColorBall extends Component {
               <div className="block" onClick={this.clearBalls}>清空</div>
               <div className="block" onClick={this.createRandomBallsHandleClick}>机选</div>
             </LayoutFixed>
-            <div className="block" onClick={this.submitHandleClick}>确定</div>
+            {
+              this.state.editing
+                ? (
+                  <div style={{display: 'flex'}}>
+                    <div className="block" onClick={this.editCancelHandleClick}>取消</div>
+                    <div className="block" onClick={this.editDoneHandleClick}>完成</div>
+                  </div>
+                )
+                : <div className="block" onClick={this.submitHandleClick}>确定</div>
+            }
           </StyledOperation>
         </LayoutFixedBottom>
 
         <Route path="/double_color_ball/layer" render={(props) => {
-          return <Layer ballPool={ballPool} createRandomBallsToPoolHandleClick={this.createRandomBallsToPoolHandleClick} {...props}/>
+          return <Layer
+            ballPool={ballPool}
+            editHandle={this.editHandle}
+            removeHandle={this.removeHandle}
+            createRandomBallsToPoolHandleClick={this.createRandomBallsToPoolHandleClick} {...props}
+          />
         }}/>
     
       </div>
@@ -344,6 +416,11 @@ export default DoubleColorBall
 // 笔记
 
 // 如何高亮选中的球呢？ 用数组的indexOf判检测当前号码是否存在于数组中方法
+
 // 如果取消当前选中的球呢？ 从数组中删除当前点选的号码 参考方法splice slice
+
 // 怎么判断当前点选是移除还是添加？ 使用filter方法遍历数组 存在 ? 移除 ：添加
+
 // 号码选择数量限制放在哪里？ 在点选事件内部进行判断
+
+// 怎么实现编辑？
