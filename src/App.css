@@ -242,6 +242,50 @@
   font-size: 22px;
 }
 
+/* font-weight */
+
 .u_f_bold{
   font-weight: bold;
+}
+
+/* text-align */
+
+.u_text_center{
+  text-align: center;
+}
+.u_text_left{
+  text-align: left;
+}
+.u_text_right{
+  text-align: right;
+}
+
+.btn{
+  display: block;
+  min-width: 0;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 3px;
+  position: relative;  
+}
+
+.btn.bg_1 {
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(207, 162, 95, .58);
+  background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
+}
+
+.btn.bg_2 {
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(207, 162, 95, .58);
+  background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
+}
+
+.btn.bg_3 {
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(207, 162, 95, .58);
+  background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
 }

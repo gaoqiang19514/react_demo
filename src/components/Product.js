@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Util from '../util'
 import { redirect } from '../services/redirect'
+import Operator from '../common/Operator'
 
 const profileSrc = 'http://yanxuan.nosdn.127.net/63f5305881562d7dbf117d606381a8fe.png'
 
@@ -165,7 +166,7 @@ class Product extends Component {
 
         <Detail/>
         <div className="u_m_xxx">
-          <button onClick={this.showLayerHandleClick}>立即兑换</button>
+          <a className="btn bg_1" onClick={this.showLayerHandleClick}>立即兑换</a>
         </div>
         <LayoutFixedFull onClick={this.hideLayerHandleClick} className={`layer ${this.state.showLayerFlag ? 'active' : ''}`}>
           <LayoutFixedBottom>
@@ -178,17 +179,12 @@ class Product extends Component {
               <FlexBox className="u_p_xxx">
                 <span>数量</span>
                 <span>
-                  {/* Operator */}
-                  <div>
-                    <button>-</button>
-                    <input type="text" onChange={this.handleChange} value={this.state.count}/>
-                    <button>+</button>
-                  </div>
+                  <Operator onChange={this.handleChange} count={this.state.count}/>
                 </span>
               </FlexBox>
             </div>
             <div className="u_p_xxx">
-              <button onClick={this.submitHandleClick}>确认</button>
+              <a className="btn bg_1" onClick={this.submitHandleClick}>确认</a>
             </div>
           </LayoutFixedBottom>
         </LayoutFixedFull>
