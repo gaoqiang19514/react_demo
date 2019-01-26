@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+import { Link } from "react-router-dom"
 import Menu from './Menu'
 import api from '../api';
 
@@ -11,17 +12,7 @@ const S_nav = styled.nav`
   display: flex;
   flex-wrap: wrap;
 `
-const S_section_head = styled.div`
-  padding: 10px;
-  h2{
-    margin: 0;
-    font-size: 16px;
-  }
-`
-const S_section_main = styled.div`
-  padding: 0 5px;
-`
-const S_link = styled.a`
+const S_link = styled(Link)`
   color: #333;
   font-size: 12px;
   width: 25%;
@@ -67,17 +58,18 @@ const S_main_cell = styled.div`
   }
 `
 
-const S_flex = styled.div`
-  display: flex;
-`
-const S_flex_space = styled(S_flex)`
-  justify-content: space-between;
-`
+const Item = function({to, icon, text}) {
+  return (
+    <S_link to={to}>
+      <div className="wrap">
+        <img src={icon} alt=""/>
+        <div>{text}</div>
+      </div>
+    </S_link>
+  )
+}
 
 class Public extends Component {
-  
-  state = {
-  }
 
   componentWillMount() {
     // api.hotProducts()
@@ -90,97 +82,43 @@ class Public extends Component {
   render() {
     return (
       <div>
-        <main>
-          <section>
-            <S_section_head>
-              <h2>常用服务</h2>
-            </S_section_head>
-            <S_section_main>
-              <S_nav>
-                <S_link href="/recharge">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>充话费</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>充流量</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>充油卡</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>信用卡还款</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>腾讯Q币</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>视频VIP</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>电子卡券</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>双色球</div>
-                  </div>
-                </S_link>
-                <S_link href="">
-                  <div className="wrap">
-                    <img src={kafei} alt=""/>
-                    <div>七乐彩</div>
-                  </div>
-                </S_link>
-              </S_nav>
-            </S_section_main>
-          </section>
 
-          <section>
-            <S_section_head>
-              <h2>商城专区</h2>
-            </S_section_head>
-            <S_section_main>
+        <section>
+          <h2 className="u_fs_xxx u_f_bold u_m_xxx">常用服务</h2>
+          <div class="u_mx_xx">
+            <S_nav>
+              <Item to="/recharge" icon={kafei} text="充话费"/>
+              <Item to="/recharge" icon={kafei} text="充流量"/>
+              <Item to="/recharge" icon={kafei} text="充油卡"/>
+              <Item to="/recharge" icon={kafei} text="信用卡还款"/>
+              <Item to="/recharge" icon={kafei} text="腾讯Q币"/>
+              <Item to="/recharge" icon={kafei} text="视频VIP"/>
+              <Item to="/recharge" icon={kafei} text="电子卡券"/>
+              <Item to="/double_color_ball" icon={kafei} text="双色球"/>
+              <Item to="/recharge" icon={kafei} text="七乐彩"/>
+            </S_nav>
+          </div>
+        </section>
 
-              <S_box>
-                <S_aside></S_aside>
-                <S_main>
-                  <S_main_cell></S_main_cell>
-                  <S_main_cell></S_main_cell> 
-                </S_main>
-              </S_box>
+        <section>
+          <h2 className="u_fs_xxx u_f_bold u_m_xxx">商城专区</h2>
+          <div class="u_mx_xx">
+            <S_box>
+              <S_aside></S_aside>
+              <S_main>
+                <S_main_cell></S_main_cell>
+                <S_main_cell></S_main_cell> 
+              </S_main>
+            </S_box>
+          </div>
+        </section>
 
-            </S_section_main>
-          </section>
+        <section>
+          <h2 className="u_fs_xxx u_f_bold u_m_xxx">热卖产品</h2>
+          <div class="u_mx_xx">
 
-          <section>
-          <S_section_head>
-            <h2>热卖产品</h2>
-          </S_section_head>
-          <S_section_main>
-
-          </S_section_main>
-        </section>       
-        </main>
+          </div>
+        </section> 
 
       </div>
     )
