@@ -15,14 +15,13 @@
 - [x] 添加银行
 - [x] 商品分类页
 - [x] 严选购买流程
+- [x] 将双色球弹层改成当前组件的路由弹层 https://reacttraining.com/react-router/web/example/modal-gallery
+- [x] 封装一个Operator组件
 - [ ] 弹层组件
 - [ ] shouldComponentUpdate的应用
-- [x] 将双色球弹层改成当前组件的路由弹层 
-https://reacttraining.com/react-router/web/example/modal-gallery
 - [ ] 引入rem
 - [ ] 以上对路由的淡出淡出可能会与rem冲突 需解决
 - [ ] 给订单页不同状态作为一个swiper使其能够左右滑动
-- [x] 封装一个Operator组件
 
 
 # 处理token过期的情况

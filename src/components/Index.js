@@ -20,9 +20,9 @@ const S_link = styled(Link)`
   text-decoration: none;
   img{
     display: block;
-    margin: 0 auto 5px;
     width: 25px;
     height: 25px;
+    margin: 0 auto 5px;
   }
   .wrap{
     margin: 5px;
@@ -57,7 +57,6 @@ const S_main_cell = styled.div`
     background: #ecd0a3;
   }
 `
-
 const Item = function({to, icon, text}) {
   return (
     <S_link to={to}>
