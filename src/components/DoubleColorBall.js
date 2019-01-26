@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Route, Link } from "react-router-dom"
 import styled from 'styled-components'
 import Util from '../util'
 import config from '../config'
-import { spawn } from 'child_process';
+import { redirect } from '../services/redirect'
 
 const StyledUl = styled.ul`
     list-style: none;
@@ -74,7 +75,7 @@ const LayoutLayer = styled.div`
   bottom: 0;
   top: 0;
   background: #f7f7f8;
-  transform: translateX(100%);
+  /* transform: translateX(100%); */
   &.active{
     transform: translateX(0);
   }
@@ -132,6 +133,41 @@ const PrimaryButton = styled(Button)`
 const StyledButtonBox = styled.div`
   margin: 15px;
 `
+
+const Layer = function({ballPool, createRandomBallsToPoolHandleClick}){
+  return (
+    <LayoutLayer>
+      <LayoutScroller>
+        <div>
+          {ballPool.map((item, index) => {
+            return <StyledBall key={index}>
+              <LayoutMain>
+                {item.red.map((item, index) => {
+                  return <span key={index}>{item}</span>
+                })}
+                {item.blue.map((item, index) => {
+                  return <span key={index}>{item}</span>
+                })}
+              </LayoutMain>
+              <LayoutAside>
+                <button>编辑</button>
+                <button>删除</button>
+              </LayoutAside>
+            </StyledBall>
+          })}
+        </div>
+
+        <LayoutFixedBottom>
+          <div style={{display: 'flex'}} className="u_m_xxx">
+            <PrimaryButton onClick={() => redirect('/double_color_ball')}>手动添加</PrimaryButton>
+            <PrimaryButton onClick={createRandomBallsToPoolHandleClick}>机选</PrimaryButton>
+          </div>
+        </LayoutFixedBottom>
+      </LayoutScroller>
+    </LayoutLayer>    
+  )
+}
+
 class DoubleColorBall extends Component {
 
   constructor(props) {
@@ -255,7 +291,7 @@ class DoubleColorBall extends Component {
       ]
     }, () => {
       this.clearBalls()
-      this.setState({ layerShowFlag: true })
+      redirect('/double_color_ball/layer')
     })
   }
 
@@ -293,35 +329,11 @@ class DoubleColorBall extends Component {
             <div className="block" onClick={this.submitHandleClick}>确定</div>
           </StyledOperation>
         </LayoutFixedBottom>
-      
-        <LayoutLayer className={this.state.layerShowFlag ? 'active' : ''}>
-          <LayoutScroller>
-            <div>
-              {ballPool.map((item, index) => {
-                return <StyledBall key={index}>
-                  <LayoutMain>
-                    {item.red.map((item, index) => {
-                      return <span key={index}>{item}</span>
-                    })}
-                    {item.blue.map((item, index) => {
-                      return <span key={index}>{item}</span>
-                    })}
-                  </LayoutMain>
-                  <LayoutAside>
-                    <button>编辑</button>
-                    <button>删除</button>
-                  </LayoutAside>
-                </StyledBall>
-              })}
-            </div>
 
-            <LayoutFixedBottom>
-              <StyledButtonBox>
-                <PrimaryButton onClick={this.createRandomBallsToPoolHandleClick}>机选</PrimaryButton>
-              </StyledButtonBox>
-            </LayoutFixedBottom>
-          </LayoutScroller>
-        </LayoutLayer>
+        <Route path="/double_color_ball/layer" render={(props) => {
+          return <Layer ballPool={ballPool} createRandomBallsToPoolHandleClick={this.createRandomBallsToPoolHandleClick} {...props}/>
+        }}/>
+    
       </div>
     )
   }
