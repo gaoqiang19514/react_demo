@@ -25,7 +25,9 @@ import Product from './components/Product'
 import Buy from './components/Buy'
 
 import Test from './components/Test'
+import Motion from './components/Motion'
 import history from './history'
+
 
 // init vConsole
 // var vConsole = new VConsole()
@@ -53,6 +55,7 @@ class App extends Component {
                         <Route path="/buy/:id" component={Buy} />
 
                         <Route path="/test" component={Test} />
+                        <Route path="/motion" component={Motion} />
 
                         <Route render={ () => <NotFound /> } />
                     </Switch>
