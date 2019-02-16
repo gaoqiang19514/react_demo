@@ -6,9 +6,9 @@ import config from '../config'
 import { redirect } from '../services/redirect'
 
 const StyledUl = styled.ul`
-    list-style: none;
-    margin: 5px;
-    padding: 0;
+  list-style: none;
+  margin: 5px;
+  padding: 0;
   li{
     position: relative;
     height: 0;
@@ -16,18 +16,18 @@ const StyledUl = styled.ul`
     padding-top: 14.2857%;
     text-align: center;
     .bg{
-        position: absolute;
-        padding: 3px;
-        top: 3px;
-        left: 3px;
-        right: 3px;
-        bottom: 3px;
-        background: #fff;        
-        border: 1px dashed #eaeaea;
+      position: absolute;
+      padding: 3px;
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+      background: #fff;        
+      border: 1px dashed #eaeaea;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `
