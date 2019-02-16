@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Router,
   Route,
   Switch
-} from "react-router-dom";
+} from "react-router-dom"
 
-import './App.css';
+import './App.css'
 
-import Loading from './components/Loading';
-import Auth from './components/Auth';
-import Login from './components/Login';
-import Protected from './components/Protected'
+import Loading from './common/Loading'
+import Auth from './components/Auth'
+import Login from './components/Login'
 import Order from './components/Order'
 import Index from './components/Index'
 import Redeem from './components/Redeem'
@@ -30,7 +29,6 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact component={ Index } />
-            <Auth path="/protected" component={ Protected } />
             <Route path="/login" component={Login} />
 
             <Auth path="/order" component={ Order } />

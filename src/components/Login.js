@@ -72,14 +72,17 @@ class Login extends Component {
   }
 
   login = () => {
-    const { username, password } = this.state
 
+    this.props.showLoading()
     setTimeout(() => {
+      this.props.hideLoading()
       this.props.login({
         access_token: 'payload.access_token',
         refresh_token: 'payload.refresh_token'
       });
     }, 2000)
+
+    const { username, password } = this.state
 
     // this.props.showLoading()
     // api.login(username, password)

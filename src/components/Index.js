@@ -66,55 +66,17 @@ const Item = function({to, icon, text}) {
 
 class Public extends Component {
 
-  componentWillMount() {
-    // api.hotProducts()
-    //   .then((res) => {
-    //     const { data } = res
-    //     console.log(data)
-    //   })
-  }
-
   render() {
     return (
       <div>
-
         <section>
           <h2 className="u_fs_xxx u_f_bold u_m_xxx">常用服务</h2>
           <div className="u_mx_xx">
             <S_nav>
-              <Item to="/recharge" icon={kafei} text="充话费"/>
-              <Item to="/recharge" icon={kafei} text="充流量"/>
-              <Item to="/recharge" icon={kafei} text="充油卡"/>
-              <Item to="/recharge" icon={kafei} text="信用卡还款"/>
-              <Item to="/recharge" icon={kafei} text="腾讯Q币"/>
-              <Item to="/recharge" icon={kafei} text="视频VIP"/>
-              <Item to="/recharge" icon={kafei} text="电子卡券"/>
               <Item to="/double_color_ball" icon={kafei} text="双色球"/>
-              <Item to="/recharge" icon={kafei} text="七乐彩"/>
             </S_nav>
           </div>
         </section>
-
-        <section>
-          <h2 className="u_fs_xxx u_f_bold u_m_xxx">商城专区</h2>
-          <div className="u_mx_xx">
-            <S_box>
-              <S_aside></S_aside>
-              <S_main>
-                <S_main_cell></S_main_cell>
-                <S_main_cell></S_main_cell> 
-              </S_main>
-            </S_box>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="u_fs_xxx u_f_bold u_m_xxx">热卖产品</h2>
-          <div className="u_mx_xx">
-
-          </div>
-        </section> 
-
       </div>
     )
   }
