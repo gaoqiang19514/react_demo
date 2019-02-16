@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Link } from "react-router-dom"
-import Menu from './Menu'
-import api from '../api';
 
 import kafei from '../asset/images/icon/kafei.png'
-import biaoqian from '../asset/images/icon/biaoqian.png'
-import goldCard from '../asset/images/goldCard.png' 
 
 const S_nav = styled.nav`
   display: flex;
@@ -84,7 +80,7 @@ class Public extends Component {
 
         <section>
           <h2 className="u_fs_xxx u_f_bold u_m_xxx">常用服务</h2>
-          <div class="u_mx_xx">
+          <div className="u_mx_xx">
             <S_nav>
               <Item to="/recharge" icon={kafei} text="充话费"/>
               <Item to="/recharge" icon={kafei} text="充流量"/>
@@ -101,7 +97,7 @@ class Public extends Component {
 
         <section>
           <h2 className="u_fs_xxx u_f_bold u_m_xxx">商城专区</h2>
-          <div class="u_mx_xx">
+          <div className="u_mx_xx">
             <S_box>
               <S_aside></S_aside>
               <S_main>
@@ -114,7 +110,7 @@ class Public extends Component {
 
         <section>
           <h2 className="u_fs_xxx u_f_bold u_m_xxx">热卖产品</h2>
-          <div class="u_mx_xx">
+          <div className="u_mx_xx">
 
           </div>
         </section> 

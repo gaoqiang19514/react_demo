@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 
-import api from '../api';
-import util from '../util';
-import Menu from './Menu'
-
 const S_main = styled.main`
   padding: 10px;
 `
@@ -22,7 +18,6 @@ class Protected extends Component {
 
         return (
             <div>
-                <Menu />
                 <S_main>
                     Protected
                 </S_main>

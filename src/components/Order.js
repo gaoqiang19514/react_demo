@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import api from '../api'
-import util from '../util'
-import { hidden } from 'ansi-colors'
 import styled from 'styled-components'
-import { dispatch } from 'rxjs/internal/observable/range';
-
-import { Protal } from './Layout'
 
 const L_Container = styled.div`
   position: absolute;
@@ -29,7 +23,6 @@ const L_Main = styled.div`
   flex-grow: 1;
   overflow-y: auto;
 `
-
 const StyleNavItem = styled.a`
   flex: 1;
   line-Height: 50px;
@@ -40,11 +33,9 @@ const StyleNavItem = styled.a`
     color: red;
   }
 `
-
 const L_header = styled.header`
   display: flex;
 `
-
 const itemStyle = {
   display: 'flex',
   padding: '10px'
@@ -107,11 +98,8 @@ class Order extends Component {
     list: []
   }
 
-  componentWillMount() {
-    this.loadNextPage(status, currentPage)
-  }
-
   componentDidMount() {
+    this.loadNextPage(status, currentPage)
     this.scrollContainer.addEventListener('scroll', this.scrollListener)
   }
 
@@ -165,10 +153,9 @@ class Order extends Component {
   }
 
   clickHandle = (e) => {
-    this.setState({
-      list: []
-    })
     currentPage = 1
+    this.setState({ list: [] })
+    
     status = e.target.getAttribute('data-status')
     this.loadNextPage(status, currentPage)
   }

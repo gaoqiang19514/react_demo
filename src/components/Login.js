@@ -40,16 +40,13 @@ const Group = styled.div`
     content: none;
   }
 `
-const GroupHead = styled.div`
-`
 const GroupBody = styled.div`
   flex: 1;
 `
 const GroupFoot = styled.div`
   display: flex;
 `
-const FromLabel = styled.label`
-`
+
 const FromInput = styled(Input)`
 `
 const FromButton = styled(Button)`
@@ -68,7 +65,6 @@ const A = styled.a`
 const FormLink = styled(A)`
   margin-left: 10px;
 `
-
 class Login extends Component {
   state = {
     username: 'test',
@@ -78,17 +74,24 @@ class Login extends Component {
   login = () => {
     const { username, password } = this.state
 
-    this.props.showLoading()
-    api.login(username, password)
-      .then((response) => {
-          const { data } = response;
-          this.props.login(data);
-      })
-      .catch((error) => {
-      })
-      .finally(() => {
-          this.props.hideLoading()
-      })
+    setTimeout(() => {
+      this.props.login({
+        access_token: 'payload.access_token',
+        refresh_token: 'payload.refresh_token'
+      });
+    }, 2000)
+
+    // this.props.showLoading()
+    // api.login(username, password)
+    //   .then((response) => {
+    //     const { data } = response;
+    //     this.props.login(data);
+    //   })
+    //   .catch((error) => {
+    //   })
+    //   .finally(() => {
+    //     this.props.hideLoading()
+    //   })
   }
 
     handleChange = (e) => {
@@ -142,18 +145,18 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { isAuthenticated: state.auth.isAuthenticated }
+  return { isAuthenticated: state.auth.isAuthenticated }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        login: (payload) => dispatch({ type: 'AUTH_USER', payload: {
-            access_token: payload.access_token,
-            refresh_token: payload.refresh_token
-        } }),
-        showLoading: () => dispatch({ type: 'SHOW_LOADING' }),
-        hideLoading: () => dispatch({ type: 'HIDE_LOADING' })
-    }
+  return {
+    login: (payload) => dispatch({ type: 'AUTH_USER', payload: {
+        access_token: payload.access_token,
+        refresh_token: payload.refresh_token
+    } }),
+    showLoading: () => dispatch({ type: 'SHOW_LOADING' }),
+    hideLoading: () => dispatch({ type: 'HIDE_LOADING' })
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
