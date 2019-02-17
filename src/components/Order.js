@@ -99,7 +99,7 @@ class Order extends Component {
   }
 
   componentDidMount() {
-    this.loadNextPage(status, currentPage)
+    // this.loadNextPage(status, currentPage) 
     this.scrollContainer.addEventListener('scroll', this.scrollListener)
   }
 
