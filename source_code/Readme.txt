@@ -1,1 +1,0 @@
-The code bundle for Chapter 1 and Chapter 2 is not present as these chapters contains basic examples to start with.
