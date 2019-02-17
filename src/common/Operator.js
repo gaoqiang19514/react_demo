@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
 
-const OperatorStyled = styled.div`
-  display: inline-block;
+const StyledOperator = styled.div`
   width: 105px;
+  display: inline-block;
   vertical-align: middle;
   span,
   input {
@@ -46,13 +46,13 @@ const OperatorStyled = styled.div`
     margin: -6px 0 0 -1px;
   }
 `
-const Operator = function(props) {
+const Operator = function({onChange, count}) {
   return (
-    <OperatorStyled>
+    <StyledOperator>
       <span className="minus"></span>
-      <input className="num" type="text" onChange={props.onChange} value={props.count}/>
+      <input className="num" type="text" onChange={onChange} value={count}/>
       <span className="plus"></span>
-    </OperatorStyled>
+    </StyledOperator>
   )
 }
 

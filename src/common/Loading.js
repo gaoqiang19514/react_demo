@@ -8,7 +8,6 @@ const StyledLoading = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
   color: #fff;
   padding: 10px;
   font-weight: bold;

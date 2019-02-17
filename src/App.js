@@ -8,7 +8,7 @@ import {
 import './App.css'
 
 import Loading from './common/Loading'
-import Auth from './components/Auth'
+import Auth from './common/Auth'
 import Login from './components/Login'
 import Order from './components/Order'
 import Index from './components/Index'

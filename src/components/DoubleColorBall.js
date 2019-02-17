@@ -75,7 +75,6 @@ const LayoutLayer = styled.div`
   bottom: 0;
   top: 0;
   background: #f7f7f8;
-  /* transform: translateX(100%); */
   &.active{
     transform: translateX(0);
   }
@@ -121,17 +120,14 @@ const Button = styled.button`
   background: transparent;
 `
 const PrimaryButton = styled(Button)`
-    font-size: 16px;
-    color: #fff;
-    font-weight: bold;
-    line-height: 50px;
-    border-radius: 3px;
-    background: #ccc;
-    box-shadow: 0 0.03rem 0.05rem rgba(207, 162, 95, .58);
-    background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
-`
-const StyledButtonBox = styled.div`
-  margin: 15px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 50px;
+  border-radius: 3px;
+  background: #ccc;
+  box-shadow: 0 0.03rem 0.05rem rgba(207, 162, 95, .58);
+  background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
 `
 
 const Layer = function({ballPool, editHandle, removeHandle, createRandomBallsToPoolHandleClick}){
