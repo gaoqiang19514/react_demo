@@ -18,6 +18,8 @@ import DoubleColorBall from './components/DoubleColorBall'
 import Product from './components/Product'
 import Buy from './components/Buy'
 
+import Test from './components/Test'
+
 import history from './history'
 
 const NotFound = () => <h1>Not Found</h1>;
@@ -39,6 +41,8 @@ class App extends Component {
             
             <Route path="/product" component={Product} />
             <Route path="/buy/:id" component={Buy} />
+
+            <Route path="/test" component={Test} />
 
             <Route render={ ()=> <NotFound /> } />
           </Switch>
