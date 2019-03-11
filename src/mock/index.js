@@ -4,7 +4,7 @@ const Mock = require('mockjs');
 const Random = Mock.Random;
 
 Mock.setup({
-  timeout: 2000
+  timeout: 300
 });
 
 // 返回商品分类
@@ -44,3 +44,16 @@ Mock.mock(/hotsell/, 'get', function(options){
   ]
 });
 
+
+Mock.mock(/getRechargePhoneProductsByType/, 'get', function(options){
+  return [
+    { id: uuid(), integral: 1060, money: 10 },
+    { id: uuid(), integral: 2120, money: 20 },
+    { id: uuid(), integral: 3180, money: 30 },
+    { id: uuid(), integral: 5300, money: 50 },
+    { id: uuid(), integral: 10600, money: 100 },
+    { id: uuid(), integral: 21200, money: 200 },
+    { id: uuid(), integral: 31800, money: 300 },
+    { id: uuid(), integral: 53000, money: 500 }
+  ]
+});

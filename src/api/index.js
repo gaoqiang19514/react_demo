@@ -55,5 +55,8 @@ export default {
   // 热卖商品
   getHotsell() {
     return this.get('hotsell')
+  },
+  getRechargePhoneProductsByType() {
+    return this.get('getRechargePhoneProductsByType')
   }
 };

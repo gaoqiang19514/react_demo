@@ -226,16 +226,16 @@ export default class extends Component {
           <h2 className="u_fStyledxxx u_f_bold u_mx_xxx u_my_xx">常用服务</h2>
           <div className="u_mx_xx">
             <StyledNav>
-              <Item to="/double_color_ball" icon={kafei} text="充话费"/>
-              <Item to="/double_color_ball" icon={kafei} text="充流量"/>
-              <Item to="/double_color_ball" icon={kafei} text="充油卡"/>
-              <Item to="/double_color_ball" icon={kafei} text="信用卡还款"/>
-              <Item to="/double_color_ball" icon={kafei} text="腾讯Q币"/>
-              <Item to="/double_color_ball" icon={kafei} text="视频VIP"/>
+              <Item to="/recharge-phone" icon={kafei} text="充话费"/>
+              <Item to="/recharge-flow" icon={kafei} text="充流量"/>
+              <Item to="/recharge-oil" icon={kafei} text="充油卡"/>
+              <Item to="/recharge-qb" icon={kafei} text="腾讯Q币"/>
+              <Item to="/recharge-video" icon={kafei} text="视频VIP"/>
               <Item to="/double_color_ball" icon={kafei} text="电子卡券"/>
               <Item to="/double_color_ball" icon={kafei} text="双色球"/>
               <Item to="/double_color_ball" icon={kafei} text="七乐彩"/>
               <Item to="/double_color_ball" icon={kafei} text="违章查询"/>
+              <Item to="/double_color_ball" icon={kafei} text="信用卡还款"/>
             </StyledNav>
           </div>
         </section>

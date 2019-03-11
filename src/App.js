@@ -7,13 +7,13 @@ import Loading from './common/Loading'
 import Auth from './common/Auth'
 import Login from './components/Login'
 import Order from './components/Order'
-import Index from './components/Index'
+import Home from './components/Home'
 import Redeem from './components/Redeem'
 import Cate from './components/Cate'
 import DoubleColorBall from './components/DoubleColorBall'
 import Product from './components/Product'
 import Buy from './components/Buy'
-
+import RechargePhone from './components/RechargePhone'
 import Test from './components/Test'
 
 import history from './history'
@@ -26,9 +26,10 @@ class App extends Component {
       <Router history={history}>
         <div>
           <Switch>
-            <Route path="/" exact component={Index} />
+            <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Auth path="/order" component={Order} />
+            <Auth path="/recharge-phone" component={RechargePhone} />
             <Route path="/redeem" component={Redeem} />
             <Route path="/cate" component={Cate} />
             <Route path="/double_color_ball" component={DoubleColorBall} />
