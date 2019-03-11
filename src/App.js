@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Router,
-  Route,
-  Switch
-} from "react-router-dom"
+import { Router, Route, Switch } from "react-router-dom"
 
 import './App.css'
 
@@ -30,20 +26,15 @@ class App extends Component {
       <Router history={history}>
         <div>
           <Switch>
-            <Route path="/" exact component={ Index } />
+            <Route path="/" exact component={Index} />
             <Route path="/login" component={Login} />
-
-            <Auth path="/order" component={ Order } />
-
+            <Auth path="/order" component={Order} />
             <Route path="/redeem" component={Redeem} />
             <Route path="/cate" component={Cate} />
             <Route path="/double_color_ball" component={DoubleColorBall} />
-            
             <Route path="/product" component={Product} />
             <Route path="/buy/:id" component={Buy} />
-
             <Route path="/test" component={Test} />
-
             <Route render={ ()=> <NotFound /> } />
           </Switch>
           <Loading />

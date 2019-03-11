@@ -291,3 +291,14 @@
   box-shadow: 0 2px 5px rgba(207, 162, 95, .58);
   background-image: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
 }
+
+.layout-flex-bet{
+  display: flex;
+  justify-content: space-between;
+}
+
+.layout-flex-bet-center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
