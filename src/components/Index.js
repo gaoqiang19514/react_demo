@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Link } from "react-router-dom"
+import api from '../api'
 
 import kafei from '../asset/images/icon/kafei.png'
 
@@ -152,6 +153,7 @@ const StyledIntegral = styled.div`
   color: #683f0c;
   margin-bottom: 10px;
 `
+
 const Item = ({to, icon, text}) => (
   <StyledLink to={to}>
     <div className="wrap">
@@ -161,16 +163,16 @@ const Item = ({to, icon, text}) => (
   </StyledLink>
 )
 
-const Product = () => {
+const Product = ({id, title, price, url, status}) => {
   return (
     <LayoutItem>
-      <a>
+      <a href={url}>
         <StyledProduct>
           <img className="img" src="http://img13.360buyimg.com/n0/jfs/t1/19531/26/3823/118504/5c2c35beE66ec977c/8133abedfda92680.jpg" alt=""></img>
-          <div className="title">Sleepace享睡RestOn智能睡眠监测仪器无感非穿戴睡眠监测设备 精准监测 高档健康礼品</div>
-          <div className="price">￥691.00</div>
+          <div className="title">{title}</div>
+          <div className="price">￥{price}</div>
           <div className="info">
-            <span className="badge">有货</span>
+            <span className="badge">{status}</span>
             <span className="badge badge--active">兑换</span>
           </div>
         </StyledProduct>
@@ -180,9 +182,20 @@ const Product = () => {
 }
 
 export default class extends Component {
-
   state = {
+    mer: '',
+    integral: '',
+    username: '',
+    mobilePhone: '',
     items: []
+  }
+
+  componentDidMount() {
+    api.getHotsell()
+      .then(res => {
+        const {data} = res
+        this.setState({items: data})
+      })
   }
 
   render() {
@@ -248,9 +261,17 @@ export default class extends Component {
           <h2 className="u_fStyledxxx u_f_bold u_mx_xxx u_my_xx">热卖商品</h2>
           <div className="u_mx_x u_my_x">
             <LayoutList>
-              <Product />
-              <Product />
-              <Product />
+              {this.state.items.map(item => (
+                <Product 
+                  key={item.id}
+                  url={item.url}
+                  title={item.title}
+                  price={item.price}
+                  status={item.status}
+                />
+              ))
+
+              }
             </LayoutList>
           </div>
         </section>

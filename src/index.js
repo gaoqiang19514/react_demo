@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import './mock';
 import axiosSetting from './api/axiosSetting';
 
 import './index.css';
@@ -10,10 +9,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './Store';
 
+// 后面这里要根据环境判断下
+import './mock';
+
 // import 'amfe-flexible'
 
 // 配置axios
 axiosSetting();
+
+
 
 const access_token  = localStorage.getItem('access_token');
 const refresh_token = localStorage.getItem('refresh_token');
