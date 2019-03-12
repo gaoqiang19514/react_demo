@@ -1,4 +1,4 @@
-import Util from '../util';
+import util from '../util';
 import uuid from 'uuid'
 const Mock = require('mockjs');
 const Random = Mock.Random;
@@ -46,14 +46,31 @@ Mock.mock(/hotsell/, 'get', function(options){
 
 
 Mock.mock(/getRechargePhoneProductsByType/, 'get', function(options){
-  return [
-    { id: uuid(), integral: 1060, money: 10 },
-    { id: uuid(), integral: 2120, money: 20 },
-    { id: uuid(), integral: 3180, money: 30 },
-    { id: uuid(), integral: 5300, money: 50 },
-    { id: uuid(), integral: 10600, money: 100 },
-    { id: uuid(), integral: 21200, money: 200 },
-    { id: uuid(), integral: 31800, money: 300 },
-    { id: uuid(), integral: 53000, money: 500 }
-  ]
+  var result = util.parseUrl(options.url, 'type');
+  console.log()
+  switch(result.type) {
+    case '1':
+      return [
+        { id: uuid(), integral: 1060, money: 10 },
+        { id: uuid(), integral: 2120, money: 20 },
+        { id: uuid(), integral: 3180, money: 30 },
+        { id: uuid(), integral: 5300, money: 50 },
+        { id: uuid(), integral: 10600, money: 100 },
+        { id: uuid(), integral: 21200, money: 200 },
+        { id: uuid(), integral: 31800, money: 300 },
+        { id: uuid(), integral: 53000, money: 500 }
+      ]
+    case '2':
+      return [
+        { id: uuid(), integral: 1060, money: 10 },
+        { id: uuid(), integral: 2120, money: 20 },
+        { id: uuid(), integral: 3180, money: 30 },
+        { id: uuid(), integral: 5300, money: 50 },
+        { id: uuid(), integral: 10600, money: 100 }
+      ]
+    case '3':
+      return []
+    default:
+      return []
+  }
 });

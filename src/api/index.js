@@ -56,7 +56,7 @@ export default {
   getHotsell() {
     return this.get('hotsell')
   },
-  getRechargePhoneProductsByType() {
-    return this.get('getRechargePhoneProductsByType')
+  getRechargePhoneProductsByType(type) {
+    return this.get('getRechargePhoneProductsByType', {type})
   }
 };

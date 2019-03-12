@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom"
+import React, { Component } from 'react'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 import classnames from 'classnames'
 
 import SkeletonPlaceholder from '../common/SkeletonPlaceholder'
-import util from '../util'
-import config from '../config'
 import api from '../api'
 import { redirect } from '../services/redirect'
 
+import emptySrc from '../asset/images/empty.png'
+
+const StyledEmpty = styled.div`
+  color: #888;
+  text-align: center;
+  img{
+    width: 150px;
+    height: 150px;
+  }
+`
 const Button = styled.button`
   padding: 0;
   width: 100%;
@@ -32,8 +40,6 @@ const PrimaryDisabledButton = styled(Button)`
   border-radius: 3px;
   background: #ccc;
 `
-
-
 const StyledNav = styled.ul`
   display: flex;
   margin-bottom: 10px;
@@ -63,7 +69,7 @@ const StyledNav = styled.ul`
   }
 `
 const StyledMain = styled.div`
-
+  background: #fff;
 `
 const Input = styled.input`
   border: 0;
@@ -74,12 +80,14 @@ const Input = styled.input`
 `
 const StyledInput = styled(Input)`
   font-family: industry;
-  font-size: 26px;
-  margin-bottom: 15px;
+  font-size: 22px;
+`
+const StyledBox = styled.div`
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
 `
 const StyledInputBox = styled.div`
-  margin: 15px;
-  border-bottom: 1px solid #ccc;
+  padding: 20px 15px;
 `
 const LayoutItem = styled.div`
   width: 33.33%;
@@ -112,8 +120,16 @@ const StyledItem = styled.div`
 const LayoutItems = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 5px;
+  margin: 0 10px;
 `
+
+const EmptyPlaceholder = () => (
+  <StyledEmpty>
+    <img src={emptySrc} alt=""/>
+    <div>暂无数据</div>
+  </StyledEmpty>
+)
+
 const Item = ({id, money, integral, clickHandle, index, currIndex}) => {
   return (
     <LayoutItem>
@@ -121,7 +137,7 @@ const Item = ({id, money, integral, clickHandle, index, currIndex}) => {
         className={classnames({'active': currIndex === index})}
         onClick={() => clickHandle(id, index)}>
         <div className="money">{money}元</div>
-        <div className="integral">售{integral}积分</div>
+        <div className="integral">{integral}积分</div>
       </StyledItem>
     </LayoutItem>
   )
@@ -136,15 +152,20 @@ export default class extends Component {
     super(props)
 
     this.toggle = this.toggle.bind(this)
+    this.changeHandle = this.changeHandle.bind(this)
     this.clickHandle = this.clickHandle.bind(this)
     this.loadProdcuts = this.loadProdcuts.bind(this)
+    this.submitHandle = this.submitHandle.bind(this)
+    this.updateButtonStatus = this.updateButtonStatus.bind(this)
 
     this.state = {
-      loadFlag: false,
+      loading: false,
       passFlag: false,
       type: CMCC,
       items: [],
-      currIndex: 0
+      currIndex: 0,
+      phone: '',
+      productId: ''
     }
   }
 
@@ -154,48 +175,60 @@ export default class extends Component {
 
   toggle(e) {
     const type = e.currentTarget.getAttribute('data-type')
-    this.setState({type: type}, () => {
+    this.setState({type: type, currIndex: 0}, () => {
       this.loadProdcuts(this.state.type)
     })
   }
 
   loadProdcuts(type) {
-    this.setState({loadFlag: true})
+    this.setState({loading: true})
     api.getRechargePhoneProductsByType(type)
       .then(res => {
         const {data} = res
-        this.setState({items: data, loadFlag: false})
+        this.setState({items: data, loading: false})
       })
       .then(() => {
-        this.setState({loadFlag: false})
+        this.setState({loading: false})
       })
   }
 
   clickHandle(id, index) {
-    console.log(id, index)
-    this.setState({currIndex: index})
+    this.setState({productId: id, currIndex: index})
+  }
+
+  changeHandle(e) {
+    this.setState({phone: e.target.value}, () => {
+      this.updateButtonStatus()
+    })
+  }
+
+  submitHandle() {
 
   }
 
+  updateButtonStatus() {
+    if(this.state.phone) {
+      this.setState({passFlag: true})
+    }else {
+      this.setState({passFlag: false})
+    }
+  }
+
   render() {
-    const {type, items, currIndex, loadFlag, passFlag} = this.state
+    const {type, items, currIndex, loading, passFlag} = this.state
     let list
 
-    if(loadFlag) {
-      list = <SkeletonPlaceholder />
-    }else {
-      list = items.map((item, index) => (
-        <Item
-          key={item.id}
-          id={item.id}
-          index={index}
-          currIndex={currIndex}
-          money={item.money}
-          integral={item.integral}
-          clickHandle={this.clickHandle}
-        />
-      ))
-    }
+    list = items.map((item, index) => (
+      <Item
+        key={item.id}
+        id={item.id}
+        index={index}
+        currIndex={currIndex}
+        money={item.money}
+        integral={item.integral}
+        clickHandle={this.clickHandle}
+      />
+    ))
 
     return (
       <div>
@@ -204,15 +237,27 @@ export default class extends Component {
           <li className={classnames({'active': type === CUCC })} onClick={this.toggle} data-type={CUCC}>中国联通</li>
           <li className={classnames({'active': type === CTCC })} onClick={this.toggle} data-type={CTCC}>中国电信</li>
         </StyledNav>
+
         <StyledMain>
           <StyledInputBox>
-            <StyledInput type="text" placeholder="请输入手机号码" autoComplete="off" />
+            <StyledBox>
+              <StyledInput 
+                type="text" 
+                value={this.state.phone}
+                onChange={this.changeHandle} 
+                placeholder="请输入手机号码" 
+                autoComplete="off"
+              />
+            </StyledBox>
           </StyledInputBox>
+
           <h2 className="u_m_xx">请选择面值</h2>
-          <LayoutItems>{list}</LayoutItems>
-          <div className="u_m_xxx">
+          {this.state.loading 
+            ? <SkeletonPlaceholder /> 
+            : (list.length ? <LayoutItems>{list}</LayoutItems> : <EmptyPlaceholder />)}
+          <div className="u_p_xxx">
             {passFlag
-              ? <PrimaryButton>立即充值</PrimaryButton>
+              ? <PrimaryButton onClick={this.submitHandle}>立即充值</PrimaryButton>
               : <PrimaryDisabledButton>立即充值</PrimaryDisabledButton>
             }
           </div>
