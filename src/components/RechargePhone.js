@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 import classnames from 'classnames'
 import weui from 'weui.js'
@@ -7,7 +6,6 @@ import weui from 'weui.js'
 import SkeletonPlaceholder from '../common/SkeletonPlaceholder'
 import api from '../api'
 import util from '../util'
-import { redirect } from '../services/redirect'
 
 import emptySrc from '../asset/images/empty.png'
 
@@ -20,25 +18,26 @@ const StyledEmpty = styled.div`
   }
 `
 const Button = styled.button`
-  padding: 0;
-  width: 100%;
-  border: 0;
   outline: none;
+  display: block;
+  border: 0;
+  width: 100%;
+  padding: 0;
 `
 const PrimaryButton = styled(Button)`
   color: #fff;
-  line-height: 50px;
   font-size: 16px;
   font-weight: bold;
+  line-height: 50px;
   border-radius: 3px;
   box-shadow: 0 3px 5px rgba(207, 162, 95, .58);
   background: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
 `
-const PrimaryDisabledButton = styled(Button)`
+const DisablePrimaryButton = styled(Button)`
   color: #fff;
-  line-height: 50px;
-  font-size: 16px;
   font-weight: bold;
+  font-size: 16px;
+  line-height: 50px;
   border-radius: 3px;
   background: #ccc;
 `
@@ -326,7 +325,7 @@ export default class extends Component {
           <div className="u_p_xxx">
             {pass
               ? <PrimaryButton onClick={this.submitHandle}>立即充值</PrimaryButton>
-              : <PrimaryDisabledButton>立即充值</PrimaryDisabledButton>
+              : <DisablePrimaryButton>立即充值</DisablePrimaryButton>
             }
           </div>
         </StyledMain>

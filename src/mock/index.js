@@ -89,3 +89,20 @@ Mock.mock(/rechargePhone/, 'get', function(options){
     msg: '充值成功'
   }
 })
+
+// 获取银行卡
+Mock.mock(/getBankCardList/, 'get', function(options){
+  return {
+    code: '1',
+    items: [
+      {id: uuid(), bankCardName: '建设银行', bankCardNo: '6227007200230197111'},
+      {id: uuid(), bankCardName: '招商银行', bankCardNo: '6227007200230197112'},
+      {id: uuid(), bankCardName: '工商银行', bankCardNo: '6227007200230197113'}
+    ]
+  }
+
+  return {
+    code: '0',
+    items: []
+  }
+})

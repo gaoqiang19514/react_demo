@@ -250,7 +250,7 @@ img {
   background: rgba(0, 0, 0, .6);
 }
 
-@keyframes slideDown {
+@keyframes modal-slideDown {
   0% {
     transform: translateY(-20px);
     opacity: 0
@@ -262,7 +262,7 @@ img {
   }
 }
 
-@keyframes slideUp {
+@keyframes modal-slideUp {
   0% {
     transform: translateY(0);
     opacity: 1
@@ -274,7 +274,7 @@ img {
   }
 }
 
-@keyframes fadeIn {
+@keyframes modal-fadeIn {
   0% {
     opacity: 0
   }
@@ -284,7 +284,7 @@ img {
   }
 }
 
-@keyframes fadeOut {
+@keyframes modal-fadeOut {
   0% {
     opacity: 1
   }
@@ -295,17 +295,24 @@ img {
 }
 
 .weui-animate-fade-slideDown {
-  animation: slideDown ease .3s forwards
+  animation: modal-slideDown ease .3s forwards
 }
 
 .weui-animate-fade-slideUp {
-  animation: slideUp ease .3s forwards
+  animation: modal-slideUp ease .3s forwards
 }
 
 .weui-animate-fade-in {
-  animation: fadeIn ease .3s forwards
+  animation: modal-fadeIn ease .3s forwards
 }
 
 .weui-animate-fade-out {
-  animation: fadeOut ease .3s forwards
+  animation: modal-fadeOut ease .3s forwards
+}
+
+/* 优化weui样式 */
+
+.weui-picker__hd{
+  padding: 12px 15px;
+  font-size: 14px;
 }

@@ -65,5 +65,9 @@ export default {
   // 话费充值
   rechargePhone(id, phone) {
     return this.get('rechargePhone', {id, phone})
+  },
+  // 获取银行列表
+  getBankCardList() {
+    return this.get('getBankCardList')
   }
 };

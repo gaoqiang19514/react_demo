@@ -166,6 +166,17 @@ const paymentConfirm = function (options) {
   addClass($dialog, 'weui-animate-fade-slideDown')
 }
 
+const parseBankCardList = function(arr) {
+  const result = []
+  arr.map(item => {
+    result.push({
+      value: item.bankCardNo,
+      label: item.bankCardName + '-' + item.bankCardNo.substring(item.bankCardNo.length - 4, item.bankCardNo.length)
+    })
+  })
+  return result
+}
+
 export default {
   accessTokenIsValid,
   refreshTokenIsValid,
@@ -173,5 +184,6 @@ export default {
   randomRangeNum,
   closest,
   parseUrl,
-  paymentConfirm
+  paymentConfirm,
+  parseBankCardList
 };
