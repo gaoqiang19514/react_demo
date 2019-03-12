@@ -9,6 +9,8 @@ import Login from './components/Login'
 import Order from './components/Order'
 import Home from './components/Home'
 import Redeem from './components/Redeem'
+import Transfer from './components/Transfer'
+
 import Cate from './components/Cate'
 import DoubleColorBall from './components/DoubleColorBall'
 import Product from './components/Product'
@@ -30,7 +32,8 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Auth path="/order" component={Order} />
             <Auth path="/recharge-phone" component={RechargePhone} />
-            <Route path="/redeem" component={Redeem} />
+            <Auth path="/redeem" component={Redeem} />
+            <Auth path="/transfer" component={Transfer} />
             <Route path="/cate" component={Cate} />
             <Route path="/double_color_ball" component={DoubleColorBall} />
             <Route path="/product" component={Product} />

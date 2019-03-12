@@ -38,7 +38,6 @@ const DisablePrimaryButton = styled(Button)`
   border-radius: 3px;
   background: #ccc;
 `
-
 const MiniPrimaryButton = styled(Button)`
   color: #fff;
   font-size: 12px;

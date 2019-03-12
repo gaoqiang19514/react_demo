@@ -216,7 +216,7 @@ export default class extends Component {
               <div><span className="integral">335</span>积分</div>
               <div>
                 <Link to="/redeem" className="badge">赎回</Link>
-                <a href="" className="badge">转赠</a>
+                <Link to="/transfer" className="badge">转赠</Link>
               </div>
             </StyledIntegral>
             <a className="link">电子积分券</a>
