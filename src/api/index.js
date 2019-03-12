@@ -58,5 +58,12 @@ export default {
   },
   getRechargePhoneProductsByType(type) {
     return this.get('getRechargePhoneProductsByType', {type})
+  },
+  confirmPaymentPswd(paymentPswd) {
+    return this.post('confirmPaymentPswd', {paymentPswd})
+  },
+  // 话费充值
+  rechargePhone(id, phone) {
+    return this.get('rechargePhone', {id, phone})
   }
 };

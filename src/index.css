@@ -121,3 +121,191 @@ img {
   opacity: 0.01;
   transition: all 500ms ease-in;
 }
+
+
+/* modal */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  outline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__dialog {
+  width: 75%;
+  border-radius: 3px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+}
+
+.modal__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.modal__close {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 26px;
+  background: transparent;
+}
+
+.modal__title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.modal__subtitle {
+  text-align: center;
+}
+
+.modal__amount{
+  text-align: center;
+  font-size: 44px;
+  font-family: industry;
+
+}
+
+.modal__useable{
+  font-family: industry;
+  text-align: center;
+}
+
+.modal__info {
+  padding: 20px 15px;
+}
+
+.modal__items {
+  color: #7E7E7E;
+  margin: 0 15px;
+  border-top: 1px solid #eaeaea;
+}
+
+.modal__item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__label {
+  flex-shrink: 0;
+  color: #7E7E7E;
+}
+
+.modal__input {
+  border: 0;
+  padding: 0;
+  outline: none;
+  text-align: right;
+  width: 100%;
+  font-size: 14px;
+}
+
+.modal__foot {
+  padding: 15px;
+}
+
+.modal__button {
+  padding: 0;
+  border: 0;
+  display: block;
+  width: 100%;
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.modal__button--enable {
+  background: #19AC18;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+}
+
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .6);
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1
+  }
+
+  to {
+    transform: translateY(-20px);
+    opacity: 0
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0
+  }
+}
+
+.weui-animate-fade-slideDown {
+  animation: slideDown ease .3s forwards
+}
+
+.weui-animate-fade-slideUp {
+  animation: slideUp ease .3s forwards
+}
+
+.weui-animate-fade-in {
+  animation: fadeIn ease .3s forwards
+}
+
+.weui-animate-fade-out {
+  animation: fadeOut ease .3s forwards
+}

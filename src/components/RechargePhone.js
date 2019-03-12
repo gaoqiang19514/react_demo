@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 import classnames from 'classnames'
+import weui from 'weui.js'
 
 import SkeletonPlaceholder from '../common/SkeletonPlaceholder'
 import api from '../api'
+import util from '../util'
 import { redirect } from '../services/redirect'
 
 import emptySrc from '../asset/images/empty.png'
@@ -130,12 +132,12 @@ const EmptyPlaceholder = () => (
   </StyledEmpty>
 )
 
-const Item = ({id, money, integral, clickHandle, index, currIndex}) => {
+const Item = ({id, selectId, money, integral, clickHandle}) => {
   return (
     <LayoutItem>
       <StyledItem 
-        className={classnames({'active': currIndex === index})}
-        onClick={() => clickHandle(id, index)}>
+        className={classnames({'active': id === selectId})}
+        onClick={() => clickHandle(id)}>
         <div className="money">{money}元</div>
         <div className="integral">{integral}积分</div>
       </StyledItem>
@@ -151,33 +153,28 @@ export default class extends Component {
   constructor(props) {
     super(props)
 
-    this.toggle = this.toggle.bind(this)
+    this.reset = this.reset.bind(this)
+    this.nextStep = this.nextStep.bind(this)
+    this.retryPaymentPswd = this.retryPaymentPswd.bind(this)
+    this.toggleType = this.toggleType.bind(this)
+    this.selectProduct = this.selectProduct.bind(this)
     this.changeHandle = this.changeHandle.bind(this)
-    this.clickHandle = this.clickHandle.bind(this)
     this.loadProdcuts = this.loadProdcuts.bind(this)
     this.submitHandle = this.submitHandle.bind(this)
     this.updateButtonStatus = this.updateButtonStatus.bind(this)
 
     this.state = {
+      pass: false,
       loading: false,
-      passFlag: false,
-      type: CMCC,
       items: [],
-      currIndex: 0,
-      phone: '',
-      productId: ''
+      phone: '15014095291',
+      selectId: '',
+      type: CMCC
     }
   }
 
   componentDidMount() {
     this.loadProdcuts(this.state.type)
-  }
-
-  toggle(e) {
-    const type = e.currentTarget.getAttribute('data-type')
-    this.setState({type: type, currIndex: 0}, () => {
-      this.loadProdcuts(this.state.type)
-    })
   }
 
   loadProdcuts(type) {
@@ -192,8 +189,24 @@ export default class extends Component {
       })
   }
 
-  clickHandle(id, index) {
-    this.setState({productId: id, currIndex: index})
+  reset() {
+    this.setState({selectId: ''}, () => {
+      this.updateButtonStatus()
+    })
+  }
+
+  toggleType(e) {
+    const type = e.currentTarget.getAttribute('data-type')
+    this.reset()
+    this.setState({type}, () => {
+      this.loadProdcuts(type)
+    })
+  }
+
+  selectProduct(selectId) {
+    this.setState({selectId}, () => {
+      this.updateButtonStatus()
+    })
   }
 
   changeHandle(e) {
@@ -203,39 +216,94 @@ export default class extends Component {
   }
 
   submitHandle() {
+    const {selectId} = this.state
+    util.paymentConfirm({
+      title: '充值',
+      subtitle: '壹企服',
+      amount: 3000,
+      useable: 5000000,
+      callback: (e, inputElem) => {
+        if(!inputElem.value) {
+          return false
+        }
+        this.nextStep()
+      }
+    })
+  }
 
+  nextStep() {
+    const loading = weui.loading('处理中')
+    api.confirmPaymentPswd()
+      .then(res => {
+        const {data} = res
+        if(data.code === '1') {
+          this.submitRecharge()
+        }else if(data.code === '2'){
+          weui.confirm(data.msg, () => {
+            this.retryPaymentPswd()
+          })
+        }else {
+          weui.alert(data.msg)
+        }
+      })
+      .then(() => {
+        loading.hide()
+      })
+      .catch(err => {
+      })
+  }
+
+  submitRecharge() {
+    const loading = weui.loading('处理中')
+    api.rechargePhone(this.state.selectId, this.state.phone)
+      .then(res => {
+        const {data} = res
+        if(data.code === '1') {
+          weui.alert(data.msg)
+        }else {
+          weui.alert(data.msg)
+        }
+      })
+      .then(() => {
+        loading.hide()
+      })
+      .catch(err => {
+      })
+  }
+
+  // 重试交易密码
+  retryPaymentPswd() {
+    this.submitHandle()
   }
 
   updateButtonStatus() {
-    if(this.state.phone) {
-      this.setState({passFlag: true})
+    if(this.state.phone && this.state.selectId) {
+      this.setState({pass: true})
     }else {
-      this.setState({passFlag: false})
+      this.setState({pass: false})
     }
   }
 
   render() {
-    const {type, items, currIndex, loading, passFlag} = this.state
-    let list
+    const {selectId, type, items, loading, pass} = this.state
 
-    list = items.map((item, index) => (
+    const list = items.map(item => (
       <Item
         key={item.id}
         id={item.id}
-        index={index}
-        currIndex={currIndex}
+        selectId={selectId}
         money={item.money}
         integral={item.integral}
-        clickHandle={this.clickHandle}
+        clickHandle={this.selectProduct}
       />
     ))
 
     return (
       <div>
         <StyledNav>
-          <li className={classnames({'active': type === CMCC })} onClick={this.toggle} data-type={CMCC}>中国移动</li>
-          <li className={classnames({'active': type === CUCC })} onClick={this.toggle} data-type={CUCC}>中国联通</li>
-          <li className={classnames({'active': type === CTCC })} onClick={this.toggle} data-type={CTCC}>中国电信</li>
+          <li className={classnames({'active': type === CMCC })} onClick={this.toggleType} data-type={CMCC}>中国移动</li>
+          <li className={classnames({'active': type === CUCC })} onClick={this.toggleType} data-type={CUCC}>中国联通</li>
+          <li className={classnames({'active': type === CTCC })} onClick={this.toggleType} data-type={CTCC}>中国电信</li>
         </StyledNav>
 
         <StyledMain>
@@ -252,11 +320,11 @@ export default class extends Component {
           </StyledInputBox>
 
           <h2 className="u_m_xx">请选择面值</h2>
-          {this.state.loading 
+          {loading
             ? <SkeletonPlaceholder /> 
             : (list.length ? <LayoutItems>{list}</LayoutItems> : <EmptyPlaceholder />)}
           <div className="u_p_xxx">
-            {passFlag
+            {pass
               ? <PrimaryButton onClick={this.submitHandle}>立即充值</PrimaryButton>
               : <PrimaryDisabledButton>立即充值</PrimaryDisabledButton>
             }

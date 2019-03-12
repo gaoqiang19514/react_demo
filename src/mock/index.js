@@ -74,3 +74,18 @@ Mock.mock(/getRechargePhoneProductsByType/, 'get', function(options){
       return []
   }
 });
+
+Mock.mock(/confirmPaymentPswd/, 'post', function(options){
+  return {
+    code: '1',
+    msg: ''
+  }
+})
+
+// 话费充值
+Mock.mock(/rechargePhone/, 'get', function(options){
+  return {
+    code: '1',
+    msg: '充值成功'
+  }
+})

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import 'weui'
 
 import axiosSetting from './api/axiosSetting';
 
@@ -16,7 +17,6 @@ import './mock';
 
 // 配置axios
 axiosSetting();
-
 
 
 const access_token  = localStorage.getItem('access_token');
