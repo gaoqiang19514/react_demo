@@ -69,5 +69,8 @@ export default {
   // 获取银行列表
   getBankCardList() {
     return this.get('getBankCardList')
+  },
+  transfer(data) {
+    return this.post('transfer', data)
   }
 };

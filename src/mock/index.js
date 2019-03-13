@@ -4,7 +4,7 @@ const Mock = require('mockjs');
 const Random = Mock.Random;
 
 Mock.setup({
-  timeout: 300
+  timeout: 500
 });
 
 // 返回商品分类
@@ -103,5 +103,17 @@ Mock.mock(/getBankCardList/, 'get', function(options){
   // return {
   //   code: '0',
   //   items: []
+  // }
+})
+
+// 积分转赠
+Mock.mock(/transfer/, 'post', function(options){
+  return {
+    code: '1',
+    msg: '转赠成功'
+  }
+  // return {
+  //   code: '0',
+  //   msg: '交易密码错误'
   // }
 })

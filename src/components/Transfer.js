@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import weui from 'weui.js'
 
 import closeIcon from '../asset/images/icon/close.png'
 import showIcon from '../asset/images/icon/show.png'
 import hideIcon from '../asset/images/icon/hide.png'
+import api from '../api';
 /*
  |--------------------------------------------------------------------------
  | button
@@ -56,15 +58,16 @@ const Input = styled.input`
   -webkit-appearance: none;
   background: transparent;
 `
-const PrimaryInput = styled(Input)`
+const BigPrimaryInput = styled(Input)`
   color: #444;
   font-size: 16px;
   font-weight: bold;
   font-family: industry;
 `
-const MinPrimaryInput = styled(Input)`
-  font-family: industry;
+const PrimaryInput = styled(Input)`
+  color: #444;
   font-size: 14px;
+  font-family: industry;
 `
 
 const Layout_M_XXX = styled.div`
@@ -106,7 +109,6 @@ const StyledBg = styled.div`
   background: #fff;
   box-shadow: 1px 1px 3px rgba(26, 26, 26, 0.1);
 `
-
 const StyledCleanIcon = styled.img`
   width: 25px;
   height: 25px;
@@ -116,62 +118,186 @@ const StyledToggleIcon = styled.img`
   height: 25px;
 `
 
+const iconSchema = {
+  text: showIcon,
+  password: hideIcon
+}
+
 class Transfer extends Component {
   constructor(props) {
     super(props)
 
+    this.handleChange = this.handleChange.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.passwordToggle = this.passwordToggle.bind(this)
+    this.integralClean = this.handleClean.bind(this, 'integral')
+    this.usernameClean = this.handleClean.bind(this, 'username')
+    this.accountClean = this.handleClean.bind(this, 'account')
+    this.passwordClean = this.handleClean.bind(this, 'password')
+    this.updateButtonStatus = this.updateButtonStatus.bind(this)
+
     this.state = {
-      pass: false
+      pass: false,
+      integral: '',
+      integralCleanView: false,
+      username: '',
+      usernameCleanView: false,
+      account: '',
+      accountCleanView: false,
+      password: '',
+      passwordCleanView: false,
+      passwordType: 'password',
+      passwordIcon: iconSchema['password']
     }
   }
 
-  render() {
+  handleClean(key) {
+    this.setState({[key]: ''})
+  }
 
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value}, () => {
+      this.updateButtonStatus()
+    })
+  }
+
+  handleFocus(e) {
+    this.setState({[`${e.target.name}CleanView`]: true})
+  }
+
+  handleBlur(e) {
+    const key =`${e.target.name}CleanView`
+    setTimeout(() => {
+      this.setState({[key]: false}, () => {
+        this.updateButtonStatus()
+      })
+    }, 100)
+  }
+
+  handleSubmit(e) {
+    const loading = weui.loading('处理中')
+    api.transfer({
+        integral: this.state.integral,
+        username: this.state.username,
+        account: this.state.account,
+        password: this.state.password
+      })
+      .then(res => {
+        const {data} = res
+        if(data.code === '1') {
+          weui.alert('转赠成功')
+        }else {
+          weui.alert(data.msg)
+        }
+      })
+      .then(() => {
+        loading.hide()
+      })
+      .catch(err => {
+      })
+  }
+
+  passwordToggle() {
+    const type = this.state.passwordType === 'password' ? 'text' : 'password'
+    this.setState({passwordType: type, passwordIcon: iconSchema[type]})
+  }
+
+  updateButtonStatus() {
+    let flag = true
+    const {integral, username, account, password} = this.state
+    if(!integral) {
+      flag = false
+    }
+    if(!username) {
+      flag = false
+    }
+    if(!account) {
+      flag = false
+    }
+    if(!password) {
+      flag = false
+    }
+    this.setState({pass: flag})
+  }
+
+  render() {
+    const {integralCleanView, usernameCleanView, accountCleanView, passwordCleanView} = this.state
     return (
       <div>
         <Layout_M_XXX>
           <StyledBg>
             <LayoutGroup>
               <LayoutBody>
-                <MinPrimaryInput placeholder="请输入转赠的积分" />
+                <PrimaryInput 
+                  type="text" 
+                  name="integral" 
+                  value={this.state.integral} 
+                  onChange={this.handleChange} 
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  placeholder="请输入转赠的积分" 
+                />
               </LayoutBody>
               <LayoutFoot>
-                <StyledCleanIcon src={closeIcon} alt="" />
-                <StyledToggleIcon src={hideIcon} alt="" />
+                <StyledCleanIcon style={{visibility: integralCleanView ? 'visible' : 'hidden'}} onClick={this.integralClean} src={closeIcon} alt="" />
               </LayoutFoot>
             </LayoutGroup>
             <LayoutGroup>
               <LayoutBody>
-                <MinPrimaryInput placeholder="请输入对方名称" />
+                <PrimaryInput 
+                  type="text" 
+                  name="username" 
+                  value={this.state.username} 
+                  onChange={this.handleChange} 
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  placeholder="请输入对方名称" 
+                />
               </LayoutBody>
               <LayoutFoot>
-                <StyledCleanIcon src={closeIcon} alt="" />
-                <StyledToggleIcon src={hideIcon} alt="" />
+                <StyledCleanIcon style={{visibility: usernameCleanView ? 'visible' : 'hidden'}} onClick={this.usernameClean} src={closeIcon} alt="" />
               </LayoutFoot>
             </LayoutGroup>
             <LayoutGroup>
               <LayoutBody>
-                <MinPrimaryInput placeholder="请输入对方登录账号" />
+                <PrimaryInput 
+                  type="text" 
+                  name="account" 
+                  value={this.state.account} 
+                  onChange={this.handleChange} 
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  placeholder="请输入对方登录账号"
+                />
               </LayoutBody>
               <LayoutFoot>
-                <StyledCleanIcon src={closeIcon} alt="" />
-                <StyledToggleIcon src={hideIcon} alt="" />
+                <StyledCleanIcon style={{visibility: accountCleanView ? 'visible' : 'hidden'}} onClick={this.accountClean} src={closeIcon} alt="" />
               </LayoutFoot>
             </LayoutGroup>
             <LayoutGroup>
               <LayoutBody>
-                <MinPrimaryInput placeholder="请输入交易密码" />
+                <PrimaryInput 
+                  type={this.state.passwordType} 
+                  name="password" 
+                  value={this.state.password} 
+                  onChange={this.handleChange} 
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  placeholder="请输入交易密码"
+                />
               </LayoutBody>
               <LayoutFoot>
-                <StyledCleanIcon src={closeIcon} alt="" />
-                <StyledToggleIcon src={hideIcon} alt="" />
+                <StyledCleanIcon style={{visibility: passwordCleanView ? 'visible' : 'hidden'}} onClick={this.passwordClean} src={closeIcon} alt="" />
+                <StyledToggleIcon onClick={this.passwordToggle} src={this.state.passwordIcon} alt="" />
               </LayoutFoot>
             </LayoutGroup>
           </StyledBg>
         </Layout_M_XXX>
         <Layout_M_XXX>
           {this.state.pass
-            ? <PrimaryButton>转赠</PrimaryButton>
+            ? <PrimaryButton onClick={this.handleSubmit}>转赠</PrimaryButton>
             : <DisablePrimaryButton>转赠</DisablePrimaryButton>}
         </Layout_M_XXX>
       </div>
