@@ -36,13 +36,13 @@ const DisablePrimaryButton = styled(Button)`
   border-radius: 3px;
   background: #ccc;
 `
-const MiniPrimaryButton = styled(Button)`
-  color: #fff;
-  font-size: 12px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  background: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
-`
+// const MiniPrimaryButton = styled(Button)`
+//   color: #fff;
+//   font-size: 12px;
+//   padding: 5px 10px;
+//   border-radius: 3px;
+//   background: -webkit-linear-gradient(47deg, #c89850, #e1c38c);
+// `
 /*
  |--------------------------------------------------------------------------
  | input
@@ -58,19 +58,18 @@ const Input = styled.input`
   -webkit-appearance: none;
   background: transparent;
 `
-const BigPrimaryInput = styled(Input)`
-  color: #444;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: industry;
-`
+// const BigPrimaryInput = styled(Input)`
+//   color: #444;
+//   font-size: 16px;
+//   font-weight: bold;
+//   font-family: industry;
+// `
 const PrimaryInput = styled(Input)`
   color: #444;
   font-size: 14px;
-  font-family: industry;
 `
 
-const Layout_M_XXX = styled.div`
+const LayoutBox = styled.div`
   margin: 15px;
 `
 const LayoutGroup = styled.div`
@@ -101,6 +100,7 @@ const LayoutBody = styled.div`
   flex: 1;
 `
 const LayoutFoot = styled.div`
+  display: flex;
   margin-left: 10px;
 `
 
@@ -226,7 +226,7 @@ class Transfer extends Component {
     const {integralCleanView, usernameCleanView, accountCleanView, passwordCleanView} = this.state
     return (
       <div>
-        <Layout_M_XXX>
+        <LayoutBox>
           <StyledBg>
             <LayoutGroup>
               <LayoutBody>
@@ -294,12 +294,12 @@ class Transfer extends Component {
               </LayoutFoot>
             </LayoutGroup>
           </StyledBg>
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutBox>
+        <LayoutBox>
           {this.state.pass
             ? <PrimaryButton onClick={this.handleSubmit}>转赠</PrimaryButton>
             : <DisablePrimaryButton>转赠</DisablePrimaryButton>}
-        </Layout_M_XXX>
+        </LayoutBox>
       </div>
     )
   }

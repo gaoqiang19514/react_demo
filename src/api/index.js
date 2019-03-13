@@ -17,13 +17,7 @@ export default {
     return axios.post(path, data, config);
   },
   login(username, password) {
-    const config = {
-      auth: {
-        username,
-        password
-      }
-    };
-    return this.post('login', {}, config);
+    return this.post('login', {username, password});
   },
   refreshToken(refresh_token) {
     return this.get('refresh_token', {

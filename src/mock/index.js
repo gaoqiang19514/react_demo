@@ -117,3 +117,15 @@ Mock.mock(/transfer/, 'post', function(options){
   //   msg: '交易密码错误'
   // }
 })
+
+// 积分转赠
+Mock.mock(/login/, 'post', function(options){
+  return {
+    code: '1',
+    msg: '登录成功'
+  }
+  // return {
+  //   code: '0',
+  //   msg: '交易密码错误'
+  // }
+})
