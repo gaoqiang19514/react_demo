@@ -3,8 +3,6 @@ import { Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 
-import api from '../api';
-
 const Input = styled.input`
   width: 100%;
   display: block;
@@ -81,8 +79,6 @@ class Login extends Component {
         refresh_token: 'payload.refresh_token'
       });
     }, 2000)
-
-    const { username, password } = this.state
 
     // this.props.showLoading()
     // api.login(username, password)

@@ -2,23 +2,23 @@ import React, { Component } from 'react'
 import api from '../api'
 import styled from 'styled-components'
 
-const L_Container = styled.div`
+const LayoutContainer = styled.div`
   position: absolute;
   width: 100%;
   top: 0;
   bottom: 0;
   display: flex;
 `
-const L_Wrap = styled.div`
+const LayoutWrap = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 `
-const L_Top = styled.div`
+const LayoutTop = styled.div`
   line-height: 50px;
   background: #ccc;
 `
-const L_Main = styled.div`
+const LayoutMain = styled.div`
   flex-shrink: 1;
   flex-grow: 1;
   overflow-y: auto;
@@ -33,7 +33,7 @@ const StyleNavItem = styled.a`
     color: red;
   }
 `
-const L_header = styled.header`
+const LayoutHeader = styled.header`
   display: flex;
 `
 const itemStyle = {
@@ -166,25 +166,25 @@ class Order extends Component {
     const items = list.map(item => <Item key={ item.id } img={ item.img } name={ item.name } age={ item.age } date={ item.date } /> )
 
     return (
-      <L_Container>
-        <L_Wrap>
-          <L_Top>
-            <L_header>
+      <LayoutContainer>
+        <LayoutWrap>
+          <LayoutTop>
+            <LayoutHeader>
               <StyleNavItem className={ status === '1' ? 'active' : '' } onClick={this.clickHandle} data-status="1">处理中</StyleNavItem>
               <StyleNavItem className={ status === '2' ? 'active' : '' } onClick={this.clickHandle} data-status="2">成功</StyleNavItem>
               <StyleNavItem className={ status === '3' ? 'active' : '' } onClick={this.clickHandle} data-status="3">失败</StyleNavItem>
-            </L_header>
-          </L_Top>
-          <L_Main ref={ node => this.scrollContainer = node }>
+            </LayoutHeader>
+          </LayoutTop>
+          <LayoutMain ref={ node => this.scrollContainer = node }>
             <main ref={node => this.itemsElem = node}>
               <div>
                 { items }
               </div>
               { this.state.showLoading ? <div style={ loadingStyle }>loading...</div> : <div style={ loadingStyle }>done</div> }            
             </main>
-          </L_Main>
-        </L_Wrap>
-      </L_Container>
+          </LayoutMain>
+        </LayoutWrap>
+      </LayoutContainer>
     )
   }
 }

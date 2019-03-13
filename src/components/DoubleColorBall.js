@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom"
+import { Route } from "react-router-dom"
 import styled from 'styled-components'
 import Util from '../util'
 import config from '../config'
@@ -212,16 +212,17 @@ class DoubleColorBall extends Component {
   randomBalls = () => {
     var redBalls = []
     var blueBalls = []
+    let ball
 
     while(redBalls.length < config.double_color_ball.red.MIN){
-      var ball = String(Util.randomRangeNum(1, 32))
+      ball = String(Util.randomRangeNum(1, 32))
       if(redBalls.indexOf(ball) === -1){
         redBalls.push(ball)
       }
     }
 
     while(blueBalls.length < config.double_color_ball.blue.MIN){
-      var ball = String(Util.randomRangeNum(1, 16))
+      ball = String(Util.randomRangeNum(1, 16))
       if(blueBalls.indexOf(ball) === -1){
         blueBalls.push(ball)
       }

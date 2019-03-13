@@ -100,8 +100,8 @@ Mock.mock(/getBankCardList/, 'get', function(options){
       {id: uuid(), bankCardName: '工商银行', bankCardNo: '6227007200230197113'}
     ]
   }
-  return {
-    code: '0',
-    items: []
-  }
+  // return {
+  //   code: '0',
+  //   items: []
+  // }
 })

@@ -32,13 +32,6 @@ const closest = function (el, selector) {
   return el !== old;
 }
 
-const getURL = function (name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  var r = decodeURI(window.location.search).substr(1).match(reg);
-  if (r != null) return r[2];
-  return null;
-}
-
 const parseUrl = function (url, name) {
   var result = [];
   var query = url.split("?")[1];
@@ -56,13 +49,13 @@ const parseUrl = function (url, name) {
 
 function hasClass(elem, cls) {
   cls = cls || '';
-  if (cls.replace(/\s/g, '').length == 0) return false;
+  if (cls.replace(/\s/g, '').length === 0) return false;
   return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
 }
 
 function addClass(elem, cls) {
   if (!hasClass(elem, cls)) {
-    elem.className = elem.className == '' ? cls : elem.className + ' ' + cls;
+    elem.className = elem.className === '' ? cls : elem.className + ' ' + cls;
   }
 }
 
@@ -171,15 +164,13 @@ const getBankCardLastNum = function(bankCardNo) {
 }
 
 const parseBankCardList = function(arr) {
-  const result = []
-  arr.map(item => {
-    result.push({
+  return arr.map(item => {
+    return {
       bankCardNo: item.bankCardNo,
       bankCardName: item.bankCardName,
       label: item.bankCardName + '-' + getBankCardLastNum(item.bankCardNo)
-    })
+    }
   })
-  return result
 }
 
 export default {

@@ -104,7 +104,7 @@ class Buy extends Component {
             总价：¥40.00
           </div>
           <div className="u_p_xx">
-            <a href="" className="btn bg_1">提交</a>
+            <button className="btn bg_1">提交</button>
           </div>
         </section>
         </form>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, Route } from "react-router-dom"
 import styled from 'styled-components'
 
 import Util from '../util'
@@ -166,7 +165,7 @@ class Product extends Component {
 
         <Detail/>
         <div className="u_m_xxx">
-          <a className="btn bg_1" onClick={this.showLayerHandleClick}>立即兑换</a>
+          <button className="btn bg_1" onClick={this.showLayerHandleClick}>立即兑换</button>
         </div>
         <LayoutFixedFull onClick={this.hideLayerHandleClick} className={`layer ${this.state.showLayerFlag ? 'active' : ''}`}>
           <LayoutFixedBottom>
@@ -184,7 +183,7 @@ class Product extends Component {
               </FlexBox>
             </div>
             <div className="u_p_xxx">
-              <a className="btn bg_1" onClick={this.submitHandleClick}>确认</a>
+              <button className="btn bg_1" onClick={this.submitHandleClick}>确认</button>
             </div>
           </LayoutFixedBottom>
         </LayoutFixedFull>

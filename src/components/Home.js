@@ -219,7 +219,7 @@ export default class extends Component {
                 <Link to="/transfer" className="badge">转赠</Link>
               </div>
             </StyledIntegral>
-            <a className="link">电子积分券</a>
+            <Link to="/redeem" className="link">电子积分券</Link>
           </StyledBox>
         </StyledHeader>
         <section>

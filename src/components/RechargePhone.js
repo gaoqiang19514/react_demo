@@ -215,7 +215,6 @@ export default class extends Component {
   }
 
   submitHandle() {
-    const {selectId} = this.state
     util.paymentConfirm({
       title: '充值',
       subtitle: '壹企服',

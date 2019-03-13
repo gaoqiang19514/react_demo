@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import weui from 'weui.js'
 import {Link} from 'react-router-dom'
-import classNames from 'classNames'
 
 import api from '../api'
 import util from '../util'
@@ -118,7 +117,7 @@ const StyledCard = styled.div`
     }
   }
 `
-const Layout_M_XXX = styled.div`
+const LayoutMXXX = styled.div`
   margin: 15px;
 `
 
@@ -246,18 +245,18 @@ class Redeem extends Component {
 
     return (
       <StyledBg>
-        <Layout_M_XXX>
+        <LayoutMXXX>
           <StyledBar>
             <span>转入银行卡</span>
             <img className="icon" onClick={this.clickHandle} src={qia} alt=""/>
           </StyledBar>
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutMXXX>
+        <LayoutMXXX>
           {this.state.hasBankCard
             ? <BankCard bankCardNo={bankCardNo} bankCardName={bankCardName} />
             : <StyledNoBankCard>暂无可用银行卡</StyledNoBankCard>}
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutMXXX>
+        <LayoutMXXX>
           <PrimaryInput 
             type="text"
             name="integral"
@@ -265,12 +264,12 @@ class Redeem extends Component {
             onChange={this.handleChange}
             placeholder="最多可赎回892积分"
           />
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutMXXX>
+        <LayoutMXXX>
           <Text>实际扣除0积分</Text>
           <Text>实际到账0元(手续费0积分，100积分等于1元)</Text>
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutMXXX>
+        <LayoutMXXX>
           <LayoutGroup>
             <LayoutBody>
               <MinPrimaryInput 
@@ -285,17 +284,17 @@ class Redeem extends Component {
               <MiniPrimaryButton>获取短信验证码</MiniPrimaryButton>
             </LayoutFoot>  
           </LayoutGroup>
-        </Layout_M_XXX>   
-        <Layout_M_XXX>
+        </LayoutMXXX>   
+        <LayoutMXXX>
           <SmallText>
             同意用户<Link to="/redeen-agreement">《赎回规则协议》</Link>
           </SmallText>
-        </Layout_M_XXX>
-        <Layout_M_XXX>
+        </LayoutMXXX>
+        <LayoutMXXX>
           {this.state.pass
             ? <PrimaryButton onClick={this.submitHandle}>确认赎回</PrimaryButton>
             : <DisablePrimaryButton>确认赎回</DisablePrimaryButton>}
-        </Layout_M_XXX>
+        </LayoutMXXX>
       </StyledBg>
     )
   }
